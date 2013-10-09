@@ -1,5 +1,5 @@
-ldmeta-maven-plugin
-=======================
+buildmetadata-maven-plugin
+==========================
 
 This plugin generates build meta data. This includes the build version and build date which are used to create a full
 version property that contains the version, the build date and revision.
@@ -76,75 +76,44 @@ buildmetadata:provide-buildmetadata
 Usage
 -----
 
-You should specify the version in your project's plugin configuration:
+    '<project>  
+      ...
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.redhat.rcm.maven.plugin</groupId>
+            <artifactId>buildmetadata-maven-plugin</artifactId>
+            <version>1.0</version>
+            <executions>
+              <execution>
+                <phase>initialize</phase>
+                <goals>
+                  <goal>provide-buildmetadata</goal>
+                </goals>
+                <configuration>
+                  <createPropertiesReport>false</createPropertiesReport>
+                  <xmlOutputFile>${project.build.outputDirectory}/META-INF/buildmetadata.xml</xmlOutputFile>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+      ...
+    </project>
 
-Eample configuration
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-
-  <groupId>com.redhat.rcm</groupId>
-  <artifactId>HelloWorld</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
-
-  <name>HelloWorld</name>
-  <url>http://maven.apache.org</url>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-
-  <build>
-    <pluginManagement>
-      <plugins>
-
-        <plugin>
-          <groupId>com.redhat.rcm.maven.plugin</groupId>
-          <artifactId>buildmetadata-maven-plugin</artifactId>
-          <version>1.2</version>
-          <executions>
-            <execution>
-              <phase>initialize</phase>
-              <goals>
-                <goal>provide-buildmetadata</goal>
-              </goals>
-              <configuration>
-                <createPropertiesReport>false</createPropertiesReport>
-                <xmlOutputFile>${project.build.outputDirectory}/META-INF/buildmetadata.xml</xmlOutputFile>
-              </configuration>
-            </execution>
-          </executions>
-        </plugin>
-
-      </plugins>
-    </pluginManagement>
-  </build>
-
-</project>
-
-                                              
 
 Runtime Example
 -------
 
-The following command will create a build.properties file in the generated jar file.
+Assuming the plugin configuration in pom matches the example provisded above the following command will create a
+buildmetadata.xml file in the generated jar file under the META-INF direcory of the archive.
 
-`mvn install buildmetadata:provide-buildmetadata`
+`mvn install`
 
 You can view the generated build.properties file in the archive without extracting it with the following command:
 
-`unzip -p target/HelloWorld.jar  META-INF/build.properties`
+`unzip -p target/HelloWorld.jar  META-INF/buildmetadata.xml`
 
 Notes
 -----
