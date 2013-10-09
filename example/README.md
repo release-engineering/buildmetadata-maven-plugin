@@ -10,9 +10,9 @@ Linux
 
 1.  Change directory to the HelloWorld example and execute a maven build
  
-    cd HelloWorld
+        cd HelloWorld
 
-    mvn -X clean install
+        mvn -X clean install
 
 2.  You can view the build.properties file in the target directory directly.
 
@@ -20,6 +20,5 @@ Linux
 
     
 3.  You can inspect the buildmetadata.xml that ships in the jar archive.
-
 
     unzip -p target/HelloWorld-1.0-SNAPSHOT.jar META-INF/buildmetadata.xml 
