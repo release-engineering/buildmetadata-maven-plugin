@@ -48,7 +48,7 @@ import com.redhat.rcm.maven.plugin.buildmetadata.util.FilePathNormalizer;
  * transformations which require XML documents as input.
  *
  * @author <a href="mailto:robert.reiner@smartics.de">Robert Reiner</a>
- * @version $Revision:591 $
+ * @version $Version:1.0 $
  */
 public final class SdocBuilder
 { // NOPMD
@@ -72,7 +72,7 @@ public final class SdocBuilder
    * </p>
    */
   private static final String CODE_URI =
-      "http://www.smartics.de/project/process/implementation/buildmetadata";
+      "http://github.com/sbadakhc/buildmetadata-maven-plugin";
 
   /**
    * The generic identifier of the element name containing a version

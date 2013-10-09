@@ -213,7 +213,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
    * </p>
    *
    * @parameter expression="${buildMetaData.hideCommandLineInfo}"
-   *            default-value="true"
+   *            default-value="false"
    * @since 1.0
    */
   private boolean hideCommandLineInfo;
@@ -255,7 +255,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
    * </p>
    *
    * @parameter expression="${buildMetaData.hideJavaOptsInfo}"
-   *            default-value="true"
+   *            default-value="false"
    * @since 1.0
    */
   private boolean hideJavaOptsInfo;
