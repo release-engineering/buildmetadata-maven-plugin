@@ -1,12 +1,10 @@
 HelloWorld Sample Report
 ========================
 
-This is a simple example that can be used to demonstarte a sample report.
+This is a simple example that can be used to demonstarte a sample report.  Assuming you have successfully built and
+deployed the buildmetadata-maven-plugin you sould be able to generate a default using the following instructions.
 
-Assuming you have successfully built and deployed the buildmetadata-maven-plugin
-you sould be able to generate a default using the following instructions.
-
-Linux 
+Instruction *NIX based systems.
 
 1.  Change directory to the HelloWorld example and execute a maven build
  
@@ -21,4 +19,4 @@ Linux
     
 3.  You can inspect the buildmetadata.xml that ships in the jar archive.
 
-    unzip -p target/HelloWorld-1.0-SNAPSHOT.jar META-INF/buildmetadata.xml 
+        unzip -p target/HelloWorld-1.0-SNAPSHOT.jar META-INF/buildmetadata.xml 
