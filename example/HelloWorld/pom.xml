@@ -36,8 +36,11 @@
             <goal>provide-buildmetadata</goal>
           </goals>
           <configuration>
-            <createPropertiesReport>false</createPropertiesReport>
             <xmlOutputFile>${project.build.outputDirectory}/META-INF/buildmetadata.xml</xmlOutputFile>
+            <createPropertiesReport>false</createPropertiesReport>
+	    <hideCommandLineInfo>false</hideCommandLineInfo>
+	    <hideMavenOptsInfo>false</hideMavenOptsInfo>
+	    <hideJavaOptsInfo>false</hideJavaOptsInfo>
           </configuration>
         </execution>
       </executions>
