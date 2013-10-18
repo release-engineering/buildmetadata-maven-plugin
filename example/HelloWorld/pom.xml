@@ -28,22 +28,23 @@
     <plugin>
       <groupId>com.redhat.rcm.maven.plugin</groupId>
       <artifactId>buildmetadata-maven-plugin</artifactId>
-      <version>1.0</version>
-      <executions>
-        <execution>
-          <phase>initialize</phase>
-          <goals>
-            <goal>provide-buildmetadata</goal>
-          </goals>
-          <configuration>
-            <xmlOutputFile>${project.build.outputDirectory}/META-INF/buildmetadata.xml</xmlOutputFile>
-            <createPropertiesReport>false</createPropertiesReport>
-	    <hideCommandLineInfo>false</hideCommandLineInfo>
-	    <hideMavenOptsInfo>false</hideMavenOptsInfo>
-	    <hideJavaOptsInfo>false</hideJavaOptsInfo>
-          </configuration>
-        </execution>
-      </executions>
+	  <version>1.0</version>
+        <executions>
+          <execution>
+            <phase>initialize</phase>
+            <goals>
+              <goal>provide-buildmetadata</goal>
+            </goals>
+            <configuration>
+              <createPropertiesReport>false</createPropertiesReport>
+              <xmlOutputFile>${project.build.outputDirectory}/META-INF/buildmetadata.xml</xmlOutputFile>
+              <hideCommandLineInfo>false</hideCommandLineInfo>
+              <hideMavenOptsInfo>false</hideMavenOptsInfo>
+              <hideJavaOptsInfo>false</hideJavaOptsInfo>
+              <buildDatePattern>dd.MM.yyyy HH:mm:ss</buildDatePattern>
+            </configuration>
+          </execution>
+        </executions>
     </plugin>
   </plugins>
   </build>

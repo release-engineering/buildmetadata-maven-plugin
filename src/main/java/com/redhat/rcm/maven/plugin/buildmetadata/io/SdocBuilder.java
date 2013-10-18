@@ -376,8 +376,8 @@ public final class SdocBuilder
     final Element parent = document.createElement("maven");
     createContentElement(GI_VERSION, Constant.PROP_NAME_MAVEN_VERSION, parent);
 
-    createContentElement("commandline", Constant.PROP_NAME_MAVEN_CMDLINE,
-        parent);
+    createContentElement("commandline", 
+	Constant.PROP_NAME_MAVEN_CMDLINE,parent);
     createContentElement("execution-project",
         Constant.PROP_NAME_MAVEN_EXECUTION_PROJECT, parent);
     createContentElement("is-excution-root",

@@ -15,6 +15,9 @@
  */
 package com.redhat.rcm.maven.plugin.buildmetadata.data;
 
+import java.io.IOException;
+import java.lang.management.ManagementFactory;
+import java.lang.management.RuntimeMXBean;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -26,6 +29,7 @@ import org.apache.maven.execution.MavenSession;
 import org.apache.maven.execution.RuntimeInformation;
 import org.apache.maven.model.Profile;
 import org.apache.maven.project.MavenProject;
+import org.codehaus.plexus.util.IOUtil;
 import org.codehaus.plexus.util.StringUtils;
 
 import com.redhat.rcm.maven.plugin.buildmetadata.common.Constant;
@@ -319,7 +323,7 @@ public final class MavenMetaDataProvider extends AbstractMetaDataProvider
   @SuppressWarnings("unchecked")
   private List<Profile> getActiveProfiles()
   {
-    return (List<Profile>) project.getActiveProfiles();
+    return project.getActiveProfiles();
   }
 
   private void provideGoals(final Properties buildMetaDataProperties)
@@ -353,8 +357,7 @@ public final class MavenMetaDataProvider extends AbstractMetaDataProvider
   {
     if (!selection.isHideCommandLineInfo())
     {
-      final String commandLine =
-          executionProperties.getProperty("env.MAVEN_CMD_LINE_ARGS");
+      final String commandLine = getCommandLine(executionProperties);
       if (!StringUtils.isEmpty(commandLine))
       {
         buildMetaDataProperties.setProperty(Constant.PROP_NAME_MAVEN_CMDLINE,
@@ -382,6 +385,117 @@ public final class MavenMetaDataProvider extends AbstractMetaDataProvider
             javaOpts);
       }
     }
+  }
+
+  private static String getCommandLine(final Properties executionProperties)
+  {
+    String commandLine = probEnv(executionProperties);
+
+    if (StringUtils.isNotBlank(commandLine))
+    {
+      return commandLine;
+    }
+
+    commandLine = probeSunVm(executionProperties);
+
+    if (StringUtils.isNotBlank(commandLine))
+    {
+      return commandLine;
+    }
+
+    commandLine = probeLinuxPs();
+
+    if (StringUtils.isBlank(commandLine))
+    {
+      commandLine = probeJmx();
+    }
+
+    return commandLine;
+  }
+
+  private static String probEnv(final Properties executionProperties)
+  {
+    // Typically works on Windows
+    final String commandLine =
+        executionProperties.getProperty("env.MAVEN_CMD_LINE_ARGS");
+    return commandLine;
+  }
+
+  private static String probeSunVm(final Properties executionProperties)
+  {
+    // Might work on some machines and does not hurt too much to try ...
+    String commandLine = executionProperties.getProperty("sun.java.command");
+    if (commandLine != null)
+    {
+      final String prefix =
+          "org.codehaus.plexus.classworlds.launcher.Launcher ";
+      if (commandLine.startsWith(prefix))
+      {
+        commandLine = commandLine.substring(prefix.length());
+      }
+    }
+    return commandLine;
+  }
+
+  private static String probeLinuxPs()
+  {
+    final Long pid = getProcessId();
+    if (pid != null)
+    {
+      try
+      {
+        final Process process =
+            Runtime.getRuntime().exec("ps -o args -p " + pid);
+        try
+        {
+          process.waitFor();
+        }
+        catch (final InterruptedException e)
+        {
+          // continue
+        }
+        final int exit = process.exitValue();
+        if (exit == 0)
+        {
+          final String commandLine = IOUtil.toString(process.getInputStream());
+          return commandLine;
+        }
+      }
+      catch (final IOException e)
+      {
+        // Silently ignore that the command failed.
+      }
+    }
+    return null;
+  }
+
+  // see
+  // http://stackoverflow.com/questions/35842/how-can-a-java-program-get-its-own-process-id
+  private static Long getProcessId()
+  {
+    final String name = ManagementFactory.getRuntimeMXBean().getName();
+    final int index = name.indexOf('@');
+
+    if (index > 0)
+    {
+      try
+      {
+        return Long.parseLong(name.substring(0, index));
+      }
+      catch (final NumberFormatException e)
+      {
+        // return null at the end
+      }
+    }
+    return null;
+  }
+
+  private static String probeJmx()
+  {
+    // Won't get too much useful, but may be better than nothing ...
+    final RuntimeMXBean runtime = ManagementFactory.getRuntimeMXBean();
+    final String commandLine = runtime.getInputArguments().toString();
+    return commandLine;
   }
 
   // --- object basics --------------------------------------------------------
