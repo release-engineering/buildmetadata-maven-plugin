@@ -82,7 +82,7 @@ Usage
         <plugins>
           <plugin>
             <groupId>com.redhat.rcm.maven.plugin</groupId>
-            <artifactId>buildmetadata-maven-plugin</artifactId>
+            <artifactId>buildmetadata-maven-plugin</artifactId
             <version>1.0</version>
             <executions>
               <execution>
@@ -93,13 +93,17 @@ Usage
                 <configuration>
                   <createPropertiesReport>false</createPropertiesReport>
                   <xmlOutputFile>${project.build.outputDirectory}/META-INF/buildmetadata.xml</xmlOutputFile>
+                  <hideCommandLineInfo>false</hideCommandLineInfo>
+                  <hideMavenOptsInfo>false</hideMavenOptsInfo>
+                  <hideJavaOptsInfo>false</hideJavaOptsInfo>
+                  <buildDatePattern>dd.MM.yyyy HH:mm:ss</buildDatePattern>
                 </configuration>
               </execution>
             </executions>
           </plugin>
         </plugins>
       </build>
-      ...
+    ...
     </project>
 
 
@@ -114,6 +118,16 @@ buildmetadata.xml file in the generated jar file under the META-INF direcory of 
 You can view the generated build.properties file in the archive without extracting it with the following command:
 
 `unzip -p target/HelloWorld.jar  META-INF/buildmetadata.xml`
+
+Known Issues
+------------
+
+With *NIX implementations of Maven the mvn shell wrapper script will need to explicitly decelare the following varible to
+capture Maven command line arguments:
+
+    export MAVEN_CMD_LINE_ARGS="$@"
+
+Fedora users should edit the /usr/bin/mvn file to include this declaration.
 
 Notes
 -----
