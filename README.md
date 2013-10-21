@@ -122,12 +122,13 @@ You can view the generated build.properties file in the archive without extracti
 Known Issues
 ------------
 
-With *NIX implementations of Maven the mvn shell wrapper script will need to explicitly decelare the following varible to
-capture Maven command line arguments:
+With *NIX implementations of Maven the mvn shell wrapper script will need to explicitly declare the following varible 
+to capture Maven command line arguments:
 
     export MAVEN_CMD_LINE_ARGS="$@"
 
-Fedora users should edit the /usr/bin/mvn file to include this declaration.
+Red Hat/Fedora users should edit the /usr/bin/mvn wrapper file for /usr/share/maven/bin/mvn to include this declaration
+and prevent the changes being lost as a result of future packages upgrades.
 
 Notes
 -----
