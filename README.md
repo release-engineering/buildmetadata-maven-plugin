@@ -119,7 +119,7 @@ buildmetadata.xml file in the generated jar file under the META-INF direcory of 
 
 You can view the generated build.properties file in the archive without extracting it with the following command:
 
-`unzip -p target/HelloWorld.jar  META-INF/buildmetadata.xml`
+`unzip -p example/HelloWorld/target/HelloWorld-1.0-SNAPSHOT.jar META-INF/buildmetadata.xml`
 
 Known Issues
 ------------
