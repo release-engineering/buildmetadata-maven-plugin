@@ -1,8 +1,10 @@
 buildmetadata-maven-plugin
 ==========================
 
-This plugin generates build meta data. This includes the build version and build date which are used to create a full
-version property that contains the version, the build date and revision.
+The build metadata maven plugin creates a detailed report of the various build time parameters employed during a build.
+The information includes useful data that can be used to provide better transparency and accountability of the build
+process. Meta data includes build times and dates, user enviroment information and Java and Maven command line options.
+The reporting is configurable and extendible as well as being adaptable for single and multiple artifacts.
 
 The meta data includes
 
