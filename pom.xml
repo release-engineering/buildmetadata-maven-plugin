@@ -6,7 +6,7 @@
 
   <groupId>com.redhat.rcm.maven.plugin</groupId>
   <artifactId>buildmetadata-maven-plugin</artifactId>
-  <version>1.0</version>
+  <version>1.3.0</version>
   <packaging>maven-plugin</packaging>
   <name>buildmetadata-maven-plugin</name>
   <description>This plugin generates build meta data. This includes the build version and build date which are used to create a full version property that contains the version, the build date and revision.</description>
