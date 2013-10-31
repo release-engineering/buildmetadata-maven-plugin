@@ -24,10 +24,31 @@
     </license>
   </licenses>
 
+  <scm>
+    <connection>scm:git:git@github.com:sbadakhc/buildmetadata-maven-plugin.git</connection>
+    <developerConnection>scm:git:git@github.com:sbadakhc/buildmetadata-maven-plugin.git</developerConnection>
+    <url>http://github.com/sbadakhc/buildmetadata-maven-plugin.git</url>
+  </scm>
+     
   <properties>
     <maven-scm.version>1.6</maven-scm.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jboss.releases.repo.url>https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/</jboss.releases.repo.url>
+    <jboss.snapshots.repo.url>https://repository.jboss.org/nexus/content/repositories/snapshots/</jboss.snapshots.repo.url>
   </properties>
+
+  <distributionManagement>
+    <repository>
+      <id>jboss-releases-repository</id>
+      <name>JBoss Releases Repository</name>
+      <url>${jboss.releases.repo.url}</url>
+    </repository>
+    <snapshotRepository>
+      <id>jboss-snapshots-repository</id>
+      <name>JBoss Snapshots Repository</name>
+      <url>${jboss.snapshots.repo.url}</url>
+    </snapshotRepository>
+  </distributionManagement>
 
   <dependencies>
     <dependency>
@@ -130,6 +151,7 @@
 
   </dependencies>
 
+
   <build>
     <plugins>
       <plugin>
@@ -171,6 +193,28 @@
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-pmd-plugin</artifactId>
             </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-scm-plugin</artifactId>
+              <version>1.8.1</version>
+              <configuration>
+                <connectionType>connection</connectionType>
+              </configuration>
+            </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-source-plugin</artifactId>
+              <version>2.2.1</version>
+              <executions>
+                <execution>
+                  <id>attach-sources</id>
+                  <goals>
+                    <goal>jar-no-fork</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+
 
             <plugin>
               <groupId>org.codehaus.mojo</groupId>
