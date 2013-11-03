@@ -112,7 +112,7 @@ Usage
 Runtime Example
 -------
 
-Assuming the plugin configuration in pom matches the example provisded above the following command will create a
+Assuming the plugin configuration in pom matches the example provided above the following command will create a
 buildmetadata.xml file in the generated jar file under the META-INF direcory of the archive.
 
 `mvn install`
