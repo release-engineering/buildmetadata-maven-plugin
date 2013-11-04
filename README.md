@@ -71,10 +71,15 @@ Clone the repository to your workspace and build with maven:
 Goals
 -----
 
-buildmetadata:build-point
-buildmetadata:buildmetadata-report
-buildmetadata:provide-buildmetadata
-                                              
+1. buildmetadata:build-point
+2. buildmetadata:buildmetadata-report
+3. buildmetadata:provide-buildmetadata
+                
+Maven Repository
+----------------
+
+https://repository.jboss.org/nexus/content/repositories/releases/com/redhat/rcm/maven/plugin/
+                              
 Usage
 -----
 
