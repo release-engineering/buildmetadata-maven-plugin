@@ -7,12 +7,13 @@ process. Meta data includes build times and dates, user environment information 
 The reporting is configurable and extendible as well as being adaptable for single and multiple artifacts.
 
 Maven Repository
----------------
+----------------
 You can access the binary artifact via the JBoss release repository:
 
 https://repository.jboss.org/nexus/content/repositories/releases/com/redhat/rcm/maven/plugin/
 
-Metadata Description.
+Metadata Description
+--------------------
 
 SCM information
 
@@ -60,7 +61,6 @@ MAVEN_OPTS
 
 System Requirements
 -------------------
-
 The following specifies the minimum requirements to run this Maven plugin:
 
 1.  Maven 2.0
@@ -68,7 +68,6 @@ The following specifies the minimum requirements to run this Maven plugin:
 
 Installation Instructions
 -------------------------
-
 Clone the repository to your workspace and build with maven:
 
 1. `git clone https://github.com/sbadakhc/buildmetadata-maven-plugin.git`
@@ -76,16 +75,16 @@ Clone the repository to your workspace and build with maven:
 
 Goals
 -----
+The following goals can be executed 
 
 1. buildmetadata:build-point
 2. buildmetadata:buildmetadata-report
 3. buildmetadata:provide-buildmetadata
                 
-
 Usage
 -----
 
-Edit you project pom.xml to include the following.  These options will produce a report that will include the command
+Edit your project pom.xml to include the following.  These options will produce a report that will include the command
 line executed along with the Maven and Java Options.  For more options and extending functionality please refer to the 
 upstream documentation linked below.
 
@@ -119,12 +118,12 @@ upstream documentation linked below.
     ...
     </project>
 
-
 Runtime Example
 -------
 
-Assuming the plugin configuration in pom.xml matches the example provided then simple executing maven with the install
-goal will create a buildmetadata.xml file in the generated jar file under the META-INF direcory of the archive.
+Assuming the plugin configuration in your projects pom.xml matches the example provided then simply executing maven with
+the install goal will create a buildmetadata.xml file in the generated jar file under the META-INF direcory of the
+archive.
 
 `mvn install`
 
