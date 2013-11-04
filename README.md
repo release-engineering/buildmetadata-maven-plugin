@@ -75,7 +75,7 @@ Clone the repository to your workspace and build with maven:
 
 Goals
 -----
-The following goals can be executed 
+The following goals are supported.  For a full explanation please refer to the upstream providers documentation. 
 
 1. buildmetadata:build-point
 2. buildmetadata:buildmetadata-report
@@ -95,7 +95,7 @@ upstream documentation linked below.
           <plugin>
             <groupId>com.redhat.rcm.maven.plugin</groupId>
             <artifactId>buildmetadata-maven-plugin</artifactId
-            <version>1.0</version>
+            <version>1.3.0</version>
             <executions>
               <execution>
                 <phase>initialize</phase>
