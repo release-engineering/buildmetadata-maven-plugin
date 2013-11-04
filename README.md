@@ -3,10 +3,16 @@ buildmetadata-maven-plugin
 
 The build metadata maven plugin creates a detailed report of the various build time parameters employed during a build.
 The information includes useful data that can be used to provide better transparency and accountability of the build
-process. Meta data includes build times and dates, user environment information and Java and Maven command line options.
+process. Meta data includes build times and dates, user environment information and Java/Maven command line options.
 The reporting is configurable and extendible as well as being adaptable for single and multiple artifacts.
 
-The meta data includes
+Maven Repository
+---------------
+You can access the binary artifact via the JBoss release repository:
+
+https://repository.jboss.org/nexus/content/repositories/releases/com/redhat/rcm/maven/plugin/
+
+Metadata Description.
 
 SCM information
 
@@ -75,13 +81,13 @@ Goals
 2. buildmetadata:buildmetadata-report
 3. buildmetadata:provide-buildmetadata
                 
-Maven Repository
-----------------
 
-https://repository.jboss.org/nexus/content/repositories/releases/com/redhat/rcm/maven/plugin/
-                              
 Usage
 -----
+
+Edit you project pom.xml to include the following.  These options will produce a report that will include the command
+line executed along with the Maven and Java Options.  For more options and extending functionality please refer to the 
+upstream documentation linked below.
 
     '<project>  
       ...
@@ -117,14 +123,14 @@ Usage
 Runtime Example
 -------
 
-Assuming the plugin configuration in pom matches the example provided above the following command will create a
-buildmetadata.xml file in the generated jar file under the META-INF direcory of the archive.
+Assuming the plugin configuration in pom.xml matches the example provided then simple executing maven with the install
+goal will create a buildmetadata.xml file in the generated jar file under the META-INF direcory of the archive.
 
 `mvn install`
 
 You can view the generated build.properties file in the archive without extracting it with the following command:
 
-`unzip -p example/HelloWorld/target/HelloWorld-1.0-SNAPSHOT.jar META-INF/buildmetadata.xml`
+`unzip -p example/MyApp/target/MyApp-1.0-SNAPSHOT.jar META-INF/buildmetadata.xml`
 
 Known Issues
 ------------
