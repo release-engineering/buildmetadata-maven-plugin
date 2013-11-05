@@ -72,24 +72,43 @@ Clone the repository to your workspace and build with maven:
 
 1. `git clone https://github.com/sbadakhc/buildmetadata-maven-plugin.git`
 2. `mvn install`
+3. Edit your project pom.xml to include the following: 
 
-Goals
------
-The following goals are supported.  For a full explanation please refer to the upstream providers documentation. 
-
-1. buildmetadata:build-point
-2. buildmetadata:buildmetadata-report
-3. buildmetadata:provide-buildmetadata
-                
-Usage
------
-
-Edit your project pom.xml to include the following.  These options will produce a report that will include the command
-line executed along with the Maven and Java Options.  For more options and extending functionality please refer to the 
-upstream documentation linked below.
+The options in the plugin's configuration section will produce a report that will include the command line executed 
+along with the Maven and Java Options.  For the full options available and details on how to extend functionality please
+refer to the upstream documentation linked below.
 
     '<project>  
       ...
+      <!-- Set up the repository to fetch the buildmetadata-maven-plugin from -->
+      <repositories>
+        <repository>
+          <id>repository.jboss.org</id>
+          <name>JBoss Releases</name>
+          <url>http://repository.jboss.org/nexus/content/repositories/releases/</url>
+        </repository>
+      </repositories>
+
+      <pluginRepositories>
+        <pluginRepository>
+          <id>repository.jboss.org</id>
+          <name>JBoss Releases</name>
+          <url>http://repository.jboss.org/nexus/content/repositories/releases/</url>
+        </pluginRepository>
+      </pluginRepositories>
+
+      ... 
+      <!-- Declare the dependancy on the buildmetadata-maven-plugin -->
+      <dependencies>
+        <dependency>
+          <groupId>com.redhat.rcm.maven.plugin</groupId>
+          <artifactId>buildmetadata-maven-plugin</artifactId>
+          <version>1.3.0</version>
+        </dependency>
+      </dependencies>
+
+      ...
+      <!-- Configure the buildmetadata-maven-plugin with the required reporting options -->
       <build>
         <plugins>
           <plugin>
@@ -119,7 +138,7 @@ upstream documentation linked below.
     </project>
 
 Runtime Example
--------
+---------------
 
 Assuming the plugin configuration in your projects pom.xml matches the example provided then simply executing maven with
 the install goal will create a buildmetadata.xml file in the generated jar file under the META-INF direcory of the
@@ -130,6 +149,61 @@ archive.
 You can view the generated build.properties file in the archive without extracting it with the following command:
 
 `unzip -p example/MyApp/target/MyApp-1.0-SNAPSHOT.jar META-INF/buildmetadata.xml`
+
+The report will resemble the example below:
+
+`<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+ <buildmetadata xmlns="http://github.com/sbadakhc/buildmetadata-maven-plugin" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://github.com/sbadakhc/buildmetadata-maven-plugin http://github.com/sbadakhc/buildmetadata-maven-plugin">
+   <name>1.0-20131105-SNAPSHOT</name>
+   <version>1.0-SNAPSHOT</version>
+   <groupId>com.redhat.rcm</groupId>
+   <artifactId>HelloWorld</artifactId>
+   <date>2013-11-05T08:57:22</date>
+   <timestamp>1383638242882</timestamp>
+   <build-year>2013</build-year>
+   <project>
+     <copyright-year>null-2013</copyright-year>
+   </project>
+   <scm/>
+   <runtime>
+     <build-server>localhost.localdomain</build-server>
+     <build-user>sbadakhc</build-user>
+     <os>
+       <arch>amd64</arch>
+       <name>Linux</name>
+       <version>3.11.6-200.fc19.x86_64</version>
+     </os>
+     <java>
+       <name>OpenJDK Runtime Environment</name>
+       <version>1.7.0_45-mockbuild_2013_10_16_17_47-b00</version>
+       <vendor>Oracle Corporation</vendor>
+       <vm>OpenJDK 64-Bit Server VM</vm>
+       <compiler>HotSpot 64-Bit Tiered Compilers</compiler>
+     </java>
+     <maven>
+       <version>3.0.5</version>
+       <commandline>-X -e install</commandline>
+       <execution-project>com.redhat.rcm:HelloWorld:jar:1.0-SNAPSHOT</execution-project>
+       <is-excution-root>true</is-excution-root>
+       <goals>
+         <goal>install</goal>
+       </goals>
+       <options>-Xmx4096m -XX:MaxPermSize=2048m -Xnoclassgc -XX:+DisableExplicitGC</options>
+     </maven>
+   </runtime>
+   <misc>
+     <metadata name="build.date.pattern">dd.MM.yyyy HH:mm:ss</metadata>
+   </misc>
+ </buildmetadata>`
+
+Goals
+-----
+The following goals are supported.  For a full explanation please refer to the upstream providers documentation.
+
+1. buildmetadata:build-point
+2. buildmetadata:buildmetadata-report
+3. buildmetadata:provide-buildmetadata
+
 
 Known Issues
 ------------
