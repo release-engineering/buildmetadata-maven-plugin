@@ -152,49 +152,50 @@ You can view the generated build.properties file in the archive without extracti
 
 The report will resemble the example below:
 
- <?xml version="1.0" encoding="UTF-8" standalone="no"?>
- <buildmetadata xmlns="http://github.com/sbadakhc/buildmetadata-maven-plugin" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://github.com/sbadakhc/buildmetadata-maven-plugin http://github.com/sbadakhc/buildmetadata-maven-plugin">
-   <name>1.0-20131105-SNAPSHOT</name>
-   <version>1.0-SNAPSHOT</version>
-   <groupId>com.redhat.rcm</groupId>
-   <artifactId>HelloWorld</artifactId>
-   <date>2013-11-05T08:57:22</date>
-   <timestamp>1383638242882</timestamp>
-   <build-year>2013</build-year>
-   <project>
-     <copyright-year>null-2013</copyright-year>
-   </project>
-   <scm/>
-   <runtime>
-     <build-server>localhost.localdomain</build-server>
-     <build-user>sbadakhc</build-user>
-     <os>
-       <arch>amd64</arch>
-       <name>Linux</name>
-       <version>3.11.6-200.fc19.x86_64</version>
-     </os>
-     <java>
-       <name>OpenJDK Runtime Environment</name>
-       <version>1.7.0_45-mockbuild_2013_10_16_17_47-b00</version>
-       <vendor>Oracle Corporation</vendor>
-       <vm>OpenJDK 64-Bit Server VM</vm>
-       <compiler>HotSpot 64-Bit Tiered Compilers</compiler>
-     </java>
-     <maven>
-       <version>3.0.5</version>
-       <commandline>-X -e install</commandline>
-       <execution-project>com.redhat.rcm:HelloWorld:jar:1.0-SNAPSHOT</execution-project>
-       <is-excution-root>true</is-excution-root>
-       <goals>
-         <goal>install</goal>
-       </goals>
-       <options>-Xmx4096m -XX:MaxPermSize=2048m -Xnoclassgc -XX:+DisableExplicitGC</options>
-     </maven>
-   </runtime>
-   <misc>
-     <metadata name="build.date.pattern">dd.MM.yyyy HH:mm:ss</metadata>
-   </misc>
- </buildmetadata>
+    `
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+    <buildmetadata xmlns="http://github.com/sbadakhc/buildmetadata-maven-plugin" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://github.com/sbadakhc/buildmetadata-maven-plugin http://github.com/sbadakhc/buildmetadata-maven-plugin">
+    <name>1.0-20131105-SNAPSHOT</name>
+    <version>1.0-SNAPSHOT</version>
+    <groupId>com.redhat.rcm</groupId>
+    <artifactId>HelloWorld</artifactId>
+    <date>2013-11-05T08:57:22</date>
+    <timestamp>1383638242882</timestamp>
+    <build-year>2013</build-year>
+    <project>
+      <copyright-year>null-2013</copyright-year>
+    </project>
+    <scm/>
+    <runtime>
+      <build-server>localhost.localdomain</build-server>
+      <build-user>sbadakhc</build-user>
+      <os>
+        <arch>amd64</arch>
+        <name>Linux</name>
+        <version>3.11.6-200.fc19.x86_64</version>
+      </os>
+      <java>
+        <name>OpenJDK Runtime Environment</name>
+        <version>1.7.0_45-mockbuild_2013_10_16_17_47-b00</version>
+        <vendor>Oracle Corporation</vendor>
+        <vm>OpenJDK 64-Bit Server VM</vm>
+        <compiler>HotSpot 64-Bit Tiered Compilers</compiler>
+      </java>
+      <maven>
+        <version>3.0.5</version>
+        <commandline>-X -e install</commandline>
+        <execution-project>com.redhat.rcm:HelloWorld:jar:1.0-SNAPSHOT</execution-project>
+        <is-excution-root>true</is-excution-root>
+        <goals>
+          <goal>install</goal>
+        </goals>
+        <options>-Xmx4096m -XX:MaxPermSize=2048m -Xnoclassgc -XX:+DisableExplicitGC</options>
+      </maven>
+     </runtime>
+     <misc>
+      <metadata name="build.date.pattern">dd.MM.yyyy HH:mm:ss</metadata>
+     </misc>
+     </buildmetadata>
 
 Goals
 -----
