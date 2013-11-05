@@ -127,7 +127,6 @@ refer to the upstream documentation linked below.
                   <hideCommandLineInfo>false</hideCommandLineInfo>
                   <hideMavenOptsInfo>false</hideMavenOptsInfo>
                   <hideJavaOptsInfo>false</hideJavaOptsInfo>
-                  <buildDatePattern>dd.MM.yyyy HH:mm:ss</buildDatePattern>
                 </configuration>
               </execution>
             </executions>
