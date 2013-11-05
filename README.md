@@ -94,7 +94,7 @@ upstream documentation linked below.
         <plugins>
           <plugin>
             <groupId>com.redhat.rcm.maven.plugin</groupId>
-            <artifactId>buildmetadata-maven-plugin</artifactId
+            <artifactId>buildmetadata-maven-plugin</artifactId>
             <version>1.3.0</version>
             <executions>
               <execution>
