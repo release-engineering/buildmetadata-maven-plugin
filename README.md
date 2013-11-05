@@ -152,7 +152,7 @@ You can view the generated build.properties file in the archive without extracti
 
 The report will resemble the example below:
 
-`<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+ <?xml version="1.0" encoding="UTF-8" standalone="no"?>
  <buildmetadata xmlns="http://github.com/sbadakhc/buildmetadata-maven-plugin" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://github.com/sbadakhc/buildmetadata-maven-plugin http://github.com/sbadakhc/buildmetadata-maven-plugin">
    <name>1.0-20131105-SNAPSHOT</name>
    <version>1.0-SNAPSHOT</version>
@@ -194,7 +194,7 @@ The report will resemble the example below:
    <misc>
      <metadata name="build.date.pattern">dd.MM.yyyy HH:mm:ss</metadata>
    </misc>
- </buildmetadata>`
+ </buildmetadata>
 
 Goals
 -----
