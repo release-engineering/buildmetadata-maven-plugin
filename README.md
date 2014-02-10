@@ -163,7 +163,11 @@ The report will resemble the example below:
     <project>
       <copyright-year>null-2013</copyright-year>
     </project>
-    <scm/>
+    <scm>
+      <revision>42c32d5c55a9fe7a0ec08ccf7719273fa268eadf</revision>
+      <revision-date>2014-02-09T00:00:00</revision-date>
+      <url>scm:git:git@github.com:sbadakhc/HelloWorld.git</url>
+    </scm>
     <runtime>
       <build-server>localhost.localdomain</build-server>
       <build-user>sbadakhc</build-user>
