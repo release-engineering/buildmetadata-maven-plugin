@@ -197,6 +197,7 @@ The report will resemble the example below:
 
 Goals
 -----
+
 The following goals are supported.  For a full explanation please refer to the upstream providers documentation.
 
 1. buildmetadata:build-point
@@ -207,13 +208,8 @@ The following goals are supported.  For a full explanation please refer to the u
 Known Issues
 ------------
 
-With *NIX implementations of Maven the mvn shell wrapper script will need to explicitly declare the following varible 
-to capture Maven command line arguments:
+See https://github.com/sbadakhc/buildmetadata-maven-plugin/issues?state=open
 
-    export MAVEN_CMD_LINE_ARGS="$@"
-
-Red Hat/Fedora users should edit the /usr/bin/mvn wrapper file for /usr/share/maven/bin/mvn to include this declaration
-and prevent the changes being lost as a result of future packages upgrades.
 
 Notes
 -----
