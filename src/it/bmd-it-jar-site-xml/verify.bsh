@@ -1,0 +1,26 @@
+import java.io.*;
+
+File fileProperties = new File(basedir, "target/build.properties");
+if (!fileProperties.isFile())
+{
+	throw new FileNotFoundException("Could not find generated build.properties: " + fileProperties);
+}
+
+File fileXml = new File(basedir, "target/classes/META-INF/buildmetadata.xml");
+if (!fileXml.isFile())
+{
+	throw new FileNotFoundException("Could not find generated buildmetadata.xml: " + fileXml);
+}
+
+File reportFile = new File(basedir, "target/site/build-report.html");
+if (!reportFile.isFile())
+{
+	throw new FileNotFoundException("Could not find generated build report: " + reportFile);
+}
+
+if(0 == reportFile.length())
+{
+	throw new FileNotFoundException("Build report file exists, but is empty: " + reportFile);
+}
+
+

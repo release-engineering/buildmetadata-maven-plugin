@@ -1,0 +1,20 @@
+import java.io.*;
+
+File file = new File(basedir, "target/classes/META-INF/build.properties");
+if (!file.isFile())
+{
+	throw new FileNotFoundException("Could not find generated build.properties: " + file);
+}
+
+File reportFile = new File(basedir, "target/site/build-report.html");
+if (!reportFile.isFile())
+{
+	throw new FileNotFoundException("Could not find generated build report: " + reportFile);
+}
+
+if(0 == reportFile.length())
+{
+	throw new FileNotFoundException("Build report file exists, but is empty: " + reportFile);
+}
+
+

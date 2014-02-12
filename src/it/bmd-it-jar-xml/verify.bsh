@@ -1,0 +1,13 @@
+import java.io.*;
+
+File fileProperties = new File(basedir, "target/build.properties");
+if (!fileProperties.isFile())
+{
+	throw new FileNotFoundException("Could not find generated build.properties: " + fileProperties);
+}
+
+File fileXml = new File(basedir, "target/classes/META-INF/buildmetadata.xml");
+if (!fileXml.isFile())
+{
+	throw new FileNotFoundException("Could not find generated buildmetadata.xml: " + fileXml);
+}
