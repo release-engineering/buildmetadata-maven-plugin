@@ -10,10 +10,6 @@ Maven Repository
 ----------------
 You can access the binary artifact via the JBoss release repository:
 
-SNAPSHOT Releases:
-
-https://repository.jboss.org/nexus/content/repositories/snapshots/com/redhat/rcm/maven/plugin/buildmetadata-maven-plugin/
-
 Stable Releases:
 
 http://repository.jboss.org/nexus/content/repositories/releases/com/redhat/rcm/maven/plugin/buildmetadata-maven-plugin/
