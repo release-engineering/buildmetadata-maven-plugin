@@ -8,9 +8,9 @@ The reporting is configurable and extensible as well as being adaptable for proj
 
 Maven Repository
 ----------------
-You can access the binary artifact via the JBoss release repository:
+You can access the binary artifact via Maven Central or the JBoss releases repository.
 
-Stable Releases:
+JBoss Releases:
 
 http://repository.jboss.org/nexus/content/repositories/releases/com/redhat/rcm/maven/plugin/buildmetadata-maven-plugin/
 
