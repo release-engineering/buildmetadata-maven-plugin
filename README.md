@@ -105,7 +105,7 @@ refer to the upstream documentation linked below.
         <dependency>
           <groupId>com.redhat.rcm.maven.plugin</groupId>
           <artifactId>buildmetadata-maven-plugin</artifactId>
-          <version>1.3.0</version>
+          <version>1.3.1</version>
         </dependency>
       </dependencies>
 
@@ -116,7 +116,7 @@ refer to the upstream documentation linked below.
           <plugin>
             <groupId>com.redhat.rcm.maven.plugin</groupId>
             <artifactId>buildmetadata-maven-plugin</artifactId>
-            <version>1.3.0</version>
+            <version>1.3.1</version>
             <executions>
               <execution>
                 <phase>initialize</phase>
