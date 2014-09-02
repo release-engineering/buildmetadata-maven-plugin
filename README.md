@@ -141,6 +141,10 @@ refer to the upstream documentation linked below.
 Runtime Example
 ---------------
 
+If you want to execute the plugin from the command line with no modifications to your pom file the following example can be used:
+
+`mvn clean install -X -C -B dependency:resolve-plugins -Dmaven.test.skip=true -Dbuildmetadata:provide-buildmetadata -Dbuildmetadata:createPropertiesReport=false -Dbuildmetadata:xmlOutputFile={project.build.outputDirectory/META-INF/buildmetadata.xml -Dbuildmetadata:hideCommandLineInfo=false -Dbuildmetadata:hideMavenOptsInfo=false -Dbuildmetadata:hideJavaOptsInfo=false -Dbuildmetadata:addScminfo=true | tee build.log`
+
 Assuming the plugin configuration in your projects pom.xml matches the example provided then simply executing maven with
 the install goal will create a buildmetadata.xml file in the generated jar file under the META-INF direcory of the
 archive.
