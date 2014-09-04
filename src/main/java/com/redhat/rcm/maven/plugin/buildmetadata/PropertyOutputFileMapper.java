@@ -96,6 +96,7 @@ final class PropertyOutputFileMapper
       propertyOutputFileMapping.add(new FileMapping("jar", jarFile));
       propertyOutputFileMapping.add(new FileMapping("ejb", jarFile));
       propertyOutputFileMapping.add(new FileMapping("maven-plugin", jarFile));
+      propertyOutputFileMapping.add(new FileMapping("bundle", jarFile));
       propertyOutputFileMapping
           .add(new FileMapping("maven-archetype", jarFile));
       propertyOutputFileMapping.add(new FileMapping("eclipse-plugin", new File(
