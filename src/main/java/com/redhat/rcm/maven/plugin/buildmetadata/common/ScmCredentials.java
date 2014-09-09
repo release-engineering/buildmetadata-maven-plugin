@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.smartics.maven.plugin.buildmetadata.common;
+package com.redhat.rcm.maven.plugin.buildmetadata.common;
 
 import org.apache.maven.settings.Server;
 import org.apache.maven.settings.Settings;
 import org.sonatype.plexus.components.sec.dispatcher.SecDispatcherException;
 
-import de.smartics.maven.plugin.buildmetadata.util.SettingsDecrypter;
+import com.redhat.rcm.maven.plugin.buildmetadata.util.SettingsDecrypter;
 
 /**
  * The SCM connection information for authentication.

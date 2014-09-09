@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.smartics.maven.plugin.buildmetadata.scm.maven;
+package com.redhat.rcm.maven.plugin.buildmetadata.scm.maven;
 
 import java.io.Serializable;
 
@@ -25,7 +25,7 @@ import org.apache.maven.scm.provider.svn.repository.SvnScmProviderRepository;
 import org.apache.maven.scm.repository.ScmRepository;
 import org.codehaus.plexus.util.StringUtils;
 
-import de.smartics.maven.plugin.buildmetadata.scm.ScmException;
+import com.redhat.rcm.maven.plugin.buildmetadata.scm.ScmException;
 
 /**
  * Provides the information required to connect to a SCM system.

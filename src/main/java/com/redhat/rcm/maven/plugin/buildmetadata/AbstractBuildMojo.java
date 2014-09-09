@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.smartics.maven.plugin.buildmetadata;
+package com.redhat.rcm.maven.plugin.buildmetadata;
 
 import java.io.File;
 import java.util.List;
@@ -27,13 +27,13 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
 import org.sonatype.plexus.components.sec.dispatcher.SecDispatcher;
 
-import de.smartics.maven.plugin.buildmetadata.common.Property;
-import de.smartics.maven.plugin.buildmetadata.common.ScmInfo;
-import de.smartics.maven.plugin.buildmetadata.data.MetaDataProvider;
-import de.smartics.maven.plugin.buildmetadata.data.MetaDataProviderBuilder;
-import de.smartics.maven.plugin.buildmetadata.data.Provider;
-import de.smartics.maven.plugin.buildmetadata.io.BuildPropertiesFileHelper;
-import de.smartics.maven.plugin.buildmetadata.util.SettingsDecrypter;
+import com.redhat.rcm.maven.plugin.buildmetadata.common.Property;
+import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmInfo;
+import com.redhat.rcm.maven.plugin.buildmetadata.data.MetaDataProvider;
+import com.redhat.rcm.maven.plugin.buildmetadata.data.MetaDataProviderBuilder;
+import com.redhat.rcm.maven.plugin.buildmetadata.data.Provider;
+import com.redhat.rcm.maven.plugin.buildmetadata.io.BuildPropertiesFileHelper;
+import com.redhat.rcm.maven.plugin.buildmetadata.util.SettingsDecrypter;
 
 /**
  * Base implementation for all build mojos.

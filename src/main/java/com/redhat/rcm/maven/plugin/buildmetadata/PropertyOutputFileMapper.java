@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.smartics.maven.plugin.buildmetadata;
+package com.redhat.rcm.maven.plugin.buildmetadata;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -96,7 +96,6 @@ final class PropertyOutputFileMapper
       propertyOutputFileMapping.add(new FileMapping("ejb", jarFile));
       propertyOutputFileMapping.add(new FileMapping("maven-plugin", jarFile));
       propertyOutputFileMapping.add(new FileMapping("atlassian-plugin", jarFile));
-      propertyOutputFileMapping.add(new FileMapping("bundle", jarFile));
       propertyOutputFileMapping
           .add(new FileMapping("maven-archetype", jarFile));
       propertyOutputFileMapping.add(new FileMapping("eclipse-plugin", new File(

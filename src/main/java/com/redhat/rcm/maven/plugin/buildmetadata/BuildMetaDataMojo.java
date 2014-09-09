@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.smartics.maven.plugin.buildmetadata;
+package com.redhat.rcm.maven.plugin.buildmetadata;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -29,19 +29,19 @@ import org.apache.maven.scm.manager.ScmManager;
 import org.apache.maven.settings.Settings;
 import org.codehaus.plexus.util.StringUtils;
 
-import de.smartics.maven.plugin.buildmetadata.common.Constant;
-import de.smartics.maven.plugin.buildmetadata.common.ScmControl;
-import de.smartics.maven.plugin.buildmetadata.common.ScmCredentials;
-import de.smartics.maven.plugin.buildmetadata.common.ScmInfo;
-import de.smartics.maven.plugin.buildmetadata.data.HostMetaDataProvider;
-import de.smartics.maven.plugin.buildmetadata.data.MavenMetaDataProvider;
-import de.smartics.maven.plugin.buildmetadata.data.MavenMetaDataSelection;
-import de.smartics.maven.plugin.buildmetadata.data.ScmMetaDataProvider;
-import de.smartics.maven.plugin.buildmetadata.io.BuildPropertiesFileHelper;
-import de.smartics.maven.plugin.buildmetadata.io.BuildXmlFileHelper;
-import de.smartics.maven.plugin.buildmetadata.scm.ScmNoRevisionException;
-import de.smartics.maven.plugin.buildmetadata.util.FilePathNormalizer;
-import de.smartics.maven.plugin.buildmetadata.util.LoggingUtils;
+import com.redhat.rcm.maven.plugin.buildmetadata.common.Constant;
+import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmControl;
+import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmCredentials;
+import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmInfo;
+import com.redhat.rcm.maven.plugin.buildmetadata.data.HostMetaDataProvider;
+import com.redhat.rcm.maven.plugin.buildmetadata.data.MavenMetaDataProvider;
+import com.redhat.rcm.maven.plugin.buildmetadata.data.MavenMetaDataSelection;
+import com.redhat.rcm.maven.plugin.buildmetadata.data.ScmMetaDataProvider;
+import com.redhat.rcm.maven.plugin.buildmetadata.io.BuildPropertiesFileHelper;
+import com.redhat.rcm.maven.plugin.buildmetadata.io.BuildXmlFileHelper;
+import com.redhat.rcm.maven.plugin.buildmetadata.scm.ScmNoRevisionException;
+import com.redhat.rcm.maven.plugin.buildmetadata.util.FilePathNormalizer;
+import com.redhat.rcm.maven.plugin.buildmetadata.util.LoggingUtils;
 
 /**
  * Provides the build properties. This information is also written to a
@@ -435,9 +435,9 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
   /**
    * The range of the query in days to fetch change log entries from the SCM. If
    * no change logs have been found, the range is incremented up to {@value
-   * de.smartics.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo;#
+   * com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo;#
    * DEFAULT_RETRY_COUNT} (5) times. If no change log has been found after these
-   * {@value de.smartics.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo;#
+   * {@value com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo;#
    * DEFAULT_RETRY_COUNT} (5) additional queries, the revision number will not
    * be set with a valid value.
    *

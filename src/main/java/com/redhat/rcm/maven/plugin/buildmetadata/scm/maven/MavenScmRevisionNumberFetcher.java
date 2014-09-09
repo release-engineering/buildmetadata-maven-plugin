@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.smartics.maven.plugin.buildmetadata.scm.maven;
+package com.redhat.rcm.maven.plugin.buildmetadata.scm.maven;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -41,10 +41,10 @@ import org.apache.maven.scm.provider.ScmProvider;
 import org.apache.maven.scm.repository.ScmRepository;
 import org.codehaus.plexus.util.StringUtils;
 
-import de.smartics.maven.plugin.buildmetadata.scm.LocallyModifiedInfo;
-import de.smartics.maven.plugin.buildmetadata.scm.Revision;
-import de.smartics.maven.plugin.buildmetadata.scm.RevisionNumberFetcher;
-import de.smartics.maven.plugin.buildmetadata.scm.ScmException;
+import com.redhat.rcm.maven.plugin.buildmetadata.scm.LocallyModifiedInfo;
+import com.redhat.rcm.maven.plugin.buildmetadata.scm.Revision;
+import com.redhat.rcm.maven.plugin.buildmetadata.scm.RevisionNumberFetcher;
+import com.redhat.rcm.maven.plugin.buildmetadata.scm.ScmException;
 
 /**
  * Implementation on the Maven SCM implementation to fetch the latest revision

@@ -28,7 +28,7 @@
 
   <!-- The following classes also gets instantiated and injected by Maven. -->
   <Match>
-    <Class name="de.smartics.maven.plugin.buildmetadata.Provider"/>
+    <Class name="com.redhat.rcm.maven.plugin.buildmetadata.Provider"/>
     <Or>
       <Bug pattern="NP_UNWRITTEN_FIELD"/>
       <Bug pattern="UWF_UNWRITTEN_FIELD"/>

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.smartics.maven.plugin.buildmetadata.common;
+package com.redhat.rcm.maven.plugin.buildmetadata.common;
 
 /**
  * Information to control the gathering of SCM meta data.

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.smartics.maven.plugin.buildmetadata.maven;
+package com.redhat.rcm.maven.plugin.buildmetadata.maven;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;

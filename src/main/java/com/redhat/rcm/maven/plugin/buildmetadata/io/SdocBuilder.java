@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.smartics.maven.plugin.buildmetadata.io;
+package com.redhat.rcm.maven.plugin.buildmetadata.io;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -36,10 +36,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
 
-import de.smartics.maven.plugin.buildmetadata.common.Constant;
-import de.smartics.maven.plugin.buildmetadata.common.Property;
-import de.smartics.maven.plugin.buildmetadata.common.SortedProperties;
-import de.smartics.maven.plugin.buildmetadata.util.FilePathNormalizer;
+import com.redhat.rcm.maven.plugin.buildmetadata.common.Constant;
+import com.redhat.rcm.maven.plugin.buildmetadata.common.Property;
+import com.redhat.rcm.maven.plugin.buildmetadata.common.SortedProperties;
+import com.redhat.rcm.maven.plugin.buildmetadata.util.FilePathNormalizer;
 
 /**
  * Creates an XML report with the build meta data. The report contains the same

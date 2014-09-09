@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.smartics.maven.plugin.buildmetadata.scm.maven;
+package com.redhat.rcm.maven.plugin.buildmetadata.scm.maven;
 
 import java.io.File;
 import java.io.Serializable;
@@ -35,8 +35,8 @@ import org.apache.maven.scm.repository.ScmRepository;
 import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.cli.Commandline;
 
-import de.smartics.maven.plugin.buildmetadata.scm.Revision;
-import de.smartics.maven.plugin.buildmetadata.scm.ScmException;
+import com.redhat.rcm.maven.plugin.buildmetadata.scm.Revision;
+import com.redhat.rcm.maven.plugin.buildmetadata.scm.ScmException;
 
 /**
  * Provides access information to retrieve revision information from the SCM.
@@ -345,14 +345,14 @@ public final class ScmAccessInfo implements Serializable
    * Checks if the given result contains change logs or not.
    * <p>
    * Calls
-   * {@link de.smartics.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo#isEmpty(org.apache.maven.scm.command.changelog.ChangeLogSet)}
+   * {@link com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo#isEmpty(org.apache.maven.scm.command.changelog.ChangeLogSet)}
    * with argument list (&lt;changeLogSet&gt;).
    *
    * @param result result the result to be checked.
    * @return <code>true</code> if change logs have been found,<code>false</code>
    *         if any reference up the path to the change logs is
    *         <code>null</code> or the set is empty.
-   * @see de.smartics.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo#isEmpty(org.apache.maven.scm.command.changelog.ChangeLogSet)
+   * @see com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo#isEmpty(org.apache.maven.scm.command.changelog.ChangeLogSet)
    */
   private boolean isEmpty(final ChangeLogScmResult result)
   {

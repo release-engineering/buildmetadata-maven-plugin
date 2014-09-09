@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.smartics.maven.plugin.buildmetadata.data;
+package com.redhat.rcm.maven.plugin.buildmetadata.data;
 
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.execution.RuntimeInformation;
 import org.apache.maven.project.MavenProject;
 
-import de.smartics.maven.plugin.buildmetadata.common.ScmInfo;
+import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmInfo;
 
 /**
  * Base implementation for {@link MetaDataProvider}s.

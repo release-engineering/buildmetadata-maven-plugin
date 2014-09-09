@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.smartics.maven.plugin.buildmetadata.data;
+package com.redhat.rcm.maven.plugin.buildmetadata.data;
 
 import java.util.Locale;
 import java.util.Properties;
@@ -27,12 +27,12 @@ import org.apache.maven.scm.repository.ScmRepository;
 import org.apache.maven.scm.repository.ScmRepositoryException;
 import org.codehaus.plexus.util.StringUtils;
 
-import de.smartics.maven.plugin.buildmetadata.common.RevisionHelper;
-import de.smartics.maven.plugin.buildmetadata.common.ScmControl;
-import de.smartics.maven.plugin.buildmetadata.common.ScmCredentials;
-import de.smartics.maven.plugin.buildmetadata.common.ScmInfo;
-import de.smartics.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo;
-import de.smartics.maven.plugin.buildmetadata.scm.maven.ScmConnectionInfo;
+import com.redhat.rcm.maven.plugin.buildmetadata.common.RevisionHelper;
+import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmControl;
+import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmCredentials;
+import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmInfo;
+import com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo;
+import com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmConnectionInfo;
 
 /**
  * Extracts information from the Maven project, session, and runtime
@@ -63,7 +63,7 @@ public class ScmMetaDataProvider extends AbstractMetaDataProvider
    *
    * @param project the Maven project.
    * @param scmInfo the value for scmInfo.
-   * @see de.smartics.maven.plugin.buildmetadata.data.AbstractMetaDataProvider#AbstractMetaDataProvider()
+   * @see com.redhat.rcm.maven.plugin.buildmetadata.data.AbstractMetaDataProvider#AbstractMetaDataProvider()
    */
   public ScmMetaDataProvider(final MavenProject project, final ScmInfo scmInfo)
   {

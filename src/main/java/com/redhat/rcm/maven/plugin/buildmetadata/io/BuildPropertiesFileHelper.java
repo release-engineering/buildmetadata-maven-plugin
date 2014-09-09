@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.smartics.maven.plugin.buildmetadata.io;
+package com.redhat.rcm.maven.plugin.buildmetadata.io;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -32,10 +32,10 @@ import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.IOUtil;
 import org.codehaus.plexus.util.StringUtils;
 
-import de.smartics.maven.plugin.buildmetadata.common.Constant;
-import de.smartics.maven.plugin.buildmetadata.common.MojoUtils;
-import de.smartics.maven.plugin.buildmetadata.common.SortedProperties;
-import de.smartics.maven.plugin.buildmetadata.util.FilePathNormalizer;
+import com.redhat.rcm.maven.plugin.buildmetadata.common.Constant;
+import com.redhat.rcm.maven.plugin.buildmetadata.common.MojoUtils;
+import com.redhat.rcm.maven.plugin.buildmetadata.common.SortedProperties;
+import com.redhat.rcm.maven.plugin.buildmetadata.util.FilePathNormalizer;
 
 /**
  * Helper to handle the build meta data properties file.

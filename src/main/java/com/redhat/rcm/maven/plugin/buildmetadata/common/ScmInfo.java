@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.smartics.maven.plugin.buildmetadata.common;
+package com.redhat.rcm.maven.plugin.buildmetadata.common;
 
 import java.io.File;
 
@@ -70,9 +70,9 @@ public final class ScmInfo
   /**
    * The range of the query in days to fetch change log entries from the SCM. If
    * no change logs have been found, the range is incremented up to
-   * {@value de.smartics.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo#DEFAULT_RETRY_COUNT}
+   * {@value com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo#DEFAULT_RETRY_COUNT}
    * times. If no change log has been found after these
-   * {@value de.smartics.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo#DEFAULT_RETRY_COUNT}
+   * {@value com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo#DEFAULT_RETRY_COUNT}
    * additional queries, the revision number will not be set with a valid value.
    */
   private final int queryRangeInDays;
@@ -224,9 +224,9 @@ public final class ScmInfo
   /**
    * Returns the range of the query in days to fetch change log entries from the
    * SCM. If no change logs have been found, the range is incremented up to
-   * {@value de.smartics.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo#DEFAULT_RETRY_COUNT}
+   * {@value com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo#DEFAULT_RETRY_COUNT}
    * times. If no change log has been found after these
-   * {@value de.smartics.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo#DEFAULT_RETRY_COUNT}
+   * {@value com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo#DEFAULT_RETRY_COUNT}
    * additional queries, the revision number will not be set with a valid value.
    *
    * @return the range of the query in days to fetch change log entries from the

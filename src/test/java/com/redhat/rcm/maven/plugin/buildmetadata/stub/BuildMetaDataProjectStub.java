@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.smartics.maven.plugin.buildmetadata.stub;
+package com.redhat.rcm.maven.plugin.buildmetadata.stub;
 
 import java.io.File;
 import java.io.IOException;

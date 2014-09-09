@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.smartics.maven.plugin.buildmetadata.scm.maven;
+package com.redhat.rcm.maven.plugin.buildmetadata.scm.maven;
 
 import java.util.Date;
 
@@ -54,7 +54,7 @@ public final class MavenRevision extends StringRevision
    *
    * @param version the SCM version provided by Maven.
    * @param date the revision date.
-   * @see de.smartics.maven.plugin.buildmetadata.scm.maven.StringRevision#StringRevision(java.lang.String,
+   * @see com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.StringRevision#StringRevision(java.lang.String,
    *      java.util.Date)
    */
   public MavenRevision(final ScmVersion version, final Date date)

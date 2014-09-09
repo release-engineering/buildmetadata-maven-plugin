@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.smartics.maven.plugin.buildmetadata.data;
+package com.redhat.rcm.maven.plugin.buildmetadata.data;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -21,7 +21,7 @@ import java.util.Properties;
 
 import org.apache.maven.plugin.MojoExecutionException;
 
-import de.smartics.maven.plugin.buildmetadata.common.Constant;
+import com.redhat.rcm.maven.plugin.buildmetadata.common.Constant;
 
 /**
  * Provides information about the host running the build.
@@ -54,7 +54,7 @@ public final class HostMetaDataProvider implements MetaDataProvider
   /**
    * {@inheritDoc}
    *
-   * @see de.smartics.maven.plugin.buildmetadata.data.MetaDataProvider#provideBuildMetaData(java.util.Properties)
+   * @see com.redhat.rcm.maven.plugin.buildmetadata.data.MetaDataProvider#provideBuildMetaData(java.util.Properties)
    */
   public void provideBuildMetaData(final Properties buildMetaDataProperties)
     throws MojoExecutionException

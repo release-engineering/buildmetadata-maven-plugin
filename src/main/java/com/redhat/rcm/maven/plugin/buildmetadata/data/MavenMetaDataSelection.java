@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.smartics.maven.plugin.buildmetadata.data;
+package com.redhat.rcm.maven.plugin.buildmetadata.data;
 
 import java.util.List;
 
-import de.smartics.maven.plugin.buildmetadata.common.Property;
+import com.redhat.rcm.maven.plugin.buildmetadata.common.Property;
 
 /**
  * Defines the Maven information to be included in the build meta data.

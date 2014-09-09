@@ -18,5 +18,5 @@
  *
  * @since 1.0
  */
-package de.smartics.maven.plugin.buildmetadata.common;
+package com.redhat.rcm.maven.plugin.buildmetadata.common;
 

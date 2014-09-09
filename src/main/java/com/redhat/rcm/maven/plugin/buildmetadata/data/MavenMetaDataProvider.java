@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.smartics.maven.plugin.buildmetadata.data;
+package com.redhat.rcm.maven.plugin.buildmetadata.data;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +28,10 @@ import org.apache.maven.model.Profile;
 import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.StringUtils;
 
-import de.smartics.maven.plugin.buildmetadata.common.Constant;
-import de.smartics.maven.plugin.buildmetadata.common.MojoUtils;
-import de.smartics.maven.plugin.buildmetadata.common.Property;
-import de.smartics.maven.plugin.buildmetadata.maven.MavenPropertyHelper;
+import com.redhat.rcm.maven.plugin.buildmetadata.common.Constant;
+import com.redhat.rcm.maven.plugin.buildmetadata.common.MojoUtils;
+import com.redhat.rcm.maven.plugin.buildmetadata.common.Property;
+import com.redhat.rcm.maven.plugin.buildmetadata.maven.MavenPropertyHelper;
 
 /**
  * Extracts information from the Maven project, session, and runtime
@@ -65,7 +65,7 @@ public final class MavenMetaDataProvider extends AbstractMetaDataProvider
    * @param runtime the runtime information of the Maven instance being executed
    *          for the build.
    * @param selection the selection of properties to be added or hidden.
-   * @see de.smartics.maven.plugin.buildmetadata.data.AbstractMetaDataProvider#AbstractMetaDataProvider()
+   * @see com.redhat.rcm.maven.plugin.buildmetadata.data.AbstractMetaDataProvider#AbstractMetaDataProvider()
    */
   public MavenMetaDataProvider(final MavenProject project,
       final MavenSession session, final RuntimeInformation runtime,

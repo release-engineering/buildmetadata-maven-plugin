@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.smartics.maven.plugin.buildmetadata.common;
+package com.redhat.rcm.maven.plugin.buildmetadata.common;
 
 /**
  * Defines a property to be selected by the user to include into the build meta

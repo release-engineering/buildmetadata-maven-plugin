@@ -21,5 +21,5 @@
  * to keep the list of dependencies for this plugin short.
  * </p>
  */
-package de.smartics.maven.plugin.buildmetadata.util;
+package com.redhat.rcm.maven.plugin.buildmetadata.util;
 

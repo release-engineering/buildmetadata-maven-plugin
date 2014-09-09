@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.smartics.maven.plugin.buildmetadata.data;
+package com.redhat.rcm.maven.plugin.buildmetadata.data;
 
 import java.util.Map;
 
 /**
  * Configuration instance to create instances of
- * {@link de.smartics.maven.plugin.buildmetadata.data.MetaDataProvider} by the
- * {@link de.smartics.maven.plugin.buildmetadata.data.MetaDataProviderBuilder}.
+ * {@link com.redhat.rcm.maven.plugin.buildmetadata.data.MetaDataProvider} by the
+ * {@link com.redhat.rcm.maven.plugin.buildmetadata.data.MetaDataProviderBuilder}.
  *
  * @author <a href="mailto:robert.reiner@smartics.de">Robert Reiner</a>
  * @version $Revision:591 $

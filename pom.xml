@@ -51,7 +51,6 @@
      
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven-scm.version>1.6</maven-scm.version>
     <jboss.releases.repo.url>https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/</jboss.releases.repo.url>
     <jboss.snapshots.repo.url>https://repository.jboss.org/nexus/content/repositories/snapshots/</jboss.snapshots.repo.url>
     <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
@@ -398,50 +397,6 @@
           <version>${versions-maven-plugin.version}</version>
         </plugin>
 
-        <!--
-          This configuration is for synchronizing Eclipse configuration only.
-            https://docs.sonatype.org/display/M2ECLIPSE/Customizable+build+lifecycle+mapping+for+m2e+extensions+developers
-
-          No plugin involved:
-            http://dev.eclipse.org/mhonarc/lists/m2e-users/msg00657.html
-          -->
-        <plugin>
-          <groupId>org.eclipse.m2e</groupId>
-          <artifactId>lifecycle-mapping</artifactId>
-          <version>1.0.0</version>
-          <configuration>
-            <lifecycleMappingMetadata>
-              <pluginExecutions>
-                <pluginExecution>
-                  <pluginExecutionFilter>
-                    <groupId>de.smartics.maven.plugin</groupId>
-                    <artifactId>buildmetadata-maven-plugin</artifactId>
-                    <versionRange>[0.0.0,)</versionRange>
-                    <goals>
-                      <goal>provide-buildmetadata</goal>
-                    </goals>
-                  </pluginExecutionFilter>
-                  <action>
-                    <ignore />
-                  </action>
-                </pluginExecution>
-                <pluginExecution>
-                  <pluginExecutionFilter>
-                    <groupId>de.smartics.maven.plugin</groupId>
-                    <artifactId>alias-maven-plugin</artifactId>
-                    <versionRange>[0.0.0,)</versionRange>
-                    <goals>
-                      <goal>alias</goal>
-                    </goals>
-                  </pluginExecutionFilter>
-                  <action>
-                    <ignore />
-                  </action>
-                </pluginExecution>
-              </pluginExecutions>
-            </lifecycleMappingMetadata>
-          </configuration>
-        </plugin>
       </plugins>
     </pluginManagement>
 

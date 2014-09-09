@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.smartics.maven.plugin.buildmetadata.scm.maven;
+package com.redhat.rcm.maven.plugin.buildmetadata.scm.maven;
 
 import java.io.Serializable;
 import java.util.Date;
 
-import de.smartics.maven.plugin.buildmetadata.scm.Revision;
+import com.redhat.rcm.maven.plugin.buildmetadata.scm.Revision;
 
 /**
  * Implementation for a simple revision string.

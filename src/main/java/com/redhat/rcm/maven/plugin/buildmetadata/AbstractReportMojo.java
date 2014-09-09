@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.smartics.maven.plugin.buildmetadata;
+package com.redhat.rcm.maven.plugin.buildmetadata;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -42,8 +42,8 @@ import org.apache.maven.reporting.AbstractMavenReport;
 import org.apache.maven.reporting.MavenReportException;
 import org.codehaus.plexus.util.StringUtils;
 
-import de.smartics.maven.plugin.buildmetadata.util.LoggingUtils;
-import de.smartics.maven.plugin.buildmetadata.util.ReportUtils;
+import com.redhat.rcm.maven.plugin.buildmetadata.util.LoggingUtils;
+import com.redhat.rcm.maven.plugin.buildmetadata.util.ReportUtils;
 
 /**
  * The abstract base implementation for reports.
