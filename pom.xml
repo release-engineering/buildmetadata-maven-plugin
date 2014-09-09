@@ -211,7 +211,7 @@
       <artifactId>maven-scm-provider-starteam</artifactId>
       <version>${maven-scm.version}</version>
       <optional>true</optional>
-    </dependency> -->
+    </dependency>
     <dependency>
       <groupId>org.apache.maven.scm</groupId>
       <artifactId>maven-scm-provider-svnexe</artifactId>
@@ -229,14 +229,12 @@
       <version>${maven-scm.version}</version>
       <optional>true</optional>
     </dependency>
-
     <dependency>
       <groupId>org.apache.maven.plugin-testing</groupId>
       <artifactId>maven-plugin-testing-harness</artifactId>
       <version>1.2</version>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
