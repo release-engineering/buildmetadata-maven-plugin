@@ -158,7 +158,6 @@
       <artifactId>maven-scm-manager-plexus</artifactId>
       <version>${maven-scm.version}</version>
     </dependency>
-    <!--
     <dependency>
       <groupId>org.apache.maven.scm</groupId>
       <artifactId>maven-scm-provider-bazaar</artifactId>
@@ -171,14 +170,12 @@
       <version>${maven-scm.version}</version>
       <optional>true</optional>
     </dependency>
-    -->
     <dependency>
       <groupId>org.apache.maven.scm</groupId>
       <artifactId>maven-scm-provider-gitexe</artifactId>
       <version>${maven-scm.version}</version>
       <optional>true</optional>
     </dependency>
-    <!--
     <dependency>
       <groupId>org.apache.maven.scm</groupId>
       <artifactId>maven-scm-provider-hg</artifactId>
@@ -220,7 +217,6 @@
       <artifactId>maven-scm-provider-svnexe</artifactId>
       <version>${maven-scm.version}</version>
     </dependency>
-    <!--
     <dependency>
       <groupId>org.apache.maven.scm</groupId>
       <artifactId>maven-scm-provider-synergy</artifactId>
@@ -233,7 +229,6 @@
       <version>${maven-scm.version}</version>
       <optional>true</optional>
     </dependency>
-    -->
 
     <dependency>
       <groupId>org.apache.maven.plugin-testing</groupId>
