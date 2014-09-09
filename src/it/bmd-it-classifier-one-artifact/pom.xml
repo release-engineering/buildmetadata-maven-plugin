@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>de.smartics.test</groupId>
+  <artifactId>bmd-it-classifier-one-artifact</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <description>
+    A test case building a JAR with classifier for the main artifact.
+  </description>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>de.smartics.maven.plugin</groupId>
+        <artifactId>buildmetadata-maven-plugin</artifactId>
+        <version>@project.version@</version>
+        <executions>
+          <execution>
+            <phase>initialize</phase>
+            <goals>
+              <goal>provide-buildmetadata</goal>
+            </goals>
+            <configuration>
+              <buildDatePattern>dd.MM.yyyy HH:mm:ss</buildDatePattern>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.5</version>
+        <executions>
+          <execution>
+            <id>default-jar</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <classifier>attached</classifier>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

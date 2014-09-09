@@ -19,6 +19,7 @@ import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
@@ -37,6 +38,7 @@ import com.redhat.rcm.maven.plugin.buildmetadata.data.HostMetaDataProvider;
 import com.redhat.rcm.maven.plugin.buildmetadata.data.MavenMetaDataProvider;
 import com.redhat.rcm.maven.plugin.buildmetadata.data.MavenMetaDataSelection;
 import com.redhat.rcm.maven.plugin.buildmetadata.data.ScmMetaDataProvider;
+import com.redhat.rcm.maven.plugin.buildmetadata.io.AdditionalLocationsSupport;
 import com.redhat.rcm.maven.plugin.buildmetadata.io.BuildPropertiesFileHelper;
 import com.redhat.rcm.maven.plugin.buildmetadata.io.BuildXmlFileHelper;
 import com.redhat.rcm.maven.plugin.buildmetadata.scm.ScmNoRevisionException;
@@ -470,6 +472,24 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
    */
   private boolean ignoreDotFilesInBaseDir;
 
+  /**
+   * Flag to copy build report files to the <code>generated-sources</code>
+   * folder, if the Maven sources plugin is configured.
+   *
+   * @parameter default-value="true"
+   * @since 1.5.0
+   */
+  private boolean addToGeneratedSources;
+
+  /**
+   * The list of locations the report files are to be copied to. If it is not
+   * absolute, the subfolder <code>META-INF</code> is appended.
+   *
+   * @parameter
+   * @since 1.5.0
+   */
+  private List<String> addToLocations;
+
   // ****************************** Initializer *******************************
 
   // ****************************** Constructors ******************************
@@ -548,14 +568,28 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
   private void writeBuildMetaData(final BuildPropertiesFileHelper helper,
       final Properties buildMetaDataProperties) throws MojoExecutionException
   {
-    helper.writePropertiesFile(buildMetaDataProperties);
+    final File propertiesFile =
+        helper.writePropertiesFile(buildMetaDataProperties);
+
+    final AdditionalLocationsSupport.Config config =
+        new AdditionalLocationsSupport.Config();
+    config.setAddToGeneratedSources(addToGeneratedSources).setAddToLocations(
+        addToLocations);
+    final AdditionalLocationsSupport additionalLocations =
+        new AdditionalLocationsSupport(project, config);
+    additionalLocations.handle(propertiesFile);
+    final boolean writable = !writeProtectFiles;
+    propertiesFile.setWritable(writable);
+
     if (createXmlReport)
     {
       final String projectRootPath = project.getBasedir().getAbsolutePath();
       final BuildXmlFileHelper xmlHelper =
           new BuildXmlFileHelper(projectRootPath, getLog(), xmlOutputFile,
               properties);
-      xmlHelper.writeXmlFile(buildMetaDataProperties);
+      final File xmlFile = xmlHelper.writeXmlFile(buildMetaDataProperties);
+      additionalLocations.handle(xmlFile);
+      xmlFile.setWritable(writable);
     }
   }
 

@@ -1,0 +1,13 @@
+import java.io.*;
+
+File file = new File(basedir, "target/classes/META-INF/build.properties");
+if (!file.isFile())
+{
+	throw new FileNotFoundException("Could not find generated build.properties: " + file);
+}
+
+File fileAttached = new File(basedir, "target/attached/build.properties");
+if (!fileAttached.isFile())
+{
+	throw new FileNotFoundException("Could not find generated build.properties in attached resources: " + fileAttached);
+}

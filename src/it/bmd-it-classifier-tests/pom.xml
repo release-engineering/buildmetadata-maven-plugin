@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>de.smartics.test</groupId>
+  <artifactId>bmd-it-classifier-sources</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <description>
+    A test case building a JAR and an attached artifact with a sources classifier.
+  </description>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>de.smartics.maven.plugin</groupId>
+        <artifactId>buildmetadata-maven-plugin</artifactId>
+        <version>@project.version@</version>
+        <executions>
+          <execution>
+            <phase>initialize</phase>
+            <goals>
+              <goal>provide-buildmetadata</goal>
+            </goals>
+            <configuration>
+              <buildDatePattern>dd.MM.yyyy HH:mm:ss</buildDatePattern>
+              <addToLocations>
+                <location>test-classes</location>
+              </addToLocations>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.5</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>test-jar</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <index>true</index>
+          <archive>
+            <manifest>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+              <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+            </manifest>
+            <manifestEntries>
+              <Implementation-SCM-Revision-Number>${build.scmRevision.id}</Implementation-SCM-Revision-Number>
+              <Implementation-SCM-Revision-Date>${build.scmRevision.date}</Implementation-SCM-Revision-Date>
+              <Implementation-URL>${project.url}</Implementation-URL>
+              <Implementation-Date>${build.date}</Implementation-Date>
+              <Implementation-Timestamp>${build.timestamp.millis}</Implementation-Timestamp>
+              <Implementation-DatePattern>${build.date.pattern}</Implementation-DatePattern>
+              <Implementation-Full-Version>${build.version.full}</Implementation-Full-Version>
+              <Built-OS>${os.name} / ${os.arch} / ${os.version}</Built-OS>
+              <Built-By>${build.user}</Built-By>
+              <Maven-Version>${build.maven.version}</Maven-Version>
+              <Java-Version>${java.version}</Java-Version>
+              <Java-Vendor>${java.vendor}</Java-Vendor>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

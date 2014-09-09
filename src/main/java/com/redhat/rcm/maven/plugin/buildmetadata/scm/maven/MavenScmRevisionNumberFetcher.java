@@ -17,7 +17,6 @@ package com.redhat.rcm.maven.plugin.buildmetadata.scm.maven;
 
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
