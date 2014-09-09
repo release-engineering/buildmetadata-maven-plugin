@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2013 smartics, Kronseder & Reiner GmbH
+ * Copyright 2006-2014 smartics, Kronseder & Reiner GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.redhat.rcm.maven.plugin.buildmetadata.data;
+package de.smartics.maven.plugin.buildmetadata.data;
 
 import java.lang.reflect.Field;
 import java.util.Map;
@@ -24,7 +24,7 @@ import org.apache.maven.execution.RuntimeInformation;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
 
-import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmInfo;
+import de.smartics.maven.plugin.buildmetadata.common.ScmInfo;
 
 /**
  * Configuration instance to create instances of {@link MetaDataProvider}.

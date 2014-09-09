@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2013 smartics, Kronseder & Reiner GmbH
+ * Copyright 2006-2014 smartics, Kronseder & Reiner GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.redhat.rcm.maven.plugin.buildmetadata.data;
+package de.smartics.maven.plugin.buildmetadata.data;
 
 import java.util.Map;
 
 /**
  * Configuration instance to create instances of
- * {@link com.redhat.rcm.maven.plugin.buildmetadata.data.MetaDataProvider} by the
- * {@link com.redhat.rcm.maven.plugin.buildmetadata.data.MetaDataProviderBuilder}.
+ * {@link de.smartics.maven.plugin.buildmetadata.data.MetaDataProvider} by the
+ * {@link de.smartics.maven.plugin.buildmetadata.data.MetaDataProviderBuilder}.
  *
  * @author <a href="mailto:robert.reiner@smartics.de">Robert Reiner</a>
  * @version $Revision:591 $

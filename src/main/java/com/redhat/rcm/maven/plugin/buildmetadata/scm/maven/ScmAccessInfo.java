@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2013 smartics, Kronseder & Reiner GmbH
+ * Copyright 2006-2014 smartics, Kronseder & Reiner GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,21 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.redhat.rcm.maven.plugin.buildmetadata.scm.maven;
+package de.smartics.maven.plugin.buildmetadata.scm.maven;
 
 import java.io.File;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.maven.scm.ScmBranch;
 import org.apache.maven.scm.ScmFileSet;
+import org.apache.maven.scm.ScmVersion;
 import org.apache.maven.scm.command.changelog.ChangeLogScmResult;
 import org.apache.maven.scm.command.changelog.ChangeLogSet;
 import org.apache.maven.scm.provider.ScmProvider;
+import org.apache.maven.scm.provider.git.gitexe.command.GitCommandLineUtils;
 import org.apache.maven.scm.repository.ScmRepository;
 import org.codehaus.plexus.util.StringUtils;
+import org.codehaus.plexus.util.cli.Commandline;
 
-import com.redhat.rcm.maven.plugin.buildmetadata.scm.ScmException;
+import de.smartics.maven.plugin.buildmetadata.scm.Revision;
+import de.smartics.maven.plugin.buildmetadata.scm.ScmException;
 
 /**
  * Provides access information to retrieve revision information from the SCM.
@@ -279,18 +288,71 @@ public final class ScmAccessInfo implements Serializable
     }
   }
 
+  public Revision fetchRemoteVersion(final ScmRepository repository,
+      final ScmVersion remoteVersion) throws ScmException
+  {
+    try
+    {
+      final Commandline cl =
+          GitCommandLineUtils.getBaseGitCommandLine(rootDirectory, "log");
+      cl.createArg().setLine("-n 1");
+      cl.createArg().setLine("--pretty=format:\"%H %ct\"");
+      cl.createArg().setLine(remoteVersion.getName());
+      final Process process = cl.execute();
+      try
+      {
+        process.waitFor();
+        final int exitValue = process.exitValue();
+        if (exitValue != 0)
+        {
+          throw new ScmException(
+              "Cannot fetch remote version from repository (" + exitValue
+                  + "): " + IOUtils.toString(process.getErrorStream()));
+        }
+        final String result = IOUtils.toString(process.getInputStream());
+        final Revision revision = createRevision(result);
+        return revision;
+      }
+      finally
+      {
+        process.destroy();
+      }
+    }
+    catch (final Exception e)
+    {
+      throw new ScmException("Cannot fetch remote version from repository.", e);
+    }
+  }
+
+  private Revision createRevision(final String idSpaceDate)
+  {
+    final int index = idSpaceDate.trim().lastIndexOf(' ');
+    final String id = idSpaceDate.substring(0, index);
+    final String dateString = idSpaceDate.substring(index + 1);
+    try
+    {
+      final Date date = new Date(Long.parseLong(dateString) * 1000L);
+      final Revision revision = new StringRevision(id, date);
+      return revision;
+    }
+    catch (final NumberFormatException e)
+    {
+      return new StringRevision(id, new Date(0L));
+    }
+  }
+
   /**
    * Checks if the given result contains change logs or not.
    * <p>
    * Calls
-   * {@link com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo#isEmpty(org.apache.maven.scm.command.changelog.ChangeLogSet)}
+   * {@link de.smartics.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo#isEmpty(org.apache.maven.scm.command.changelog.ChangeLogSet)}
    * with argument list (&lt;changeLogSet&gt;).
    *
    * @param result result the result to be checked.
    * @return <code>true</code> if change logs have been found,<code>false</code>
    *         if any reference up the path to the change logs is
    *         <code>null</code> or the set is empty.
-   * @see com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo#isEmpty(org.apache.maven.scm.command.changelog.ChangeLogSet)
+   * @see de.smartics.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo#isEmpty(org.apache.maven.scm.command.changelog.ChangeLogSet)
    */
   private boolean isEmpty(final ChangeLogScmResult result)
   {

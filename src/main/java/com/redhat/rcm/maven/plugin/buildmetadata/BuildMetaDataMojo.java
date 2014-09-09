@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2013 smartics, Kronseder & Reiner GmbH
+ * Copyright 2006-2014 smartics, Kronseder & Reiner GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.redhat.rcm.maven.plugin.buildmetadata;
+package de.smartics.maven.plugin.buildmetadata;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -24,23 +24,24 @@ import java.util.Properties;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.scm.ScmBranch;
 import org.apache.maven.scm.manager.ScmManager;
 import org.apache.maven.settings.Settings;
 import org.codehaus.plexus.util.StringUtils;
 
-import com.redhat.rcm.maven.plugin.buildmetadata.common.Constant;
-import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmControl;
-import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmCredentials;
-import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmInfo;
-import com.redhat.rcm.maven.plugin.buildmetadata.data.HostMetaDataProvider;
-import com.redhat.rcm.maven.plugin.buildmetadata.data.MavenMetaDataProvider;
-import com.redhat.rcm.maven.plugin.buildmetadata.data.MavenMetaDataSelection;
-import com.redhat.rcm.maven.plugin.buildmetadata.data.ScmMetaDataProvider;
-import com.redhat.rcm.maven.plugin.buildmetadata.io.BuildPropertiesFileHelper;
-import com.redhat.rcm.maven.plugin.buildmetadata.io.BuildXmlFileHelper;
-import com.redhat.rcm.maven.plugin.buildmetadata.scm.ScmNoRevisionException;
-import com.redhat.rcm.maven.plugin.buildmetadata.util.FilePathNormalizer;
-import com.redhat.rcm.maven.plugin.buildmetadata.util.LoggingUtils;
+import de.smartics.maven.plugin.buildmetadata.common.Constant;
+import de.smartics.maven.plugin.buildmetadata.common.ScmControl;
+import de.smartics.maven.plugin.buildmetadata.common.ScmCredentials;
+import de.smartics.maven.plugin.buildmetadata.common.ScmInfo;
+import de.smartics.maven.plugin.buildmetadata.data.HostMetaDataProvider;
+import de.smartics.maven.plugin.buildmetadata.data.MavenMetaDataProvider;
+import de.smartics.maven.plugin.buildmetadata.data.MavenMetaDataSelection;
+import de.smartics.maven.plugin.buildmetadata.data.ScmMetaDataProvider;
+import de.smartics.maven.plugin.buildmetadata.io.BuildPropertiesFileHelper;
+import de.smartics.maven.plugin.buildmetadata.io.BuildXmlFileHelper;
+import de.smartics.maven.plugin.buildmetadata.scm.ScmNoRevisionException;
+import de.smartics.maven.plugin.buildmetadata.util.FilePathNormalizer;
+import de.smartics.maven.plugin.buildmetadata.util.LoggingUtils;
 
 /**
  * Provides the build properties. This information is also written to a
@@ -434,9 +435,9 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
   /**
    * The range of the query in days to fetch change log entries from the SCM. If
    * no change logs have been found, the range is incremented up to {@value
-   * com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo;#
+   * de.smartics.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo;#
    * DEFAULT_RETRY_COUNT} (5) times. If no change log has been found after these
-   * {@value com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo;#
+   * {@value de.smartics.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo;#
    * DEFAULT_RETRY_COUNT} (5) additional queries, the revision number will not
    * be set with a valid value.
    *
@@ -483,6 +484,9 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
 
   // --- business -------------------------------------------------------------
 
+  /**
+   * {@inheritDoc}
+   */
   public void execute() throws MojoExecutionException, MojoFailureException
   {
     if (!skip)
@@ -536,8 +540,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
     // The custom providers are required to be run at the end.
     // This allows these providers to access the information generated
     // by the built-in providers.
-    provideBuildMetaData(buildMetaDataProperties, scmInfo, providers,
-        false);
+    provideBuildMetaData(buildMetaDataProperties, scmInfo, providers, false);
 
     writeBuildMetaData(helper, buildMetaDataProperties);
   }
@@ -613,14 +616,16 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
   private ScmInfo createScmInfo()
   {
     final ScmCredentials scmCredentials =
-        new ScmCredentials(settings, userName, password, privateKey, passphrase);
+        new ScmCredentials(settingsDecrypter, settings, userName, password,
+            privateKey, passphrase);
     final ScmControl scmControl =
         new ScmControl(failOnLocalModifications, ignoreDotFilesInBaseDir,
             offline, addScmInfo, validateCheckout, failOnMissingRevision);
     final ScmInfo scmInfo =
         new ScmInfo(scmManager, connectionType, scmDateFormat, basedir,
             scmCredentials, tagBase, queryRangeInDays, buildDatePattern,
-            scmControl);
+            scmControl, StringUtils.isNotBlank(remoteVersion) ? new ScmBranch(
+                remoteVersion) : null);
     return scmInfo;
   }
 
@@ -702,8 +707,9 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
         buildYearString);
     final String inceptionYearString = project.getInceptionYear();
     final String copyrightYearString =
-        (buildYearString.equals(inceptionYearString) ? inceptionYearString
-            : inceptionYearString + '-' + buildYearString);
+        (inceptionYearString == null ? buildYearString : (buildYearString
+            .equals(inceptionYearString) ? inceptionYearString
+            : inceptionYearString + '-' + buildYearString));
     buildMetaDataProperties.setProperty(Constant.PROP_NAME_COPYRIGHT_YEAR,
         copyrightYearString);
   }

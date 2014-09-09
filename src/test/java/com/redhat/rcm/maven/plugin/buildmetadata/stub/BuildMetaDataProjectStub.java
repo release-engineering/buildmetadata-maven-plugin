@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2013 smartics, Kronseder & Reiner GmbH
+ * Copyright 2006-2014 smartics, Kronseder & Reiner GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.redhat.rcm.maven.plugin.buildmetadata.stub;
+package de.smartics.maven.plugin.buildmetadata.stub;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +28,7 @@ import org.apache.maven.plugin.testing.stubs.MavenProjectStub;
  * A stub to use with unit tests.
  *
  * @author <a href="mailto:robert.reiner@smartics.de">Robert Reiner</a>
- * @version $Revision: 13913 $
+ * @version $Revision: 16727 $
  */
 public final class BuildMetaDataProjectStub extends MavenProjectStub
 {

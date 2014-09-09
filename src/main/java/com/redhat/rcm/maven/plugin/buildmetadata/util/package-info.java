@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2013 smartics, Kronseder & Reiner GmbH
+ * Copyright 2006-2014 smartics, Kronseder & Reiner GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,5 +21,5 @@
  * to keep the list of dependencies for this plugin short.
  * </p>
  */
-package com.redhat.rcm.maven.plugin.buildmetadata.util;
+package de.smartics.maven.plugin.buildmetadata.util;
 

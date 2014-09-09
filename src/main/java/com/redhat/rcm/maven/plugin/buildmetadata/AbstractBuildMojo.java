@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2013 smartics, Kronseder & Reiner GmbH
+ * Copyright 2006-2014 smartics, Kronseder & Reiner GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.redhat.rcm.maven.plugin.buildmetadata;
+package de.smartics.maven.plugin.buildmetadata;
 
 import java.io.File;
 import java.util.List;
@@ -25,13 +25,15 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
+import org.sonatype.plexus.components.sec.dispatcher.SecDispatcher;
 
-import com.redhat.rcm.maven.plugin.buildmetadata.common.Property;
-import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmInfo;
-import com.redhat.rcm.maven.plugin.buildmetadata.data.MetaDataProvider;
-import com.redhat.rcm.maven.plugin.buildmetadata.data.MetaDataProviderBuilder;
-import com.redhat.rcm.maven.plugin.buildmetadata.data.Provider;
-import com.redhat.rcm.maven.plugin.buildmetadata.io.BuildPropertiesFileHelper;
+import de.smartics.maven.plugin.buildmetadata.common.Property;
+import de.smartics.maven.plugin.buildmetadata.common.ScmInfo;
+import de.smartics.maven.plugin.buildmetadata.data.MetaDataProvider;
+import de.smartics.maven.plugin.buildmetadata.data.MetaDataProviderBuilder;
+import de.smartics.maven.plugin.buildmetadata.data.Provider;
+import de.smartics.maven.plugin.buildmetadata.io.BuildPropertiesFileHelper;
+import de.smartics.maven.plugin.buildmetadata.util.SettingsDecrypter;
 
 /**
  * Base implementation for all build mojos.
@@ -213,6 +215,45 @@ public abstract class AbstractBuildMojo extends AbstractMojo
    */
   protected boolean addToFilters;
 
+  /**
+   * The branch or tag version on the remote server to compare against. If
+   * unset, the SCM status will be used to determine the differences.
+   * <p>
+   * For SVN, leave it blank. For Git, set the version on the remote server (the
+   * project's SCM URL points to).
+   * </p>
+   *
+   * @parameter
+   * @since 1.4.0
+   */
+  protected String remoteVersion;
+
+  /**
+   * Helper to decrypt passwords from the settings.
+   *
+   * @component
+   *            role="org.sonatype.plexus.components.sec.dispatcher.SecDispatcher"
+   * @since 1.4.0
+   */
+  private SecDispatcher securityDispatcher;
+
+  /**
+   * The location of the <code>settings-security.xml</code>.
+   *
+   * @parameter expression="${user.home}/.m2/settings-security.xml"
+   * @required
+   * @since 1.4.0
+   */
+  private String settingsSecurityLocation;
+
+  /**
+   * Helper to decrypt passwords from the settings handling the location of the
+   * <code>settings-security.xml</code> file.
+   *
+   * @since 1.4.0
+   */
+  protected SettingsDecrypter settingsDecrypter;
+
   // ****************************** Initializer *******************************
 
   // ****************************** Constructors ******************************
@@ -315,6 +356,10 @@ public abstract class AbstractBuildMojo extends AbstractMojo
         calcFileName(propertiesOutputFile, "build.properties");
     if (createPropertiesReport)
     {
+      settingsDecrypter =
+          securityDispatcher != null ? new SettingsDecrypter(
+              securityDispatcher, settingsSecurityLocation) : null;
+
       final PropertyOutputFileMapper mapperProperties =
           new PropertyOutputFileMapper(project, propertyOutputFileMapping,
               propertiesFileName);

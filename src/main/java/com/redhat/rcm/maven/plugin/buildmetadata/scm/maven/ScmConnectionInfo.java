@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2013 smartics, Kronseder & Reiner GmbH
+ * Copyright 2006-2014 smartics, Kronseder & Reiner GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.redhat.rcm.maven.plugin.buildmetadata.scm.maven;
+package de.smartics.maven.plugin.buildmetadata.scm.maven;
 
 import java.io.Serializable;
 
+import org.apache.maven.scm.ScmVersion;
 import org.apache.maven.scm.manager.ScmManager;
 import org.apache.maven.scm.provider.ScmProviderRepository;
 import org.apache.maven.scm.provider.ScmProviderRepositoryWithHost;
@@ -24,7 +25,7 @@ import org.apache.maven.scm.provider.svn.repository.SvnScmProviderRepository;
 import org.apache.maven.scm.repository.ScmRepository;
 import org.codehaus.plexus.util.StringUtils;
 
-import com.redhat.rcm.maven.plugin.buildmetadata.scm.ScmException;
+import de.smartics.maven.plugin.buildmetadata.scm.ScmException;
 
 /**
  * Provides the information required to connect to a SCM system.
@@ -77,6 +78,13 @@ public final class ScmConnectionInfo implements Serializable
    * The url of tags base directory (used by svn protocol).
    */
   private String tagBase;
+
+  /**
+   * The branch or tag version on the remote server to compare against. If
+   * <code>null</code>, the SCM status will be used to determine the
+   * differences.
+   */
+  private ScmVersion remoteVersion;
 
   // ****************************** Initializer *******************************
 
@@ -210,6 +218,31 @@ public final class ScmConnectionInfo implements Serializable
     this.tagBase = tagBase;
   }
 
+  /**
+   * Returns the branch or tag version on the remote server to compare against.
+   * If <code>null</code>, the SCM status will be used to determine the
+   * differences.
+   *
+   * @return the branch or tag version on the remote server to compare against.
+   */
+  public ScmVersion getRemoteVersion()
+  {
+    return remoteVersion;
+  }
+
+  /**
+   * Sets the branch or tag version on the remote server to compare against. If
+   * <code>null</code>, the SCM status will be used to determine the
+   * differences.
+   *
+   * @param remoteVersion the branch or tag version on the remote server to
+   *          compare against.
+   */
+  public void setRemoteVersion(final ScmVersion remoteVersion)
+  {
+    this.remoteVersion = remoteVersion;
+  }
+
   // --- business -------------------------------------------------------------
 
   /**
@@ -305,8 +338,8 @@ public final class ScmConnectionInfo implements Serializable
   // --- object basics --------------------------------------------------------
 
   /**
-   * Returns the string representation of the object.
-   * Sensitive information is masked.
+   * Returns the string representation of the object. Sensitive information is
+   * masked.
    *
    * @return the string representation of the object.
    */

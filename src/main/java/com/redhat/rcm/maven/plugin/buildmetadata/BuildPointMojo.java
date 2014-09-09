@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2013 smartics, Kronseder & Reiner GmbH
+ * Copyright 2006-2014 smartics, Kronseder & Reiner GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.redhat.rcm.maven.plugin.buildmetadata;
+package de.smartics.maven.plugin.buildmetadata;
 
 import java.util.Date;
 import java.util.Properties;
@@ -22,14 +22,14 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.codehaus.plexus.util.StringUtils;
 
-import com.redhat.rcm.maven.plugin.buildmetadata.common.Constant;
-import com.redhat.rcm.maven.plugin.buildmetadata.io.BuildPropertiesFileHelper;
-import com.redhat.rcm.maven.plugin.buildmetadata.util.FilePathNormalizer;
+import de.smartics.maven.plugin.buildmetadata.common.Constant;
+import de.smartics.maven.plugin.buildmetadata.io.BuildPropertiesFileHelper;
+import de.smartics.maven.plugin.buildmetadata.util.FilePathNormalizer;
 
 /**
  * Adds the build time to the properties file and runs all providers flagged
  * with
- * {@link com.redhat.rcm.maven.plugin.buildmetadata.data.Provider#RUN_AT_BUILD_POINT}
+ * {@link de.smartics.maven.plugin.buildmetadata.data.Provider#RUN_AT_BUILD_POINT}
  * .
  *
  * @goal build-point

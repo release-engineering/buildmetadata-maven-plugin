@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2013 smartics, Kronseder & Reiner GmbH
+ * Copyright 2006-2014 smartics, Kronseder & Reiner GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.redhat.rcm.maven.plugin.buildmetadata;
+package de.smartics.maven.plugin.buildmetadata;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -35,12 +35,12 @@ import org.apache.maven.reporting.MavenReportException;
 import org.codehaus.plexus.util.IOUtil;
 import org.codehaus.plexus.util.StringUtils;
 
-import com.redhat.rcm.maven.plugin.buildmetadata.common.Constant;
-import com.redhat.rcm.maven.plugin.buildmetadata.common.Property;
-import com.redhat.rcm.maven.plugin.buildmetadata.common.Constant.Section;
-import com.redhat.rcm.maven.plugin.buildmetadata.util.FilePathNormalizer;
-import com.redhat.rcm.maven.plugin.buildmetadata.util.NoopNormalizer;
-import com.redhat.rcm.maven.plugin.buildmetadata.util.Normalizer;
+import de.smartics.maven.plugin.buildmetadata.common.Constant;
+import de.smartics.maven.plugin.buildmetadata.common.Property;
+import de.smartics.maven.plugin.buildmetadata.common.Constant.Section;
+import de.smartics.maven.plugin.buildmetadata.util.FilePathNormalizer;
+import de.smartics.maven.plugin.buildmetadata.util.NoopNormalizer;
+import de.smartics.maven.plugin.buildmetadata.util.Normalizer;
 
 /**
  * Renders the build report.

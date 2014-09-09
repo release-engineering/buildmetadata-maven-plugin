@@ -6,7 +6,7 @@ if (!fileProperties.isFile())
 	throw new FileNotFoundException("Could not find generated build.properties: " + fileProperties);
 }
 
-File fileXml = new File(basedir, "target/bmd-it-ear-xml-1.3.2-SNAPSHOT/META-INF/buildmetadata.xml");
+File fileXml = new File(basedir, "target/bmd-it-ear-xml-1.0.0-SNAPSHOT/META-INF/buildmetadata.xml");
 if (!fileXml.isFile())
 {
 	throw new FileNotFoundException("Could not find generated buildmetadata.xml: " + fileXml);

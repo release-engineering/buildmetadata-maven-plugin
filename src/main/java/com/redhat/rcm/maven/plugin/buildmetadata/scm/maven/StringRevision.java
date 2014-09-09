@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2013 smartics, Kronseder & Reiner GmbH
+ * Copyright 2006-2014 smartics, Kronseder & Reiner GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.redhat.rcm.maven.plugin.buildmetadata.scm.maven;
+package de.smartics.maven.plugin.buildmetadata.scm.maven;
 
 import java.io.Serializable;
 import java.util.Date;
 
-import com.redhat.rcm.maven.plugin.buildmetadata.scm.Revision;
+import de.smartics.maven.plugin.buildmetadata.scm.Revision;
 
 /**
  * Implementation for a simple revision string.

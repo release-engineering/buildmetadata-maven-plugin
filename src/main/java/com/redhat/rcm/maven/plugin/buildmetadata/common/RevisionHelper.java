@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2013 smartics, Kronseder & Reiner GmbH
+ * Copyright 2006-2014 smartics, Kronseder & Reiner GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.redhat.rcm.maven.plugin.buildmetadata.common;
+package de.smartics.maven.plugin.buildmetadata.common;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -26,14 +26,14 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.maven.scm.ScmFileSet;
 import org.apache.maven.scm.manager.ScmManager;
 
-import com.redhat.rcm.maven.plugin.buildmetadata.scm.LocallyModifiedInfo;
-import com.redhat.rcm.maven.plugin.buildmetadata.scm.Revision;
-import com.redhat.rcm.maven.plugin.buildmetadata.scm.RevisionNumberFetcher;
-import com.redhat.rcm.maven.plugin.buildmetadata.scm.ScmException;
-import com.redhat.rcm.maven.plugin.buildmetadata.scm.ScmNoRevisionException;
-import com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.MavenScmRevisionNumberFetcher;
-import com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo;
-import com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmConnectionInfo;
+import de.smartics.maven.plugin.buildmetadata.scm.LocallyModifiedInfo;
+import de.smartics.maven.plugin.buildmetadata.scm.Revision;
+import de.smartics.maven.plugin.buildmetadata.scm.RevisionNumberFetcher;
+import de.smartics.maven.plugin.buildmetadata.scm.ScmException;
+import de.smartics.maven.plugin.buildmetadata.scm.ScmNoRevisionException;
+import de.smartics.maven.plugin.buildmetadata.scm.maven.MavenScmRevisionNumberFetcher;
+import de.smartics.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo;
+import de.smartics.maven.plugin.buildmetadata.scm.maven.ScmConnectionInfo;
 
 /**
  * Helper to access the revision information.

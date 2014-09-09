@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2013 smartics, Kronseder & Reiner GmbH
+ * Copyright 2006-2014 smartics, Kronseder & Reiner GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.redhat.rcm.maven.plugin.buildmetadata.io;
+package de.smartics.maven.plugin.buildmetadata.io;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -34,10 +34,10 @@ import org.apache.maven.plugin.logging.Log;
 import org.codehaus.plexus.util.IOUtil;
 import org.w3c.dom.Document;
 
-import com.redhat.rcm.maven.plugin.buildmetadata.common.MojoUtils;
-import com.redhat.rcm.maven.plugin.buildmetadata.common.Property;
-import com.redhat.rcm.maven.plugin.buildmetadata.util.FilePathNormalizer;
-import com.redhat.rcm.maven.plugin.buildmetadata.util.MojoIoUtils;
+import de.smartics.maven.plugin.buildmetadata.common.MojoUtils;
+import de.smartics.maven.plugin.buildmetadata.common.Property;
+import de.smartics.maven.plugin.buildmetadata.util.FilePathNormalizer;
+import de.smartics.maven.plugin.buildmetadata.util.MojoIoUtils;
 
 /**
  * Helper to handle the build meta data properties file.

@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2013 smartics, Kronseder & Reiner GmbH
+ * Copyright 2006-2014 smartics, Kronseder & Reiner GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.redhat.rcm.maven.plugin.buildmetadata.common;
+package de.smartics.maven.plugin.buildmetadata.common;
 
 import java.io.File;
 
+import org.apache.maven.scm.ScmVersion;
 import org.apache.maven.scm.manager.ScmManager;
 
 /**
@@ -69,9 +70,9 @@ public final class ScmInfo
   /**
    * The range of the query in days to fetch change log entries from the SCM. If
    * no change logs have been found, the range is incremented up to
-   * {@value com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo#DEFAULT_RETRY_COUNT}
+   * {@value de.smartics.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo#DEFAULT_RETRY_COUNT}
    * times. If no change log has been found after these
-   * {@value com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo#DEFAULT_RETRY_COUNT}
+   * {@value de.smartics.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo#DEFAULT_RETRY_COUNT}
    * additional queries, the revision number will not be set with a valid value.
    */
   private final int queryRangeInDays;
@@ -88,6 +89,13 @@ public final class ScmInfo
    * The information to control the gathering of SCM meta data.
    */
   private final ScmControl scmControl;
+
+  /**
+   * The branch or tag version on the remote server to compare against. If
+   * <code>null</code>, the SCM status will be used to determine the
+   * differences.
+   */
+  private final ScmVersion remoteVersion;
 
   // ****************************** Initializer *******************************
 
@@ -109,14 +117,18 @@ public final class ScmInfo
    *          revision dates.
    * @param scmControl the information to control the gathering of SCM meta
    *          data.
+   * @param remoteVersion the branch or tag version on the remote server to
+   *          compare against.
    * @note This argument list is quite long. The next time we touch this class,
    *       we should provide a builder.
    */
-  public ScmInfo(final ScmManager scmManager, final String connectionType, // NOPMD
+  public ScmInfo(
+      final ScmManager scmManager,
+      final String connectionType, // NOPMD
       final String scmDateFormat, final File basedir,
       final ScmCredentials scmCrendentials, final String tagBase,
       final int queryRangeInDays, final String buildDatePattern,
-      final ScmControl scmControl)
+      final ScmControl scmControl, final ScmVersion remoteVersion)
   {
     this.scmManager = scmManager;
     this.connectionType = connectionType;
@@ -127,7 +139,9 @@ public final class ScmInfo
     this.queryRangeInDays = queryRangeInDays;
     this.buildDatePattern = buildDatePattern;
     this.scmControl = scmControl;
+    this.remoteVersion = remoteVersion;
   }
+
   // CHECKSTYLE:ON
 
   // ****************************** Inner Classes *****************************
@@ -210,9 +224,9 @@ public final class ScmInfo
   /**
    * Returns the range of the query in days to fetch change log entries from the
    * SCM. If no change logs have been found, the range is incremented up to
-   * {@value com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo#DEFAULT_RETRY_COUNT}
+   * {@value de.smartics.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo#DEFAULT_RETRY_COUNT}
    * times. If no change log has been found after these
-   * {@value com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo#DEFAULT_RETRY_COUNT}
+   * {@value de.smartics.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo#DEFAULT_RETRY_COUNT}
    * additional queries, the revision number will not be set with a valid value.
    *
    * @return the range of the query in days to fetch change log entries from the
@@ -244,6 +258,18 @@ public final class ScmInfo
   public ScmControl getScmControl()
   {
     return scmControl;
+  }
+
+  /**
+   * Returns the branch or tag version on the remote server to compare against.
+   * If <code>null</code>, the SCM status will be used to determine the
+   * differences.
+   *
+   * @return the branch or tag version on the remote server to compare against.
+   */
+  public ScmVersion getRemoteVersion()
+  {
+    return remoteVersion;
   }
 
   // --- business -------------------------------------------------------------

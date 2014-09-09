@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2013 smartics, Kronseder & Reiner GmbH
+ * Copyright 2006-2014 smartics, Kronseder & Reiner GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.redhat.rcm.maven.plugin.buildmetadata;
+package de.smartics.maven.plugin.buildmetadata;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -42,8 +42,8 @@ import org.apache.maven.reporting.AbstractMavenReport;
 import org.apache.maven.reporting.MavenReportException;
 import org.codehaus.plexus.util.StringUtils;
 
-import com.redhat.rcm.maven.plugin.buildmetadata.util.LoggingUtils;
-import com.redhat.rcm.maven.plugin.buildmetadata.util.ReportUtils;
+import de.smartics.maven.plugin.buildmetadata.util.LoggingUtils;
+import de.smartics.maven.plugin.buildmetadata.util.ReportUtils;
 
 /**
  * The abstract base implementation for reports.
@@ -359,7 +359,7 @@ public abstract class AbstractReportMojo extends AbstractMavenReport
   protected final ResourceBundle getBundle(final Locale locale)
   {
     return ResourceBundle.getBundle(
-        "com.redhat.rcm.maven.buildmetadata.BuildReport", locale);
+        "de.smartics.maven.buildmetadata.BuildReport", locale);
   }
 
   // --- object basics --------------------------------------------------------

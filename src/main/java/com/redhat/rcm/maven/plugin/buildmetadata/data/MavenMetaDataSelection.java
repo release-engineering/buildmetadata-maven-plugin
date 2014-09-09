@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2013 smartics, Kronseder & Reiner GmbH
+ * Copyright 2006-2014 smartics, Kronseder & Reiner GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.redhat.rcm.maven.plugin.buildmetadata.data;
+package de.smartics.maven.plugin.buildmetadata.data;
 
 import java.util.List;
 
-import com.redhat.rcm.maven.plugin.buildmetadata.common.Property;
+import de.smartics.maven.plugin.buildmetadata.common.Property;
 
 /**
  * Defines the Maven information to be included in the build meta data.

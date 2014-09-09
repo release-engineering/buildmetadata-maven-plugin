@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2013 smartics, Kronseder & Reiner GmbH
+ * Copyright 2006-2014 smartics, Kronseder & Reiner GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.redhat.rcm.maven.plugin.buildmetadata.io;
+package de.smartics.maven.plugin.buildmetadata.io;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -36,10 +36,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
 
-import com.redhat.rcm.maven.plugin.buildmetadata.common.Constant;
-import com.redhat.rcm.maven.plugin.buildmetadata.common.Property;
-import com.redhat.rcm.maven.plugin.buildmetadata.common.SortedProperties;
-import com.redhat.rcm.maven.plugin.buildmetadata.util.FilePathNormalizer;
+import de.smartics.maven.plugin.buildmetadata.common.Constant;
+import de.smartics.maven.plugin.buildmetadata.common.Property;
+import de.smartics.maven.plugin.buildmetadata.common.SortedProperties;
+import de.smartics.maven.plugin.buildmetadata.util.FilePathNormalizer;
 
 /**
  * Creates an XML report with the build meta data. The report contains the same
@@ -48,7 +48,7 @@ import com.redhat.rcm.maven.plugin.buildmetadata.util.FilePathNormalizer;
  * transformations which require XML documents as input.
  *
  * @author <a href="mailto:robert.reiner@smartics.de">Robert Reiner</a>
- * @version $Version:1.0 $
+ * @version $Revision:591 $
  */
 public final class SdocBuilder
 { // NOPMD
@@ -72,7 +72,7 @@ public final class SdocBuilder
    * </p>
    */
   private static final String CODE_URI =
-      "http://github.com/sbadakhc/buildmetadata-maven-plugin";
+      "http://www.smartics.de/project/process/implementation/buildmetadata";
 
   /**
    * The generic identifier of the element name containing a version
@@ -376,8 +376,8 @@ public final class SdocBuilder
     final Element parent = document.createElement("maven");
     createContentElement(GI_VERSION, Constant.PROP_NAME_MAVEN_VERSION, parent);
 
-    createContentElement("commandline", 
-	Constant.PROP_NAME_MAVEN_CMDLINE,parent);
+    createContentElement("commandline", Constant.PROP_NAME_MAVEN_CMDLINE,
+        parent);
     createContentElement("execution-project",
         Constant.PROP_NAME_MAVEN_EXECUTION_PROJECT, parent);
     createContentElement("is-excution-root",

@@ -6,9 +6,9 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.redhat.rcm.maven.test</groupId>
+  <groupId>de.smartics.test</groupId>
   <artifactId>bmd-it-jar-site</artifactId>
-  <version>1.3.2-SNAPSHOT</version>
+  <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <description>
@@ -18,7 +18,7 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>com.redhat.rcm.maven.plugin</groupId>
+        <groupId>de.smartics.maven.plugin</groupId>
         <artifactId>buildmetadata-maven-plugin</artifactId>
         <version>@project.version@</version>
         <executions>
@@ -58,7 +58,7 @@
   <reporting>
     <plugins>
       <plugin>
-        <groupId>com.redhat.rcm.maven.plugin</groupId>
+        <groupId>de.smartics.maven.plugin</groupId>
         <artifactId>buildmetadata-maven-plugin</artifactId>
         <version>@project.version@</version>
         <configuration>

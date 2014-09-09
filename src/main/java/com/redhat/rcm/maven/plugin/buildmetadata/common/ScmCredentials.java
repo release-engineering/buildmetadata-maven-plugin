@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2013 smartics, Kronseder & Reiner GmbH
+ * Copyright 2006-2014 smartics, Kronseder & Reiner GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,10 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.redhat.rcm.maven.plugin.buildmetadata.common;
+package de.smartics.maven.plugin.buildmetadata.common;
 
 import org.apache.maven.settings.Server;
 import org.apache.maven.settings.Settings;
+import org.sonatype.plexus.components.sec.dispatcher.SecDispatcherException;
+
+import de.smartics.maven.plugin.buildmetadata.util.SettingsDecrypter;
 
 /**
  * The SCM connection information for authentication.
@@ -31,6 +34,11 @@ public final class ScmCredentials
   // --- constants ------------------------------------------------------------
 
   // --- members --------------------------------------------------------------
+
+  /**
+   * Helper to decrypt encrypted passwords.
+   */
+  private final SettingsDecrypter settingsDecrypter;
 
   /**
    * The user's settings.
@@ -64,18 +72,22 @@ public final class ScmCredentials
   /**
    * Default constructor.
    *
+   * @param settingsDecrypter a Helper to decrypt encrypted passwords. May be
+   *          <code>null</code> if no decryption is required.
    * @param settings the settings to fetch SCM information.
    * @param userName the user name (used by svn and starteam protocol).
    * @param password the user password (used by svn and starteam protocol).
    * @param privateKey the private key (used by java svn).
    * @param passphrase the passphrase (used by java svn).
    */
-  public ScmCredentials(final Settings settings, final String userName, // NOPMD
+  public ScmCredentials(final SettingsDecrypter settingsDecrypter,
+      final Settings settings, final String userName, // NOPMD
       final String password, final String privateKey, final String passphrase)
   {
+    this.settingsDecrypter = settingsDecrypter;
     this.settings = settings;
     this.userName = userName;
-    this.password = password;
+    this.password = decrypt(settingsDecrypter, password);
     this.privateKey = privateKey;
     this.passPhrase = passphrase;
   }
@@ -85,6 +97,24 @@ public final class ScmCredentials
   // ********************************* Methods ********************************
 
   // --- init -----------------------------------------------------------------
+
+  private static String decrypt(final SettingsDecrypter settingsDecrypter,
+      final String possiblyEncrypted)
+  {
+    if (settingsDecrypter != null)
+    {
+      try
+      {
+        final String decrypted = settingsDecrypter.decrypt(possiblyEncrypted);
+        return decrypted;
+      }
+      catch (final SecDispatcherException e)
+      {
+        // ok, continue with the unencrypted...
+      }
+    }
+    return possiblyEncrypted;
+  }
 
   // --- get&set --------------------------------------------------------------
 
@@ -148,7 +178,8 @@ public final class ScmCredentials
 
       if (password == null)
       {
-        password = settings.getServer(host).getPassword();
+        password =
+            decrypt(settingsDecrypter, settings.getServer(host).getPassword());
       }
 
       if (privateKey == null)

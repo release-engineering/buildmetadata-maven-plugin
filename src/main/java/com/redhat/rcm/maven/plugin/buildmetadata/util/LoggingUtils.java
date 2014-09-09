@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2013 smartics, Kronseder & Reiner GmbH
+ * Copyright 2006-2014 smartics, Kronseder & Reiner GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.redhat.rcm.maven.plugin.buildmetadata.util;
+package de.smartics.maven.plugin.buildmetadata.util;
 
 import java.lang.reflect.Method;
 import java.util.logging.Level;
@@ -100,7 +100,7 @@ public final class LoggingUtils
     try
     {
       final Class<?> clazz =
-          Class.forName("com.redhat.rcm.maven.util.log4j.Log4jConfigurator");
+          Class.forName("de.smartics.maven.util.log4j.Log4jConfigurator");
       final Object instance = clazz.newInstance();
       final Method method =
           clazz.getMethod("configure", Log.class, String.class);

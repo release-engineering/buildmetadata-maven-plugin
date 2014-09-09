@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright 2006-2013 smartics, Kronseder & Reiner GmbH
+    Copyright 2006-2014 smartics, Kronseder & Reiner GmbH
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@
 
   <!-- The following classes also gets instantiated and injected by Maven. -->
   <Match>
-    <Class name="com.redhat.rcm.maven.plugin.buildmetadata.Provider"/>
+    <Class name="de.smartics.maven.plugin.buildmetadata.Provider"/>
     <Or>
       <Bug pattern="NP_UNWRITTEN_FIELD"/>
       <Bug pattern="UWF_UNWRITTEN_FIELD"/>

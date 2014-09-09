@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2013 smartics, Kronseder & Reiner GmbH
+ * Copyright 2006-2014 smartics, Kronseder & Reiner GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.redhat.rcm.maven.plugin.buildmetadata.data;
+package de.smartics.maven.plugin.buildmetadata.data;
 
 import java.util.Locale;
 import java.util.Properties;
@@ -27,12 +27,12 @@ import org.apache.maven.scm.repository.ScmRepository;
 import org.apache.maven.scm.repository.ScmRepositoryException;
 import org.codehaus.plexus.util.StringUtils;
 
-import com.redhat.rcm.maven.plugin.buildmetadata.common.RevisionHelper;
-import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmControl;
-import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmCredentials;
-import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmInfo;
-import com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo;
-import com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmConnectionInfo;
+import de.smartics.maven.plugin.buildmetadata.common.RevisionHelper;
+import de.smartics.maven.plugin.buildmetadata.common.ScmControl;
+import de.smartics.maven.plugin.buildmetadata.common.ScmCredentials;
+import de.smartics.maven.plugin.buildmetadata.common.ScmInfo;
+import de.smartics.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo;
+import de.smartics.maven.plugin.buildmetadata.scm.maven.ScmConnectionInfo;
 
 /**
  * Extracts information from the Maven project, session, and runtime
@@ -63,7 +63,7 @@ public class ScmMetaDataProvider extends AbstractMetaDataProvider
    *
    * @param project the Maven project.
    * @param scmInfo the value for scmInfo.
-   * @see com.redhat.rcm.maven.plugin.buildmetadata.data.AbstractMetaDataProvider#AbstractMetaDataProvider()
+   * @see de.smartics.maven.plugin.buildmetadata.data.AbstractMetaDataProvider#AbstractMetaDataProvider()
    */
   public ScmMetaDataProvider(final MavenProject project, final ScmInfo scmInfo)
   {
@@ -158,6 +158,7 @@ public class ScmMetaDataProvider extends AbstractMetaDataProvider
     info.setPrivateKey(credentials.getPrivateKey());
     info.setScmConnectionUrl(scmConnection);
     info.setTagBase(scmInfo.getTagBase());
+    info.setRemoteVersion(scmInfo.getRemoteVersion());
     return info;
   }
 
@@ -230,6 +231,7 @@ public class ScmMetaDataProvider extends AbstractMetaDataProvider
     accessInfo.setIgnoreDotFilesInBaseDir(scmInfo.getScmControl()
         .isIgnoreDotFilesInBaseDir());
     accessInfo.setQueryRangeInDays(scmInfo.getQueryRangeInDays());
+
     return accessInfo;
   }
 
