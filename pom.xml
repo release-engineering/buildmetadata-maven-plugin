@@ -254,29 +254,6 @@
     <pluginManagement>
       <plugins>
         <plugin>
-          <groupId>de.smartics.maven.plugin</groupId>
-          <artifactId>bugzilla-maven-plugin</artifactId>
-          <version>${bugzilla-maven-plugin.version}</version>
-          <configuration>
-            <classification>Build Management</classification>
-            <initialOwner>${user.email}</initialOwner>
-          </configuration>
-        </plugin>
-
-        <plugin>
-          <groupId>de.smartics.ci</groupId>
-          <artifactId>hudson-maven-plugin</artifactId>
-          <version>${hudson-maven-plugin.version}</version>
-          <dependencies>
-            <dependency>
-              <groupId>de.smartics.config</groupId>
-              <artifactId>config-smartics-hudson</artifactId>
-              <version>${config-smartics-hudson.version}</version>
-            </dependency>
-          </dependencies>
-        </plugin>
-
-        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-clean-plugin</artifactId>
           <version>${maven-clean-plugin.version}</version>
@@ -430,80 +407,6 @@
         </reportSets>
       </plugin>
 
-      <plugin>
-        <groupId>de.smartics.maven.plugin</groupId>
-        <artifactId>issues-maven-plugin</artifactId>
-        <version>${issues-maven-plugin.version}</version>
-        <configuration>
-          <issueManagementUser>${bugzillaUser}</issueManagementUser>
-          <issueManagementPassword>${bugzillaPassword}</issueManagementPassword>
-
-          <currentReleaseVersionOnly>false</currentReleaseVersionOnly>
-          <includeOnSamePageAllOfVersion>major</includeOnSamePageAllOfVersion>
-
-          <repositoryVersion>4.2</repositoryVersion>
-          <ignoreLogoutProblem>true</ignoreLogoutProblem>
-          <locale>en</locale>
-
-          <product>${issues-product}</product>
-          <component>${issues-component}</component>
-        </configuration>
-        <reportSets>
-          <reportSet>
-            <id>standard</id>
-            <reports>
-              <report>bugzilla-releasenotes-report</report>
-              <report>bugzilla-releaseplan-report</report>
-            </reports>
-          </reportSet>
-
-          <reportSet>
-            <id>breakingNews</id>
-            <reports>
-              <report>bugzilla-section-report</report>
-            </reports>
-            <configuration>
-              <outputName>breaking-news</outputName>
-              <title>Breaking News</title>
-              <description>
-                The following changes break API or behavior
-                of the previous version.
-              </description>
-              <noResultsDescription>
-                This release contains no changes
-                that are known to break API or
-                behavior.
-              </noResultsDescription>
-              <keywords>break.api,break.runtime,break.deprecated,break.removed</keywords>
-              <columns>bug_id,short_desc</columns>
-              <columnWidths>65,0</columnWidths>
-              <includeOnSamePageAllOfVersion>all</includeOnSamePageAllOfVersion>
-            </configuration>
-          </reportSet>
-
-          <reportSet>
-            <id>newAndNoteworthy</id>
-            <reports>
-              <report>bugzilla-section-report</report>
-            </reports>
-            <configuration>
-              <outputName>new-and-noteworthy</outputName>
-              <title>New and Noteworthy</title>
-              <description>
-                This version presents the following key features.
-              </description>
-              <noResultsDescription>
-                This release is a bugfix release and contains no new
-                key features.
-              </noResultsDescription>
-              <keywords>info.noteworthy</keywords>
-              <columns>bug_id,short_desc</columns>
-              <columnWidths>65,0</columnWidths>
-              <includeOnSamePageAllOfVersion>all</includeOnSamePageAllOfVersion>
-            </configuration>
-          </reportSet>
-        </reportSets>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-plugin-plugin</artifactId>
