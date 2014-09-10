@@ -17,7 +17,6 @@ package com.redhat.rcm.maven.plugin.buildmetadata.data;
 
 import java.util.Locale;
 import java.util.Properties;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.maven.project.MavenProject;
@@ -26,11 +25,11 @@ import org.apache.maven.scm.provider.ScmProviderRepositoryWithHost;
 import org.apache.maven.scm.repository.ScmRepository;
 import org.apache.maven.scm.repository.ScmRepositoryException;
 import org.codehaus.plexus.util.StringUtils;
-
 import com.redhat.rcm.maven.plugin.buildmetadata.common.RevisionHelper;
 import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmControl;
 import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmCredentials;
 import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmInfo;
+import com.redhat.rcm.maven.plugin.buildmetadata.scm.ScmNoRevisionException;
 import com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo;
 import com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmConnectionInfo;
 
@@ -104,12 +103,12 @@ public class ScmMetaDataProvider extends AbstractMetaDataProvider
       }
       catch (final ScmRepositoryException e)
       {
-        throw new IllegalStateException(
+        throw new ScmNoRevisionException(
             "Cannot fetch SCM revision information.", e);
       }
       catch (final NoSuchScmProviderException e)
       {
-        throw new IllegalStateException(
+        throw new ScmNoRevisionException(
             "Cannot fetch SCM revision information.", e);
       }
     }

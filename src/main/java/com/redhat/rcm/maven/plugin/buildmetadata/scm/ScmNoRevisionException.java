@@ -15,6 +15,7 @@
  */
 package com.redhat.rcm.maven.plugin.buildmetadata.scm;
 
+
 /**
  * Thrown on any problem fetching SCM revision information.
  *
@@ -50,6 +51,11 @@ public class ScmNoRevisionException extends ScmException
   public ScmNoRevisionException(final String message)
   {
     super(message);
+  }
+
+  public ScmNoRevisionException(String message, Throwable e)
+  {
+      super (message, e);
   }
 
   // ****************************** Inner Classes *****************************
