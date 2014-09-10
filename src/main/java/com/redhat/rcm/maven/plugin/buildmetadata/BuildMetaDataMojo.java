@@ -22,14 +22,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
-
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.scm.ScmBranch;
 import org.apache.maven.scm.manager.ScmManager;
 import org.apache.maven.settings.Settings;
 import org.codehaus.plexus.util.StringUtils;
-
 import com.redhat.rcm.maven.plugin.buildmetadata.common.Constant;
 import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmControl;
 import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmCredentials;
@@ -507,7 +505,8 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
   /**
    * {@inheritDoc}
    */
-  public void execute() throws MojoExecutionException, MojoFailureException
+  @Override
+public void execute() throws MojoExecutionException, MojoFailureException
   {
     if (!skip)
     {
@@ -614,18 +613,27 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
   private ScmInfo provideScmMetaData(final Properties buildMetaDataProperties)
     throws MojoFailureException
   {
+    final ScmInfo scmInfo = createScmInfo();
     try
     {
-      final ScmInfo scmInfo = createScmInfo();
       final ScmMetaDataProvider scmMetaDataProvider =
           new ScmMetaDataProvider(project, scmInfo);
       scmMetaDataProvider.provideBuildMetaData(buildMetaDataProperties);
-      return scmInfo;
     }
     catch (final ScmNoRevisionException e)
     {
-      throw new MojoFailureException(e.getMessage()); // NOPMD
+        if (failOnMissingRevision)
+        {
+            throw new MojoFailureException(e.getMessage()); // NOPMD
+        }
+        else
+        {
+            getLog().info("Unable to determine SCM information " +
+                    (e.getCause() == null ? "" : e.getCause().getMessage()));
+            getLog().debug("Unable to determine SCM information: ", e);
+        }
     }
+    return scmInfo;
   }
 
   private void provideHostMetaData(final Properties buildMetaDataProperties)
