@@ -174,12 +174,14 @@
       <version>${maven-scm.version}</version>
       <optional>true</optional>
     </dependency>
+    <!--
     <dependency>
       <groupId>org.apache.maven.scm</groupId>
       <artifactId>maven-scm-provider-hg</artifactId>
       <version>${maven-scm.version}</version>
       <optional>true</optional>
     </dependency>
+    -->
     <dependency>
       <groupId>org.apache.maven.scm</groupId>
       <artifactId>maven-scm-provider-cvsexe</artifactId>
