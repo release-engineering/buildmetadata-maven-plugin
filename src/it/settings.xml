@@ -49,4 +49,8 @@
       </pluginRepositories>
     </profile>
   </profiles>
+  
+  <activeProfiles>
+    <activeProfile>it-repo</activeProfile>
+  </activeProfiles>
 </settings>

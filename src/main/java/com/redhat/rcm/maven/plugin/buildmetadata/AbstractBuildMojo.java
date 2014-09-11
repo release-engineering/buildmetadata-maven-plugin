@@ -391,7 +391,6 @@ public abstract class AbstractBuildMojo extends AbstractMojo
   // --- business -------------------------------------------------------------
 
   // CHECKSTYLE:OFF
-  @Override
   public void execute() throws MojoExecutionException, MojoFailureException
   {
     // CHECKSTYLE:ON

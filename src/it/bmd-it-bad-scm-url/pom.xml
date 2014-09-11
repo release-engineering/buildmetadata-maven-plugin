@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>com.redhat.rcm</groupId>
+  <artifactId>bmd-it-bad-scm-url</artifactId>
+  <version>1.0</version>
+  
+  <name>HelloWorld</name>
+  
+  <scm>
+    <connection>scm:foo:https://github.com/sbadakhc/buildmetadata-maven-plugin.git</connection>
+    <developerConnection>scm:foo:git@github.com:sbadakhc/buildmetadata-maven-plugin.git</developerConnection>
+    <url>https://github.com/sbadakhc/buildmetadata-maven-plugin.git</url>
+  </scm>
+  
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.redhat.rcm.maven.plugin</groupId>
+        <artifactId>buildmetadata-maven-plugin</artifactId>
+        <version>@project.version@</version>
+        <executions>
+          <execution>
+            <phase>initialize</phase>
+            <goals>
+              <goal>provide-buildmetadata</goal>
+            </goals>
+            <configuration>
+              <failOnMissingRevision>false</failOnMissingRevision>
+              <addScmInfo>true</addScmInfo>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  
+</project>
