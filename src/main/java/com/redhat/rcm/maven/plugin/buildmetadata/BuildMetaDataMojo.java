@@ -22,12 +22,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
+
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.scm.ScmBranch;
 import org.apache.maven.scm.manager.ScmManager;
 import org.apache.maven.settings.Settings;
 import org.codehaus.plexus.util.StringUtils;
+
 import com.redhat.rcm.maven.plugin.buildmetadata.common.Constant;
 import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmControl;
 import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmCredentials;
@@ -628,9 +630,10 @@ public void execute() throws MojoExecutionException, MojoFailureException
         }
         else
         {
-            getLog().info("Unable to determine SCM information " +
+                getLog().info( "Unable to determine SCM revision information "
+                                   +
                     (e.getCause() == null ? "" : e.getCause().getMessage()));
-            getLog().debug("Unable to determine SCM information: ", e);
+                getLog().debug( "Unable to determine SCM revision information: ", e );
         }
     }
     return scmInfo;

@@ -214,7 +214,8 @@ public abstract class AbstractReportMojo extends AbstractMavenReport
    *
    * @throws MojoExecutionException on any problem encountered.
    */
-  public void execute() throws MojoExecutionException // CHECKSTYLE:ON
+  @Override
+public void execute() throws MojoExecutionException // CHECKSTYLE:ON
   {
     final Log log = getLog();
     if (!canGenerateReport())
@@ -359,7 +360,7 @@ public abstract class AbstractReportMojo extends AbstractMavenReport
   protected final ResourceBundle getBundle(final Locale locale)
   {
     return ResourceBundle.getBundle(
-        "de.smartics.maven.buildmetadata.BuildReport", locale);
+ "com.redhat.rcm.maven.buildmetadata.BuildReport", locale );
   }
 
   // --- object basics --------------------------------------------------------

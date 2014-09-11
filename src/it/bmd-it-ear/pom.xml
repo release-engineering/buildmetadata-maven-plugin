@@ -6,7 +6,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>de.smartics.test</groupId>
+  <groupId>com.redhat.rcm.test</groupId>
   <artifactId>bmd-it-ear</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>ear</packaging>
@@ -18,7 +18,7 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>de.smartics.maven.plugin</groupId>
+        <groupId>com.redhat.rcm.maven.plugin</groupId>
         <artifactId>buildmetadata-maven-plugin</artifactId>
         <version>@project.version@</version>
         <executions>
