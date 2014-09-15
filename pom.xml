@@ -43,7 +43,7 @@
   </developers>
 
   <scm>
-    <connection>scm:git:git@github.com:sbadakhc/buildmetadata-maven-plugin.git</connection>
+    <connection>scm:git:https://github.com/sbadakhc/buildmetadata-maven-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:sbadakhc/buildmetadata-maven-plugin.git</developerConnection>
     <url>http://github.com/sbadakhc/buildmetadata-maven-plugin.git</url>
     <tag>HEAD</tag>
