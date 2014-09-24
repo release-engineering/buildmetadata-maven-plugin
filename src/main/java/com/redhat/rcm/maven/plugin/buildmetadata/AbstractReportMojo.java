@@ -42,7 +42,6 @@ import org.apache.maven.reporting.AbstractMavenReport;
 import org.apache.maven.reporting.MavenReportException;
 import org.codehaus.plexus.util.StringUtils;
 
-import com.redhat.rcm.maven.plugin.buildmetadata.util.LoggingUtils;
 import com.redhat.rcm.maven.plugin.buildmetadata.util.ReportUtils;
 
 /**
@@ -228,8 +227,6 @@ public void execute() throws MojoExecutionException // CHECKSTYLE:ON
       return;
     }
 
-    LoggingUtils.configureLogger(log, logLevel);
-
     provideSink();
   }
 
@@ -258,7 +255,6 @@ public void execute() throws MojoExecutionException // CHECKSTYLE:ON
   protected void executeReport(final Locale locale) throws MavenReportException // CHECKSTYLE:ON
   {
     final Log log = getLog();
-    LoggingUtils.configureLogger(log, logLevel);
   }
 
   /**

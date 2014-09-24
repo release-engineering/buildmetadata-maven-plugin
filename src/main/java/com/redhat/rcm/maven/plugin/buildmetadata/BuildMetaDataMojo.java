@@ -43,7 +43,7 @@ import com.redhat.rcm.maven.plugin.buildmetadata.io.BuildPropertiesFileHelper;
 import com.redhat.rcm.maven.plugin.buildmetadata.io.BuildXmlFileHelper;
 import com.redhat.rcm.maven.plugin.buildmetadata.scm.ScmNoRevisionException;
 import com.redhat.rcm.maven.plugin.buildmetadata.util.FilePathNormalizer;
-import com.redhat.rcm.maven.plugin.buildmetadata.util.LoggingUtils;
+//import com.redhat.rcm.maven.plugin.buildmetadata.util.LoggingUtils;
 
 /**
  * Provides the build properties. This information is also written to a
@@ -523,7 +523,6 @@ public void execute() throws MojoExecutionException, MojoFailureException
       final Properties projectProperties = helper.getProjectProperties(project);
       if (!isBuildPropertiesAlreadySet(projectProperties))
       {
-        LoggingUtils.configureLogger(getLog(), logLevel);
         final Properties buildMetaDataProperties = new Properties();
         if (isBuildPropertiesToBeRebuild())
         {
