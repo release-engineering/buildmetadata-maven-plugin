@@ -226,7 +226,7 @@ public void execute() throws MojoExecutionException // CHECKSTYLE:ON
       }
       return;
     }
-
+    getLog();
     provideSink();
   }
 
@@ -255,6 +255,7 @@ public void execute() throws MojoExecutionException // CHECKSTYLE:ON
   protected void executeReport(final Locale locale) throws MavenReportException // CHECKSTYLE:ON
   {
     final Log log = getLog();
+    getLog();
   }
 
   /**
