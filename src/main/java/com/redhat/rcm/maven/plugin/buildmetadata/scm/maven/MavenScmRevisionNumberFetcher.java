@@ -94,8 +94,6 @@ public final class MavenScmRevisionNumberFetcher extends AbstractBuildMojo imple
     this.scmManager = scmManager;
     this.scmConnectionInfo = scmConnectionInfo;
     this.scmAccessInfo = scmAccessInfo;
-    //AbstractBuildMojo abm = new AbstractBuildMojo();
-    //getLog() = getLog();
   }
 
   // ****************************** Inner Classes *****************************
