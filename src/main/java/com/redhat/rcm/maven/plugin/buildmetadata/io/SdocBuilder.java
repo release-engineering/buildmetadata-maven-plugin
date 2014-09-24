@@ -28,8 +28,6 @@ import java.util.Properties;
 import java.util.StringTokenizer;
 
 import org.apache.commons.lang.time.DateFormatUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.codehaus.plexus.util.StringUtils;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
@@ -40,6 +38,7 @@ import com.redhat.rcm.maven.plugin.buildmetadata.common.Constant;
 import com.redhat.rcm.maven.plugin.buildmetadata.common.Property;
 import com.redhat.rcm.maven.plugin.buildmetadata.common.SortedProperties;
 import com.redhat.rcm.maven.plugin.buildmetadata.util.FilePathNormalizer;
+import com.redhat.rcm.maven.plugin.buildmetadata.AbstractBuildMojo;
 
 /**
  * Creates an XML report with the build meta data. The report contains the same
@@ -50,7 +49,7 @@ import com.redhat.rcm.maven.plugin.buildmetadata.util.FilePathNormalizer;
  * @author <a href="mailto:robert.reiner@smartics.de">Robert Reiner</a>
  * @version $Revision:591 $
  */
-public final class SdocBuilder
+public final class SdocBuilder extends AbstractBuildMojo
 { // NOPMD
   // ********************************* Fields *********************************
 
@@ -90,11 +89,6 @@ public final class SdocBuilder
    * </p>
    */
   private static final String GI_NAME = "name";
-
-  /**
-   * Reference to the logger for this class.
-   */
-  private static final Log LOG = LogFactory.getLog(SdocBuilder.class);
 
   // --- members --------------------------------------------------------------
 
@@ -237,9 +231,9 @@ public final class SdocBuilder
       }
       catch (final ParseException e)
       {
-        if (LOG.isDebugEnabled())
+        if (getLog().isDebugEnabled())
         {
-          LOG.debug("Cannot parse date of property '" + datePropertyKey + "': "
+          getLog().debug("Cannot parse date of property '" + datePropertyKey + "': "
                     + originalDateString + ". Skipping...");
         }
         return null;

@@ -21,11 +21,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Properties;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.maven.scm.ScmFileSet;
 import org.apache.maven.scm.manager.ScmManager;
-
 import com.redhat.rcm.maven.plugin.buildmetadata.scm.LocallyModifiedInfo;
 import com.redhat.rcm.maven.plugin.buildmetadata.scm.Revision;
 import com.redhat.rcm.maven.plugin.buildmetadata.scm.RevisionNumberFetcher;
@@ -34,6 +31,7 @@ import com.redhat.rcm.maven.plugin.buildmetadata.scm.ScmNoRevisionException;
 import com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.MavenScmRevisionNumberFetcher;
 import com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo;
 import com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmConnectionInfo;
+import com.redhat.rcm.maven.plugin.buildmetadata.AbstractBuildMojo;
 
 /**
  * Helper to access the revision information.
@@ -41,16 +39,11 @@ import com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmConnectionInfo;
  * @author <a href="mailto:robert.reiner@smartics.de">Robert Reiner</a>
  * @version $Revision:591 $
  */
-public final class RevisionHelper
+public final class RevisionHelper extends AbstractBuildMojo
 {
   // ********************************* Fields *********************************
 
   // --- constants ------------------------------------------------------------
-
-  /**
-   * Reference to the logger for this class.
-   */
-  private static final Log LOG = LogFactory.getLog(RevisionHelper.class);
 
   // --- members --------------------------------------------------------------
 
@@ -194,9 +187,9 @@ public final class RevisionHelper
       {
         buildMetaDataProperties.setProperty(
             Constant.PROP_NAME_SCM_LOCALLY_MODIFIED, "unknown");
-        if (LOG.isInfoEnabled())
+        if (getLog().isInfoEnabled())
         {
-          LOG.info("Failed to check modification status.");
+          getLog().info("Failed to check modification status.");
         }
       }
     }

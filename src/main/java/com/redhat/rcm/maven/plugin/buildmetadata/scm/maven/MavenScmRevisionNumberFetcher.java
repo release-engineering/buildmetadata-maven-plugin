@@ -22,8 +22,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.maven.scm.ChangeFile;
 import org.apache.maven.scm.ChangeSet;
 import org.apache.maven.scm.ScmFile;
@@ -45,24 +43,20 @@ import com.redhat.rcm.maven.plugin.buildmetadata.scm.Revision;
 import com.redhat.rcm.maven.plugin.buildmetadata.scm.RevisionNumberFetcher;
 import com.redhat.rcm.maven.plugin.buildmetadata.scm.ScmException;
 
+import com.redhat.rcm.maven.plugin.buildmetadata.AbstractBuildMojo;
+
 /**
  * Implementation on the Maven SCM implementation to fetch the latest revision
  * number.
  *
  * @author <a href="mailto:robert.reiner@smartics.de">Robert Reiner</a>
  */
-public final class MavenScmRevisionNumberFetcher implements
+public final class MavenScmRevisionNumberFetcher extends AbstractBuildMojo implements
     RevisionNumberFetcher
 {
   // ********************************* Fields *********************************
 
   // --- constants ------------------------------------------------------------
-
-  /**
-   * Reference to the logger for this class.
-   */
-  private static final Log LOG = LogFactory
-      .getLog(MavenScmRevisionNumberFetcher.class);
 
   // --- members --------------------------------------------------------------
 
@@ -100,6 +94,8 @@ public final class MavenScmRevisionNumberFetcher implements
     this.scmManager = scmManager;
     this.scmConnectionInfo = scmConnectionInfo;
     this.scmAccessInfo = scmAccessInfo;
+    //AbstractBuildMojo abm = new AbstractBuildMojo();
+    //getLog() = getLog();
   }
 
   // ****************************** Inner Classes *****************************
@@ -156,9 +152,9 @@ public final class MavenScmRevisionNumberFetcher implements
    */
   public Revision fetchLatestRevisionNumber() throws ScmException
   {
-    if (LOG.isDebugEnabled())
+    if (getLog().isDebugEnabled())
     {
-      LOG.debug("  Fetching latest revision number.\n    "
+      getLog().debug("  Fetching latest revision number.\n    "
                 + this.scmConnectionInfo + "\n    " + this.scmAccessInfo);
     }
 
@@ -182,15 +178,15 @@ public final class MavenScmRevisionNumberFetcher implements
       {
         final ChangeLogSet changeLogSet = result.getChangeLog();
         final Revision revision = findEndVersion(changeLogSet);
-        if (LOG.isDebugEnabled())
+        if (getLog().isDebugEnabled())
         {
-          LOG.debug("  Found revision '" + revision + "'.");
+          getLog().debug("  Found revision '" + revision + "'.");
         }
         return revision;
       }
-      else if (LOG.isDebugEnabled())
+      else if (getLog().isDebugEnabled())
       {
-        LOG.debug("  No revision information found.");
+        getLog().debug("  No revision information found.");
       }
       return null;
     }
@@ -202,9 +198,9 @@ public final class MavenScmRevisionNumberFetcher implements
   public LocallyModifiedInfo containsModifications(final ScmFileSet fileSet)
     throws ScmException
   {
-    if (LOG.isDebugEnabled())
+    if (getLog().isDebugEnabled())
     {
-      LOG.debug("  Fetching modification information.\n    "
+      getLog().debug("  Fetching modification information.\n    "
                 + this.scmConnectionInfo + "\n    " + this.scmAccessInfo);
     }
 
@@ -222,9 +218,9 @@ public final class MavenScmRevisionNumberFetcher implements
       else
       {
         final String message = result.toString();
-        if (LOG.isDebugEnabled())
+        if (getLog().isDebugEnabled())
         {
-          LOG.debug(message);
+          getLog().debug(message);
         }
 
         throw new ScmException(message);
@@ -285,9 +281,9 @@ public final class MavenScmRevisionNumberFetcher implements
   {
     final List<ScmFile> changedFiles = filter(result.getChangedFiles());
     final boolean locallyModified = !changedFiles.isEmpty();
-    if (LOG.isDebugEnabled())
+    if (getLog().isDebugEnabled())
     {
-      LOG.debug("  Modifications have" + (locallyModified ? "" : " not")
+      getLog().debug("  Modifications have" + (locallyModified ? "" : " not")
                 + " been found.");
     }
     return new LocallyModifiedInfo(locallyModified, locallyModified
@@ -364,9 +360,9 @@ public final class MavenScmRevisionNumberFetcher implements
       final ScmVersion endVersion = changeLogSet.getEndVersion();
       if (endVersion != null)
       {
-        if (LOG.isDebugEnabled())
+        if (getLog().isDebugEnabled())
         {
-          LOG.debug("End version found.");
+          getLog().debug("End version found.");
         }
         return new MavenRevision(endVersion, changeLogSet.getEndDate());
       }
@@ -390,26 +386,26 @@ public final class MavenScmRevisionNumberFetcher implements
           }
           else
           {
-            if (LOG.isDebugEnabled())
+            if (getLog().isDebugEnabled())
             {
-              LOG.debug("No change files found.");
+              getLog().debug("No change files found.");
             }
           }
         }
       }
       else
       {
-        if (LOG.isDebugEnabled())
+        if (getLog().isDebugEnabled())
         {
-          LOG.debug("No change set found.");
+          getLog().debug("No change set found.");
         }
       }
     }
     else
     {
-      if (LOG.isDebugEnabled())
+      if (getLog().isDebugEnabled())
       {
-        LOG.debug("No change log set found.");
+        getLog().debug("No change log set found.");
       }
     }
 

@@ -18,8 +18,6 @@ package com.redhat.rcm.maven.plugin.buildmetadata.data;
 import java.util.Locale;
 import java.util.Properties;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.scm.manager.NoSuchScmProviderException;
 import org.apache.maven.scm.provider.ScmProviderRepositoryWithHost;
@@ -34,6 +32,7 @@ import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmInfo;
 import com.redhat.rcm.maven.plugin.buildmetadata.scm.ScmNoRevisionException;
 import com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo;
 import com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmConnectionInfo;
+import com.redhat.rcm.maven.plugin.buildmetadata.AbstractBuildMojo;
 
 /**
  * Extracts information from the Maven project, session, and runtime
@@ -47,11 +46,6 @@ public class ScmMetaDataProvider extends AbstractMetaDataProvider
   // ********************************* Fields *********************************
 
   // --- constants ------------------------------------------------------------
-
-  /**
-   * Reference to the logger for this class.
-   */
-  private static final Log LOG = LogFactory.getLog(ScmMetaDataProvider.class);
 
   // --- members --------------------------------------------------------------
 
@@ -116,7 +110,7 @@ public class ScmMetaDataProvider extends AbstractMetaDataProvider
     }
     else
     {
-      LOG.debug("Skipping SCM data since addScmInfo="
+      getLog().debug("Skipping SCM data since addScmInfo="
                 + scmControl.isAddScmInfo() + ", offline="
                 + scmControl.isOffline() + ", scmInfoProvided="
                 + (project.getScm() != null) + ".");

@@ -20,6 +20,7 @@ import org.apache.maven.execution.RuntimeInformation;
 import org.apache.maven.project.MavenProject;
 
 import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmInfo;
+import com.redhat.rcm.maven.plugin.buildmetadata.AbstractBuildMojo;
 
 /**
  * Base implementation for {@link MetaDataProvider}s.
@@ -27,7 +28,7 @@ import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmInfo;
  * @author <a href="mailto:robert.reiner@smartics.de">Robert Reiner</a>
  * @version $Revision:591 $
  */
-public abstract class AbstractMetaDataProvider implements MetaDataProvider
+public abstract class AbstractMetaDataProvider extends AbstractBuildMojo implements MetaDataProvider
 {
   // ********************************* Fields *********************************
 
