@@ -17,24 +17,18 @@ package com.redhat.rcm.maven.plugin.buildmetadata.scm.maven;
 
 import java.io.File;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.maven.scm.ScmBranch;
 import org.apache.maven.scm.ScmFileSet;
-import org.apache.maven.scm.ScmVersion;
+import org.apache.maven.scm.ScmRevision;
+import org.apache.maven.scm.command.changelog.ChangeLogScmRequest;
 import org.apache.maven.scm.command.changelog.ChangeLogScmResult;
 import org.apache.maven.scm.command.changelog.ChangeLogSet;
+import org.apache.maven.scm.command.info.InfoItem;
+import org.apache.maven.scm.command.info.InfoScmResult;
 import org.apache.maven.scm.provider.ScmProvider;
-import org.apache.maven.scm.provider.git.gitexe.command.GitCommandLineUtils;
 import org.apache.maven.scm.repository.ScmRepository;
 import org.codehaus.plexus.util.StringUtils;
-import org.codehaus.plexus.util.cli.Commandline;
-
-import com.redhat.rcm.maven.plugin.buildmetadata.scm.Revision;
 import com.redhat.rcm.maven.plugin.buildmetadata.scm.ScmException;
-
 /**
  * Provides access information to retrieve revision information from the SCM.
  *
@@ -248,7 +242,7 @@ public final class ScmAccessInfo implements Serializable
     this.ignoreDotFilesInBaseDir = ignoreDotFilesInBaseDir;
   }
 
-  // --- business -------------------------------------------------------------
+
 
   /**
    * Returns the result of the change log query.
@@ -264,20 +258,61 @@ public final class ScmAccessInfo implements Serializable
   {
     try
     {
-      ChangeLogScmResult result = null;
-      int currentRange = queryRangeInDays;
-      for (int i = 0; i <= DEFAULT_RETRY_COUNT; i++)
-      {
-        result =
-            provider.changeLog(repository, createFileSet(), null, null,
-                currentRange, (ScmBranch) null, dateFormat);
-        if (!isEmpty(result))
+        ChangeLogScmResult result = null;
+        ScmRevision endRev = null;
+        ScmRevision startRev = null;
+        ScmFileSet fileSet = createFileSet();
+
+        InfoScmResult isr = provider.info(repository.getProviderRepository(), fileSet, null);
+        if (isr != null)
         {
-          return result;
+            for (InfoItem ii : isr.getInfoItems())
+            {
+                if (StringUtils.isNotEmpty(ii.getRevision()) && !ii.getRevision().contains("abort") )
+                {
+                    // HG places a trailing + which confuses the scm provider.
+                    endRev = new ScmRevision (ii.getRevision().replaceAll("\\+$", ""));
+                }
+            }
         }
-        currentRange += queryRangeInDays;
-      }
-      return result;
+
+        int currentRange = queryRangeInDays;
+        if (repository.getProvider().equals("git"))
+        {
+            // Git can't handle x->x so use an inbuilt shortcut.
+            startRev = new ScmRevision ("HEAD^");
+        }
+        else if (repository.getProvider().equals("svn"))
+        {
+            // Annoyingly the SCM provider almost always adds the URL which prevents the use of BASE.
+            // Hence the hacky shortcut.
+            startRev = endRev;
+            endRev = new ScmRevision ("1");
+        }
+        else
+        {
+            startRev = endRev;
+        }
+
+        for (int i = 0; i <= DEFAULT_RETRY_COUNT; i++)
+        {
+            ChangeLogScmRequest scmRequest = new ChangeLogScmRequest (repository, fileSet);
+            scmRequest.setStartRevision(startRev);
+            scmRequest.setEndRevision(endRev);
+            scmRequest.setDatePattern(dateFormat);
+            scmRequest.setNumDays(currentRange);
+            scmRequest.setDateRange(null, null);
+            scmRequest.setLimit(Integer.valueOf(1));
+
+            result = provider.changeLog(scmRequest);
+
+            if (!isEmpty(result))
+            {
+                return result;
+            }
+            currentRange += queryRangeInDays;
+        }
+        return result;
     }
     catch (final org.apache.maven.scm.ScmException e)
     {
@@ -285,58 +320,6 @@ public final class ScmAccessInfo implements Serializable
     }
   }
 
-  public Revision fetchRemoteVersion(final ScmRepository repository,
-      final ScmVersion remoteVersion) throws ScmException
-  {
-    try
-    {
-      final Commandline cl =
-          GitCommandLineUtils.getBaseGitCommandLine(rootDirectory, "log");
-      cl.createArg().setLine("-n 1");
-      cl.createArg().setLine("--pretty=format:\"%H %ct\"");
-      cl.createArg().setLine(remoteVersion.getName());
-      final Process process = cl.execute();
-      try
-      {
-        process.waitFor();
-        final int exitValue = process.exitValue();
-        if (exitValue != 0)
-        {
-          throw new ScmException(
-              "Cannot fetch remote version from repository (" + exitValue
-                  + "): " + IOUtils.toString(process.getErrorStream()));
-        }
-        final String result = IOUtils.toString(process.getInputStream());
-        final Revision revision = createRevision(result);
-        return revision;
-      }
-      finally
-      {
-        process.destroy();
-      }
-    }
-    catch (final Exception e)
-    {
-      throw new ScmException("Cannot fetch remote version from repository.", e);
-    }
-  }
-
-  private Revision createRevision(final String idSpaceDate)
-  {
-    final int index = idSpaceDate.trim().lastIndexOf(' ');
-    final String id = idSpaceDate.substring(0, index);
-    final String dateString = idSpaceDate.substring(index + 1);
-    try
-    {
-      final Date date = new Date(Long.parseLong(dateString) * 1000L);
-      final Revision revision = new StringRevision(id, date);
-      return revision;
-    }
-    catch (final NumberFormatException e)
-    {
-      return new StringRevision(id, new Date(0L));
-    }
-  }
 
   /**
    * Checks if the given result contains change logs or not.
