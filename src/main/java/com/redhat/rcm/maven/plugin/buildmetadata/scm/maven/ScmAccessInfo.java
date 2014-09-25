@@ -268,7 +268,7 @@ public final class ScmAccessInfo implements Serializable
         {
             for (InfoItem ii : isr.getInfoItems())
             {
-                if (StringUtils.isNotEmpty(ii.getRevision()) && !ii.getRevision().contains("abort") )
+                if (StringUtils.isNotEmpty(ii.getRevision()))
                 {
                     // HG places a trailing + which confuses the scm provider.
                     endRev = new ScmRevision (ii.getRevision().replaceAll("\\+$", ""));
@@ -289,9 +289,11 @@ public final class ScmAccessInfo implements Serializable
             startRev = endRev;
             endRev = new ScmRevision ("1");
         }
-        else
+        else if (repository.getProvider().equals("hg") &&
+                endRev.getName().contains("abort: there is no Mercurial repository here"))
         {
-            startRev = endRev;
+            // Unable to locate a HG repository.
+            return result;
         }
 
         for (int i = 0; i <= DEFAULT_RETRY_COUNT; i++)
