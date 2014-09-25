@@ -254,8 +254,16 @@ public void execute() throws MojoExecutionException // CHECKSTYLE:ON
   @Override
   protected void executeReport(final Locale locale) throws MavenReportException // CHECKSTYLE:ON
   {
-    final Log log = getLog();
-    getLog();
+	final Log log = getLog();
+	  if (!canGenerateReport())
+	  {
+	    if (log.isInfoEnabled())
+	    {
+	      log.info("Report '" + getName(Locale.getDefault())
+	               + "' skipped due to offline mode.");
+	    }
+	    return;
+	  }
   }
 
   /**

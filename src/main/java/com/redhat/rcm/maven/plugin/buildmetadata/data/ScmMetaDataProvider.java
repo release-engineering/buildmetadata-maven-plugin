@@ -32,7 +32,7 @@ import com.redhat.rcm.maven.plugin.buildmetadata.common.ScmInfo;
 import com.redhat.rcm.maven.plugin.buildmetadata.scm.ScmNoRevisionException;
 import com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmAccessInfo;
 import com.redhat.rcm.maven.plugin.buildmetadata.scm.maven.ScmConnectionInfo;
-import com.redhat.rcm.maven.plugin.buildmetadata.AbstractBuildMojo;
+
 
 /**
  * Extracts information from the Maven project, session, and runtime

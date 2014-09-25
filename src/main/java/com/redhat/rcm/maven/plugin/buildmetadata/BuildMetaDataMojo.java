@@ -43,7 +43,6 @@ import com.redhat.rcm.maven.plugin.buildmetadata.io.BuildPropertiesFileHelper;
 import com.redhat.rcm.maven.plugin.buildmetadata.io.BuildXmlFileHelper;
 import com.redhat.rcm.maven.plugin.buildmetadata.scm.ScmNoRevisionException;
 import com.redhat.rcm.maven.plugin.buildmetadata.util.FilePathNormalizer;
-//import com.redhat.rcm.maven.plugin.buildmetadata.util.LoggingUtils;
 
 /**
  * Provides the build properties. This information is also written to a
@@ -295,7 +294,14 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
    * @since 1.0
    */
   private String logLevel;
+  
+  public String getLogLevel() {
+		return logLevel;
+	}
 
+  public void setLogLevel(String logLevel) {
+		this.logLevel = logLevel;
+	}
   /**
    * The manager instance to access the SCM system. Provides access to the
    * repository and the provider information.
@@ -834,6 +840,8 @@ public void execute() throws MojoExecutionException, MojoFailureException
 
     return fullVersion;
   }
+
+
 
   // --- object basics --------------------------------------------------------
 
