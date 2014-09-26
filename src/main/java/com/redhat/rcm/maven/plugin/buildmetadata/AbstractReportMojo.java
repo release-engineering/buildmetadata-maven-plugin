@@ -63,7 +63,7 @@ public abstract class AbstractReportMojo extends AbstractMavenReport
   /**
    * The Maven project.
    *
-   * @parameter expression="${project}"
+   * @parameter property=="${project}"
    * @required
    * @readonly
    * @since 1.0
@@ -83,7 +83,7 @@ public abstract class AbstractReportMojo extends AbstractMavenReport
   /**
    * Local Repository.
    *
-   * @parameter expression="${localRepository}"
+   * @parameter property=="${localRepository}"
    * @required
    * @readonly
    * @since 1.0
@@ -116,7 +116,7 @@ public abstract class AbstractReportMojo extends AbstractMavenReport
    * Specifies the directory where the report will written to. This information
    * is only used if the report is not part of the site generation process.
    *
-   * @parameter expression="${project.reporting.outputDirectory}"
+   * @parameter property=="${project.reporting.outputDirectory}"
    * @readonly
    * @since 1.0
    */
@@ -130,7 +130,7 @@ public abstract class AbstractReportMojo extends AbstractMavenReport
    * <code>INFO</code> and <code>FINEST</code>.
    * </p>
    *
-   * @parameter expression="${buildmetadata.logLevel}"
+   * @parameter property=="${buildmetadata.logLevel}"
    * @since 1.0
    */
   protected String logLevel;
@@ -140,7 +140,7 @@ public abstract class AbstractReportMojo extends AbstractMavenReport
    * locale the Javadoc comment is written in. If not set, the Maven provided
    * locale is used.
    *
-   * @parameter expression="${buildmetadata.locale}"
+   * @parameter property=="${buildmetadata.locale}"
    * @since 1.0
    */
   protected String locale;
@@ -149,7 +149,7 @@ public abstract class AbstractReportMojo extends AbstractMavenReport
    * A simple flag to skip the generation of the reports. If set on the command
    * line use <code>-Dbuildmetadata.skip</code>.
    *
-   * @parameter expression="${buildmetadata.skip}" default-value="false"
+   * @parameter property=="${buildmetadata.skip}" default-value="false"
    * @since 1.0
    */
   protected boolean skip;
