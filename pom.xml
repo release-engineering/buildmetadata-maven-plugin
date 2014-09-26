@@ -10,7 +10,7 @@
 
   <name>buildmetadata-maven-plugin</name>
   <description>This plugin generates build meta data. The final build report is bundled with the artifact in xml format.  This allows easy inspection and further processing of the report as required.</description>
-  <url>${weburl}</url>
+  <url>https://github.com/sbadakhc/buildmetadata-maven-plugin</url>
   <inceptionYear>2006</inceptionYear>
 
   <licenses>
@@ -48,7 +48,7 @@
     <url>http://github.com/sbadakhc/buildmetadata-maven-plugin.git</url>
     <tag>HEAD</tag>
   </scm>
-     
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jboss.releases.repo.url>https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/</jboss.releases.repo.url>
@@ -146,7 +146,7 @@
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-plugin-descriptor</artifactId>
       <version>2.0.10</version>
-    </dependency> 
+    </dependency>
 
     <dependency>
       <groupId>org.apache.maven.scm</groupId>
@@ -253,8 +253,48 @@
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.1</version>
+          <configuration>
+              <debug>true</debug>
+              <source>1.6</source>
+              <target>1.6</target>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-dependency-plugin</artifactId>
           <version>${maven-dependency-plugin.version}</version>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>${maven-javadoc-plugin.version}</version>
+            <executions>
+                <execution>
+                    <id>attach-javadocs</id>
+                    <goals>
+                        <goal>jar</goal>
+                    </goals>
+                    <configuration>
+                        <detectOfflineLinks>false</detectOfflineLinks>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>${maven-gpg-plugin.version}</version>
+            <executions>
+                <execution>
+                    <id>sign-artifacts</id>
+                    <phase>verify</phase>
+                <goals>
+                    <goal>sign</goal>
+                </goals>
+                </execution>
+            </executions>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -277,6 +317,19 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-source-plugin</artifactId>
           <version>${maven-source-plugin.version}</version>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+        </plugin>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>buildnumber-maven-plugin</artifactId>
+            <version>1.3</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -290,18 +343,10 @@
                 <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
               </manifest>
               <manifestEntries>
-                <Implementation-SCM-Revision-Number>${build.scmRevision.id}</Implementation-SCM-Revision-Number>
-                <Implementation-SCM-Revision-Date>${build.scmRevision.date}</Implementation-SCM-Revision-Date>
                 <Implementation-URL>${project.url}</Implementation-URL>
-                <Implementation-Date>${build.date}</Implementation-Date>
-                <Implementation-Timestamp>${build.timestamp.millis}</Implementation-Timestamp>
-                <Implementation-DatePattern>${build.date.pattern}</Implementation-DatePattern>
-                <Implementation-Full-Version>${build.version.full}</Implementation-Full-Version>
-                <Built-OS>${os.name} / ${os.arch} / ${os.version}</Built-OS>
-                <Built-By>${build.user}</Built-By>
-                <Maven-Version>${build.maven.version}</Maven-Version>
                 <Java-Version>${java.version}</Java-Version>
                 <Java-Vendor>${java.vendor}</Java-Vendor>
+                <Scm-Revision>${buildNumber}</Scm-Revision>
               </manifestEntries>
             </archive>
           </configuration>
@@ -403,8 +448,28 @@
             </configuration>
         </plugin>
     </plugins>
-</pluginManagement>
+   </pluginManagement>
 
+
+   <plugins>
+       <plugin>
+           <groupId>org.codehaus.mojo</groupId>
+           <artifactId>buildnumber-maven-plugin</artifactId>
+           <executions>
+               <execution>
+                   <phase>validate</phase>
+                   <id>buildnumber</id>
+                   <goals>
+                       <goal>create</goal>
+                   </goals>
+                   <configuration>
+                       <shortRevisionLength>8</shortRevisionLength>
+                       <timestampFormat>{0,date,dd MMMM yyyy}</timestampFormat>
+                   </configuration>
+               </execution>
+           </executions>
+       </plugin>
+   </plugins>
   </build>
 
   <reporting>
@@ -466,14 +531,14 @@
                   <debug>true</debug>
                   <projectsDirectory>src/it</projectsDirectory>
                   <settingsFile>src/it/settings.xml</settingsFile>
-                  
+
                   <pomIncludes>
                     <pomInclude>*/pom.xml</pomInclude>
                   </pomIncludes>
-                  
+
                   <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
                   <cloneClean>true</cloneClean>
-                  
+
                   <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>
                   <preBuildHookScript>setup</preBuildHookScript>
                   <postBuildHookScript>verify</postBuildHookScript>
@@ -491,45 +556,14 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-source-plugin</artifactId>
-            <version>${maven-source-plugin.version}</version>
-            <executions>
-              <execution>
-                <id>attach-sources</id>
-                <goals>
-                  <goal>jar-no-fork</goal>
-                </goals>
-              </execution>
-            </executions>
           </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
-            <version>${maven-javadoc-plugin.version}</version>
-            <executions>
-              <execution>
-                <id>attach-javadocs</id>
-                <goals>
-                  <goal>jar</goal>
-                </goals>
-                <configuration>
-                  <detectOfflineLinks>false</detectOfflineLinks>
-                </configuration>
-              </execution>
-            </executions>
           </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
-            <version>${maven-gpg-plugin.version}</version>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
           </plugin>
         </plugins>
       </build>
