@@ -24,14 +24,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
+import java.util.Enumeration;
 import java.util.Properties;
-
+import java.util.jar.Manifest;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.IOUtil;
 import org.codehaus.plexus.util.StringUtils;
-
+import com.redhat.rcm.maven.plugin.buildmetadata.BuildReportMojo;
 import com.redhat.rcm.maven.plugin.buildmetadata.common.Constant;
 import com.redhat.rcm.maven.plugin.buildmetadata.common.MojoUtils;
 import com.redhat.rcm.maven.plugin.buildmetadata.common.SortedProperties;
@@ -121,7 +123,7 @@ public final class BuildPropertiesFileHelper
     try
     {
       out = new BufferedOutputStream(new FileOutputStream(buildMetaDataFile));
-      final String comments = "Created by buildmetadata-maven-plugin.";
+      final String comments = "Created by buildmetadata-maven-plugin " + getManifestInformation();
       final Properties sortedBuildMetaDataProperties =
           SortedProperties.createSorted(buildMetaDataProperties);
       normalizeProperties(sortedBuildMetaDataProperties);
@@ -240,6 +242,38 @@ public final class BuildPropertiesFileHelper
     return projectProperties;
   }
 
-  // --- object basics --------------------------------------------------------
 
+  private String getManifestInformation()
+          throws MojoExecutionException
+  {
+      String result = "";
+      try
+      {
+          final Enumeration<URL> resources = BuildReportMojo.class.getClassLoader()
+                                                                       .getResources( "META-INF/MANIFEST.MF" );
+
+          while ( resources.hasMoreElements() )
+          {
+              final URL jarUrl = resources.nextElement();
+
+              log.debug( "Processing jar resource " + jarUrl );
+              if ( jarUrl.getFile()
+                         .contains( "buildmetadata-maven-plugin" ) )
+              {
+                  final Manifest manifest = new Manifest( jarUrl.openStream() );
+                  result = manifest.getMainAttributes()
+                                   .getValue( "Implementation-Version" );
+                  result += " ( SHA: " + manifest.getMainAttributes()
+                                                 .getValue( "Scm-Revision" ) + " ) ";
+                  break;
+              }
+          }
+      }
+      catch ( final IOException e )
+      {
+          throw new MojoExecutionException( "Error retrieving information from manifest");
+      }
+
+      return result;
+  }
 }
