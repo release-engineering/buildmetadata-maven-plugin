@@ -20,14 +20,12 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
-
 import org.apache.maven.artifact.versioning.ArtifactVersion;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.execution.RuntimeInformation;
 import org.apache.maven.model.Profile;
 import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.StringUtils;
-
 import com.redhat.rcm.maven.plugin.buildmetadata.common.Constant;
 import com.redhat.rcm.maven.plugin.buildmetadata.common.MojoUtils;
 import com.redhat.rcm.maven.plugin.buildmetadata.common.Property;
@@ -92,7 +90,8 @@ public final class MavenMetaDataProvider extends AbstractMetaDataProvider
    *
    * @param buildMetaDataProperties the build meta data properties.
    */
-  public void provideBuildMetaData(final Properties buildMetaDataProperties)
+  @Override
+public void provideBuildMetaData(final Properties buildMetaDataProperties)
   {
     if (runtime != null)
     {
@@ -356,8 +355,7 @@ public final class MavenMetaDataProvider extends AbstractMetaDataProvider
       final String commandLine = calcCommandLine(executionProperties);
       if (!StringUtils.isEmpty(commandLine))
       {
-        buildMetaDataProperties.setProperty(Constant.PROP_NAME_MAVEN_CMDLINE,
-            commandLine);
+          buildMetaDataProperties.setProperty(Constant.PROP_NAME_MAVEN_CMDLINE, commandLine);
       }
     }
 
@@ -385,11 +383,11 @@ public final class MavenMetaDataProvider extends AbstractMetaDataProvider
 
   private String calcCommandLine(final Properties executionProperties)
   {
-    final String commandLine =
-        executionProperties.getProperty("env.MAVEN_CMD_LINE_ARGS");
-    return commandLine;
+      String commandLine = executionProperties.getProperty("sun.java.command");
+      if (commandLine != null)
+      {
+          commandLine = commandLine.replace("org.codehaus.plexus.classworlds.launcher.Launcher ", "");
+      }
+      return commandLine;
   }
-
-  // --- object basics --------------------------------------------------------
-
 }
