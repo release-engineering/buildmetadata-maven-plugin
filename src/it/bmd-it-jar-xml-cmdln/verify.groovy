@@ -13,11 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/*
-  Requires FIX on Linux:
-    https://git-wip-us.apache.org/repos/asf?p=maven.git;a=commitdiff;h=70218af1c1824caa892e7e507463ea713faa7133
-  in mvn shell script:
-    export MAVEN_CMD_LINE_ARGS="$@"
 
 def fileXml = new File(basedir, 'target/classes/META-INF/buildmetadata.xml')
 assert fileXml.exists()
@@ -27,4 +22,3 @@ def buildmetadata = new XmlSlurper().parse(fileXml)
 
 def cmdline = buildmetadata.runtime.maven.commandline.text()
 assert cmdline.contains("clean package");
- */
