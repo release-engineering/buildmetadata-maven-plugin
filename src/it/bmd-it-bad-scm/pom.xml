@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.redhat.rcm.test</groupId>
+  <artifactId>bmd-it-bad-scm</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <description>
+    A test case building a JAR with the
+    build.properties and a specific configuration.
+  </description>
+  <inceptionYear>2013</inceptionYear>
+
+  <!-- Dummy SCM to check handling. -->
+  <scm>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/tika/tags/tika-1.3</connection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/tika/tags/tika-1.3</developerConnection>
+    <url>http://svn.apache.org/viewvc/tika/tags/tika-1.3</url>
+  </scm>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.redhat.rcm.maven.plugin</groupId>
+        <artifactId>buildmetadata-maven-plugin</artifactId>
+        <version>@project.version@</version>
+        <executions>
+          <execution>
+            <phase>initialize</phase>
+            <goals>
+              <goal>provide-buildmetadata</goal>
+            </goals>
+            <configuration>
+              <validateCheckout>false</validateCheckout>
+              <hideJavaOptsInfo>false</hideJavaOptsInfo>
+              <activateOutputFileMapping>false</activateOutputFileMapping>
+              <createXmlReport>false</createXmlReport>
+              <hideCommandLineInfo>false</hideCommandLineInfo>
+              <propertiesOutputFile>${basedir}/build.properties</propertiesOutputFile>
+              <createPropertiesReport>true</createPropertiesReport>
+              <addMavenExecutionInfo>true</addMavenExecutionInfo>
+              <addLocallyModifiedTagToFullVersion>false</addLocallyModifiedTagToFullVersion>
+              <addJavaRuntimeInfo>true</addJavaRuntimeInfo>
+              <hideMavenOptsInfo>false</hideMavenOptsInfo>
+              <forceNewProperties>true</forceNewProperties>
+              <addToGeneratedSources>false</addToGeneratedSources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

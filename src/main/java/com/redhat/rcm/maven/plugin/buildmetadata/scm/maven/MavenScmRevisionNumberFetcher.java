@@ -119,6 +119,7 @@ public final class MavenScmRevisionNumberFetcher extends AbstractBuildMojo imple
       this.result = result;
     }
 
+    @Override
     public boolean isSuccess()
     {
       return result.isSuccess();
@@ -143,7 +144,8 @@ public final class MavenScmRevisionNumberFetcher extends AbstractBuildMojo imple
   /**
    * {@inheritDoc}
    */
-  public Revision fetchLatestRevisionNumber() throws ScmException
+  @Override
+public Revision fetchLatestRevisionNumber() throws ScmException
   {
       if (getLog().isDebugEnabled())
       {
@@ -159,7 +161,7 @@ public final class MavenScmRevisionNumberFetcher extends AbstractBuildMojo imple
 
       Revision revision = null;
 
-      if (result != null)
+      if (result != null && result.isSuccess())
       {
           final List<ChangeSet> changeLogSets = result.getChangeLog().getChangeSets();
 
@@ -183,7 +185,8 @@ public final class MavenScmRevisionNumberFetcher extends AbstractBuildMojo imple
   /**
    * {@inheritDoc}
    */
-  public LocallyModifiedInfo containsModifications(final ScmFileSet fileSet)
+  @Override
+public LocallyModifiedInfo containsModifications(final ScmFileSet fileSet)
     throws ScmException
   {
     if (getLog().isDebugEnabled())
@@ -245,7 +248,8 @@ public final class MavenScmRevisionNumberFetcher extends AbstractBuildMojo imple
   {
     return new AbstractScmResultWrapper(diff)
     {
-      public List<ScmFile> getChangedFiles()
+      @Override
+    public List<ScmFile> getChangedFiles()
       {
         return diff.getChangedFiles();
       }
@@ -257,7 +261,8 @@ public final class MavenScmRevisionNumberFetcher extends AbstractBuildMojo imple
   {
     return new AbstractScmResultWrapper(diff)
     {
-      public List<ScmFile> getChangedFiles()
+      @Override
+    public List<ScmFile> getChangedFiles()
       {
         return diff.getChangedFiles();
       }
@@ -282,7 +287,8 @@ public final class MavenScmRevisionNumberFetcher extends AbstractBuildMojo imple
   {
     final Set<ScmFile> set = new TreeSet<ScmFile>(new Comparator<ScmFile>()
     {
-      public int compare(final ScmFile o1, final ScmFile o2)
+      @Override
+    public int compare(final ScmFile o1, final ScmFile o2)
       {
         return o2.compareTo(o1);
       }
