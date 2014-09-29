@@ -57,7 +57,7 @@ public abstract class AbstractBuildMojo extends AbstractMojo
   /**
    * The Maven project.
    *
-   * @parameter property=="${project}"
+   * @parameter expression="${project}"
    * @required
    * @readonly
    * @since 1.0
@@ -67,7 +67,7 @@ public abstract class AbstractBuildMojo extends AbstractMojo
   /**
    * The Maven session instance.
    *
-   * @parameter property=="${session}"
+   * @parameter expression="${session}"
    * @required
    * @readonly
    */
@@ -252,7 +252,7 @@ public abstract class AbstractBuildMojo extends AbstractMojo
    * are not written to the POM.
    * </p>
    *
-   * @parameter property=="${buildMetaData.addToFilters}" default-value="true"
+   * @parameter expression="${buildMetaData.addToFilters}" default-value="true"
    * @since 1.0
    */
   protected boolean addToFilters;
@@ -282,7 +282,7 @@ public abstract class AbstractBuildMojo extends AbstractMojo
   /**
    * The location of the <code>settings-security.xml</code>.
    *
-   * @parameter property=="${user.home}/.m2/settings-security.xml"
+   * @parameter expression="${user.home}/.m2/settings-security.xml"
    * @required
    * @since 1.4.0
    */

@@ -68,7 +68,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
   /**
    * The user's settings.
    *
-   * @parameter property=="${settings}"
+   * @parameter expression="${settings}"
    * @required
    * @readonly
    * @since 1.0
@@ -104,7 +104,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
    * property.
    * </p>
    *
-   * @parameter property=="${buildMetaData.addScmInfo}" default-value="true"
+   * @parameter expression="${buildMetaData.addScmInfo}" default-value="true"
    * @since 1.0
    */
   private boolean addScmInfo;
@@ -120,7 +120,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
    * revision.
    * </p>
    *
-   * @parameter property=="${buildMetaData.failOnMissingRevision}"
+   * @parameter expression="${buildMetaData.failOnMissingRevision}"
    *            default-value="false"
    * @since 1.0
    */
@@ -136,7 +136,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
    * property.
    * </p>
    *
-   * @parameter property=="${buildMetaData.addHostInfo}" default-value="true"
+   * @parameter expression="${buildMetaData.addHostInfo}" default-value="true"
    * @since 1.0
    */
   private boolean addHostInfo;
@@ -151,7 +151,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
    * property.
    * </p>
    *
-   * @parameter property=="${buildMetaData.addEnvInfo}" default-value="false"
+   * @parameter expression="${buildMetaData.addEnvInfo}" default-value="false"
    * @since 1.0
    */
   private boolean addEnvInfo;
@@ -160,7 +160,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
    * Add information about the Java runtime running the build if set to
    * <code>true</code>, skip it, if set to <code>false</code>.
    *
-   * @parameter property=="${buildMetaData.addJavaRuntimeInfo}"
+   * @parameter expression="${buildMetaData.addJavaRuntimeInfo}"
    *            default-value="true"
    * @since 1.0
    */
@@ -170,7 +170,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
    * Add information about the operating system the build is run in if set to
    * <code>true</code>, skip it, if set to <code>false</code>.
    *
-   * @parameter property=="${buildMetaData.addOsInfo}" default-value="true"
+   * @parameter expression="${buildMetaData.addOsInfo}" default-value="true"
    * @since 1.0
    */
   private boolean addOsInfo;
@@ -187,7 +187,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
    * property.
    * </p>
    *
-   * @parameter property=="${buildMetaData.addMavenExecutionInfo}"
+   * @parameter expression="${buildMetaData.addMavenExecutionInfo}"
    *            default-value="true"
    * @since 1.0
    */
@@ -198,7 +198,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
    * <code>true</code>, skip it, if set to <code>false</code>. If you are not
    * interested in execution information, set this to <code>false</code>.
    *
-   * @parameter property=="${buildMetaData.addProjectInfo}"
+   * @parameter expression="${buildMetaData.addProjectInfo}"
    *            default-value="false"
    * @since 1.1
    */
@@ -214,7 +214,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
    * want to include this information, use a value of <code>false</code>.
    * </p>
    *
-   * @parameter property=="${buildMetaData.hideCommandLineInfo}"
+   * @parameter expression="${buildMetaData.hideCommandLineInfo}"
    *            default-value="true"
    * @since 1.0
    */
@@ -235,7 +235,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
    * <code>addEnvInfo</code>!
    * </p>
    *
-   * @parameter property=="${buildMetaData.hideMavenOptsInfo}"
+   * @parameter expression="${buildMetaData.hideMavenOptsInfo}"
    *            default-value="true"
    * @since 1.0
    */
@@ -256,7 +256,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
    * <code>addEnvInfo</code>!
    * </p>
    *
-   * @parameter property=="${buildMetaData.hideJavaOptsInfo}"
+   * @parameter expression="${buildMetaData.hideJavaOptsInfo}"
    *            default-value="true"
    * @since 1.0
    */
@@ -266,7 +266,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
    * A simple flag to skip the generation of the build information. If set on
    * the command line use <code>-DbuildMetaData.skip</code>.
    *
-   * @parameter property=="${buildMetaData.skip}" default-value="false"
+   * @parameter expression="${buildMetaData.skip}" default-value="false"
    * @since 1.0
    */
   private boolean skip;
@@ -277,7 +277,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
    * of the check, including the list of changed files, is added to the build
    * meta data.
    *
-   * @parameter property=="${buildMetaData.validateCheckout}"
+   * @parameter expression="${buildMetaData.validateCheckout}"
    *            default-value="true"
    * @since 1.0
    */
@@ -290,7 +290,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
    * <code>INFO</code> and <code>FINEST</code>.
    * </p>
    *
-   * @parameter property=="${buildMetaData.logLevel}"
+   * @parameter expression="${buildMetaData.logLevel}"
    * @since 1.0
    */
   private String logLevel;
@@ -329,7 +329,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
    * "http://java.sun.com/j2se/1.5.0/docs/api/java/text/SimpleDateFormat.html"
    * >SimpleDateFormat</a> class for valid patterns.
    *
-   * @parameter property=="${buildMetaData.buildDate.pattern}"
+   * @parameter expression="${buildMetaData.buildDate.pattern}"
    *            default-value="dd.MM.yyyy"
    * @since 1.0
    */
@@ -349,7 +349,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
    * Flag to add the build date to the full version separated by a '-'. If
    * <code>true</code> the build date is added, if <code>false</code> it is not.
    *
-   * @parameter property=="${buildMetaData.addBuildDateToFullVersion}"
+   * @parameter expression="${buildMetaData.addBuildDateToFullVersion}"
    *            default-value="true"
    * @since 1.0
    */
@@ -361,7 +361,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
    * Used to specify the date format of the log entries that are retrieved from
    * your SCM system.
    *
-   * @parameter property=="${changelog.dateFormat}"
+   * @parameter expression="${changelog.dateFormat}"
    *            default-value="yyyy-MM-dd HH:mm:ss"
    * @required
    * @since 1.0
@@ -371,7 +371,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
   /**
    * Input dir. Directory where the files under SCM control are located.
    *
-   * @parameter property=="${basedir}"
+   * @parameter expression="${basedir}"
    * @required
    * @since 1.0
    */
@@ -380,7 +380,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
   /**
    * The user name (used by svn and starteam protocol).
    *
-   * @parameter property=="${username}"
+   * @parameter expression="${username}"
    * @since 1.0
    */
   private String userName;
@@ -388,7 +388,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
   /**
    * The user password (used by svn and starteam protocol).
    *
-   * @parameter property=="${password}"
+   * @parameter expression="${password}"
    * @since 1.0
    */
   private String password;
@@ -396,7 +396,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
   /**
    * The private key (used by java svn).
    *
-   * @parameter property=="${privateKey}"
+   * @parameter expression="${privateKey}"
    * @since 1.0
    */
   private String privateKey;
@@ -404,7 +404,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
   /**
    * The passphrase (used by java svn).
    *
-   * @parameter property=="${passphrase}"
+   * @parameter expression="${passphrase}"
    * @since 1.0
    */
   private String passphrase;
@@ -412,7 +412,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
   /**
    * The url of tags base directory (used by svn protocol).
    *
-   * @parameter property=="${tagBase}"
+   * @parameter expression="${tagBase}"
    * @since 1.0
    */
   private String tagBase;
@@ -422,7 +422,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
    * <code>true</code> the revision number is added, if <code>false</code> it is
    * not.
    *
-   * @parameter property=="${buildMetaData.addReleaseNumberToFullVersion}"
+   * @parameter expression="${buildMetaData.addReleaseNumberToFullVersion}"
    *            default-value="true"
    * @since 1.0
    */
@@ -434,7 +434,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
    * modified sources. This is often the case while the artifact is built while
    * still working on an issue before it is committed to the SCM repository.
    *
-   * @parameter property=="${buildMetaData.addLocallyModifiedTagToFullVersion}"
+   * @parameter expression="${buildMetaData.addLocallyModifiedTagToFullVersion}"
    *            default-value="true"
    * @since 1.0
    */
@@ -449,7 +449,7 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
    * DEFAULT_RETRY_COUNT} (5) additional queries, the revision number will not
    * be set with a valid value.
    *
-   * @parameter property=="${buildMetaData.queryRangeInDays}"
+   * @parameter expression="${buildMetaData.queryRangeInDays}"
    *            default-value="30"
    * @since 1.0
    */
