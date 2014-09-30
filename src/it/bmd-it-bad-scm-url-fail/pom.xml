@@ -2,11 +2,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   
-  <groupId>com.redhat.rcm</groupId>
+  <groupId>com.redhat.rcm.test</groupId>
   <artifactId>bmd-it-bad-scm-url</artifactId>
   <version>1.0</version>
   
-  <name>HelloWorld</name>
+  <name>bmd-it-bad-scm-url</name>
   
   <scm>
     <connection>scm:foo:https://github.com/sbadakhc/buildmetadata-maven-plugin.git</connection>
