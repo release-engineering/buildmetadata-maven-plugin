@@ -1,0 +1,7 @@
+Kojak build directory
+
+Contents
+
+config.xml - Jenkins job for use with Kojak Jenkins instance 
+DEPS       - GAV list of dependencies tagged into the ${PRODUCT}-deps tag
+README     - This file
