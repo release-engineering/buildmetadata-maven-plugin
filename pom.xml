@@ -45,7 +45,7 @@
   <scm>
     <connection>scm:git:https://github.com/sbadakhc/buildmetadata-maven-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:sbadakhc/buildmetadata-maven-plugin.git</developerConnection>
-    <url>http://github.com/sbadakhc/buildmetadata-maven-plugin.git</url>
+    <url>https://github.com/sbadakhc/buildmetadata-maven-plugin.git</url>
     <tag>buildmetadata-maven-plugin-1.5.1</tag>
   </scm>
 
