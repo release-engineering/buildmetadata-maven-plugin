@@ -8,7 +8,7 @@
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <url>https://github.com/sbadakhc/buildmetadata-maven-plugin.git</url>
+        <url>https://github.com/release-engineering/buildmetadata-maven-plugin.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
@@ -73,7 +73,7 @@ fi
       <kojiOptions></kojiOptions>
       <kojiTask>mavenBuild</kojiTask>
       <kojiScratchBuild>false</kojiScratchBuild>
-      <kojiScmUrl>git+https://github.com/sbadakhc/buildmetadata-maven-plugin.git#27daee82b8065aa8ae4d7b26c1f41a8ed30f00c8</kojiScmUrl>
+      <kojiScmUrl>git+https://github.com/release-engineering/buildmetadata-maven-plugin.git#27daee82b8065aa8ae4d7b26c1f41a8ed30f00c8</kojiScmUrl>
     </org.jenkinsci.plugins.koji.KojiBuilder>
   </postbuilders>
   <runPostStepsIfResult>
