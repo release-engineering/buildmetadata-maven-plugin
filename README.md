@@ -72,15 +72,15 @@ Installation Instructions
 -------------------------
 Clone the repository to your workspace and build with maven:
 
-1. `git clone https://github.com/sbadakhc/buildmetadata-maven-plugin.git`
+1. `git clone https://github.com/release-engineering/buildmetadata-maven-plugin.git`
 2. `mvn install`
 3. Edit your project pom.xml to include the following: 
 
 The options in the plugin's configuration section will produce a report that will include the command line executed 
 along with the Maven and Java Options.  For the full options available and details on how to extend functionality please
 refer to the upstream documentation linked below.
-
-    '<project>  
+```
+    <project>  
       ...
       <!-- Set up the repository to fetch the buildmetadata-maven-plugin from -->
       <repositories>
@@ -99,7 +99,6 @@ refer to the upstream documentation linked below.
         </pluginRepository>
       </pluginRepositories>
 
-      ... 
       <!-- Declare the dependancy on the buildmetadata-maven-plugin -->
       <dependencies>
         <dependency>
@@ -109,7 +108,6 @@ refer to the upstream documentation linked below.
         </dependency>
       </dependencies>
 
-      ...
       <!-- Configure the buildmetadata-maven-plugin with the required reporting options -->
       <build>
         <plugins>
@@ -137,16 +135,25 @@ refer to the upstream documentation linked below.
       </build>
     ...
     </project>
+```
 
 Runtime Example
 ---------------
 
 If you want to execute the plugin from the command line with no modifications to your pom file the following example can be used:
 
-`mvn clean install -X -C -B dependency:resolve-plugins -Dmaven.test.skip=true -Dbuildmetadata:provide-buildmetadata -Dbuildmetadata:createPropertiesReport=false -Dbuildmetadata:xmlOutputFile={project.build.outputDirectory/META-INF/buildmetadata.xml -Dbuildmetadata:hideCommandLineInfo=false -Dbuildmetadata:hideMavenOptsInfo=false -Dbuildmetadata:hideJavaOptsInfo=false -Dbuildmetadata:addScminfo=true | tee build.log`
-
-Assuming the plugin configuration in your projects pom.xml matches the example provided then simply executing maven with
-the install goal will create a buildmetadata.xml file in the generated jar file under the META-INF direcory of the
+```
+mvn clean install -X -C -B dependency:resolve-plugins \
+-Dmaven.test.skip=true \
+-Dbuildmetadata:provide-buildmetadata \
+-Dbuildmetadata:createPropertiesReport=false \ 
+-Dbuildmetadata:xmlOutputFile={project.build.outputDirectory}/META-INF/buildmetadata.xml \ 
+-Dbuildmetadata:hideCommandLineInfo=false \
+-Dbuildmetadata:hideMavenOptsInfo=false \
+-Dbuildmetadata:hideJavaOptsInfo=false \
+-Dbuildmetadata:addScminfo=true | tee build.log
+```
+Assuming the plugin configuration in your projects pom.xml matches the example provided then simply executing maven withthe install goal will create a buildmetadata.xml file in the generated jar file under the META-INF direcory of the
 archive.
 
 `mvn install`
