@@ -97,6 +97,11 @@ public class ScmMetaDataProvider extends AbstractMetaDataProvider
                 scmAccessInfo, scmInfo.getBuildDatePattern());
         helper.provideScmBuildInfo(buildMetaDataProperties, scmControl);
       }
+      catch (final IllegalArgumentException e)
+      {
+        throw new ScmNoRevisionException(
+ "Unable to determine SCM revision information.", e );
+      }
       catch (final ScmRepositoryException e)
       {
         throw new ScmNoRevisionException(
