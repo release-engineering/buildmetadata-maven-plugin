@@ -228,9 +228,3 @@ Known Issues
 See https://github.com/sbadakhc/buildmetadata-maven-plugin/issues?state=open
 
 
-Notes
------
-
-For further infoprmation please visit the upstream providers web site at 
-http://www.smartics.eu/buildmetadata-maven-plugin/
-
