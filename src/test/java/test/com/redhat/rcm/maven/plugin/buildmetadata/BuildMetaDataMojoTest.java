@@ -133,7 +133,8 @@ public class BuildMetaDataMojoTest extends AbstractMojoTestCase
     // uut = (BuildMetaDataMojo) lookupMojo("provide-buildmetadata",
     // testPomFile);
     uut = new BuildMetaDataMojo();
-    uut.setProject(createProject());
+
+    setVariableValueToObject(uut, "project", createProject());
   }
 
   /**
@@ -178,6 +179,7 @@ public class BuildMetaDataMojoTest extends AbstractMojoTestCase
     build.setDirectory(targetDir.getAbsolutePath());
     build.setOutputDirectory(new File(targetDir, "classes").getAbsolutePath());
     model.setBuild(build);
+
     Writer writer = null;
     try
     {
@@ -270,16 +272,18 @@ public class BuildMetaDataMojoTest extends AbstractMojoTestCase
   @Test
   public void testBuild() throws Exception
   {
-    uut.setCreatePropertiesReport(true);
-    uut.setPropertiesOutputFile(new File(targetDir,
-        "META-INF/buildmetadata.properties"));
     final MavenSession session =
         new MavenSession(null, null, null, null, null, null, null, null,
             new Date());
-    uut.setSession(session);
-    uut.execute();
-    final Properties buildProperties = loadProperties();
 
+    setVariableValueToObject(uut, "createPropertiesReport", Boolean.TRUE);
+    setVariableValueToObject(uut, "propertiesOutputFile", new File(targetDir, "META-INF/buildmetadata.properties") );
+    setVariableValueToObject(uut, "session", session);
+    setVariableValueToObject(uut, "addBuildDateInfo", Boolean.TRUE);
+
+    uut.execute();
+
+    final Properties buildProperties = loadProperties();
     final String version =
         buildProperties.getProperty(Constant.PROP_NAME_VERSION);
     assertEquals("Version check.", "1.0.0", version);
@@ -292,5 +296,4 @@ public class BuildMetaDataMojoTest extends AbstractMojoTestCase
         buildProperties.getProperty(Constant.PROP_NAME_FULL_VERSION);
     assertNotNull("Full version check.", fullVersion);
   }
-
 }
