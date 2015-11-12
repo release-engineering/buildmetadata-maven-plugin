@@ -17,6 +17,8 @@ package com.redhat.rcm.maven.plugin.buildmetadata.io;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -24,6 +26,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.StringReader;
+import java.io.Writer;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.Properties;
@@ -119,15 +124,36 @@ public final class BuildPropertiesFileHelper
                + "'...");
     }
 
-    OutputStream out = null;
+    //OutputStream out = null;
+    PrintWriter out = null;
     try
     {
-      out = new BufferedOutputStream(new FileOutputStream(buildMetaDataFile));
-      final String comments = "Created by buildmetadata-maven-plugin " + getManifestInformation();
+      out = new PrintWriter (buildMetaDataFile);
+      final String comments = "# Created by buildmetadata-maven-plugin " + getManifestInformation();
       final Properties sortedBuildMetaDataProperties =
           SortedProperties.createSorted(buildMetaDataProperties);
       normalizeProperties(sortedBuildMetaDataProperties);
-      sortedBuildMetaDataProperties.store(out, comments);
+
+      // Rather than using the Properties.store directly we write it out
+      // manually therebye avoiding the Date line in the properties file.
+      ByteArrayOutputStream bao = new ByteArrayOutputStream();
+      sortedBuildMetaDataProperties.store(bao, null);
+      String result = bao.toString("8859_1");
+      BufferedReader bufReader = new BufferedReader(new StringReader(result));
+
+      String line;
+      while( (line=bufReader.readLine()) != null )
+      {
+        if (line.startsWith("#"))
+        {
+          out.println(comments);
+        }
+        else
+        {
+          out.println(line);
+        }
+      }
+      out.flush();
     }
     catch (final FileNotFoundException e)
     {
@@ -194,7 +220,7 @@ public final class BuildPropertiesFileHelper
 
   /**
    * Reads the build properties file from stream. The properties file is passed
-   * to this instance via the {@link #BuildPropertiesFileHelper(Log, File)
+   * to this instance via the {@link BuildPropertiesFileHelper(Log, File)
    * constructor} {@code propertiesOutputFile}.
    *
    * @param buildMetaDataProperties the properties instance to append the read
