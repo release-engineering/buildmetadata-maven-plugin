@@ -142,6 +142,15 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
   private boolean addHostInfo;
 
   /**
+   * Add build date information if set to <code>true</code>, skip it, if set to
+   * <code>false</code>.
+   *
+   * @parameter expression="${buildMetaData.addBuildDateInfo}" default-value="true"
+   * @since 1.0
+   */
+  private boolean addBuildDateInfo;
+
+  /**
    * Add environment variables if set to <code>true</code>, skip it, if set to
    * <code>false</code>. If you are not interested in the environment variables
    * of the host (e.g. for security reasons), set this to <code>false</code>.
@@ -562,6 +571,7 @@ public void execute() throws MojoExecutionException, MojoFailureException
     provideHostMetaData(buildMetaDataProperties);
     final ScmInfo scmInfo = provideScmMetaData(buildMetaDataProperties);
     provideBuildDateMetaData(buildMetaDataProperties, buildDate);
+    provideBuildVersionMetaData(buildMetaDataProperties, buildDate);
 
     // The custom providers are required to be run at the end.
     // This allows these providers to access the information generated
@@ -657,10 +667,11 @@ public void execute() throws MojoExecutionException, MojoFailureException
   private void provideBuildDateMetaData(
       final Properties buildMetaDataProperties, final Date buildDate)
   {
-    final String buildDateString =
-        createBuildDate(buildMetaDataProperties, buildDate);
-    createYears(buildMetaDataProperties, buildDate);
-    createBuildVersion(buildMetaDataProperties, buildDate, buildDateString);
+    if (addBuildDateInfo)
+    {
+      createBuildDate(buildMetaDataProperties, buildDate);
+      createYears(buildMetaDataProperties, buildDate);
+    }
   }
 
   private ScmInfo createScmInfo()
@@ -724,7 +735,7 @@ public void execute() throws MojoExecutionException, MojoFailureException
    * @param buildDate the date of the build.
    * @return the formatted build date.
    */
-  private String createBuildDate(final Properties buildMetaDataProperties,
+  private void createBuildDate(final Properties buildMetaDataProperties,
       final Date buildDate)
   {
     final DateFormat format =
@@ -733,13 +744,11 @@ public void execute() throws MojoExecutionException, MojoFailureException
     final String timestamp = String.valueOf(buildDate.getTime());
 
     buildMetaDataProperties.setProperty(Constant.PROP_NAME_BUILD_DATE,
-        buildDateString);
+            buildDateString);
     buildMetaDataProperties.setProperty(Constant.PROP_NAME_BUILD_DATE_PATTERN,
         this.buildDatePattern);
     buildMetaDataProperties.setProperty(Constant.PROP_NAME_BUILD_TIMESTAMP,
         timestamp);
-
-    return buildDateString;
   }
 
   /**
@@ -766,13 +775,10 @@ public void execute() throws MojoExecutionException, MojoFailureException
 
   /**
    * Adds the version information of the artifact.
-   *
-   * @param buildMetaDataProperties the build meta data properties.
+   *  @param buildMetaDataProperties the build meta data properties.
    * @param buildDate the date of the build.
-   * @param buildDateString the formatted date string.
    */
-  private void createBuildVersion(final Properties buildMetaDataProperties,
-      final Date buildDate, final String buildDateString)
+  private void provideBuildVersionMetaData(final Properties buildMetaDataProperties, final Date buildDate)
   {
     final String version = project.getVersion();
     buildMetaDataProperties.setProperty(Constant.PROP_NAME_VERSION, version);
@@ -780,8 +786,6 @@ public void execute() throws MojoExecutionException, MojoFailureException
         project.getGroupId());
     buildMetaDataProperties.setProperty(Constant.PROP_NAME_ARTIFACT_ID,
         project.getArtifactId());
-    buildMetaDataProperties.setProperty(Constant.PROP_NAME_BUILD_DATE,
-        buildDateString);
 
     final String fullVersion =
         createFullVersion(buildMetaDataProperties, buildDate);
