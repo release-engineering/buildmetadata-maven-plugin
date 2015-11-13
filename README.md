@@ -74,13 +74,13 @@ Clone the repository to your workspace and build with maven:
 
 1. `git clone https://github.com/release-engineering/buildmetadata-maven-plugin.git`
 2. `mvn install`
-3. Edit your project pom.xml to include the following: 
+3. Edit your project pom.xml to include the following:
 
-The options in the plugin's configuration section will produce a report that will include the command line executed 
+The options in the plugin's configuration section will produce a report that will include the command line executed
 along with the Maven and Java Options.  For the full options available and details on how to extend functionality please
 refer to the upstream documentation linked below.
 ```
-    <project>  
+    <project>
       ...
       <!-- Set up the repository to fetch the buildmetadata-maven-plugin from -->
       <repositories>
@@ -146,8 +146,8 @@ If you want to execute the plugin from the command line with no modifications to
 mvn clean install -X -C -B dependency:resolve-plugins \
 -Dmaven.test.skip=true \
 -Dbuildmetadata:provide-buildmetadata \
--Dbuildmetadata:createPropertiesReport=false \ 
--Dbuildmetadata:xmlOutputFile={project.build.outputDirectory}/META-INF/buildmetadata.xml \ 
+-Dbuildmetadata:createPropertiesReport=false \
+-Dbuildmetadata:xmlOutputFile={project.build.outputDirectory}/META-INF/buildmetadata.xml \
 -Dbuildmetadata:hideCommandLineInfo=false \
 -Dbuildmetadata:hideMavenOptsInfo=false \
 -Dbuildmetadata:hideJavaOptsInfo=false \
@@ -222,15 +222,11 @@ The following goals are supported.  For a full explanation please refer to the u
 3. buildmetadata:provide-buildmetadata
 
 
-Known Issues
-------------
-
-See https://github.com/sbadakhc/buildmetadata-maven-plugin/issues?state=open
-
 
 Notes
 -----
 
-For further infoprmation please visit the upstream providers web site at 
-http://www.smartics.eu/buildmetadata-maven-plugin/
+This project is a fork of http://www.smartics.eu/buildmetadata-maven-plugin
 
+At the time of forking the project the buildmetadata-maven-plugin had not been deployed to Central. However
+since version 1.6.1 the upstream is now available in Central (See: https://github.com/smartics/buildmetadata-maven-plugin and https://repo1.maven.org/maven2/de/smartics/maven/plugin/buildmetadata-maven-plugin/ )
