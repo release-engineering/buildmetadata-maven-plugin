@@ -142,6 +142,15 @@ public final class BuildMetaDataMojo extends AbstractBuildMojo // NOPMD
   private boolean addHostInfo;
 
   /**
+   * Add user information if set to <code>true</code>, skip it, if set to
+   * <code>false</code>.
+   *
+   * @parameter expression="${buildMetaData.addUserInfo}" default-value="false"
+   * @since 1.0
+   */
+  private boolean addUserInfo;
+
+  /**
    * Add build date information if set to <code>true</code>, skip it, if set to
    * <code>false</code>.
    *
@@ -711,20 +720,22 @@ public void execute() throws MojoExecutionException, MojoFailureException
   private void provideBuildUser(final Properties projectProperties,
       final Properties buildMetaDataProperties)
   {
-    String userNameValue = System.getProperty("user.name");
-    if ((buildUserPropertyName != null))
+    if (addUserInfo)
     {
-      final String value = projectProperties.getProperty(buildUserPropertyName);
-      if (!StringUtils.isBlank(value))
+      String userNameValue = System.getProperty("user.name");
+      if ((buildUserPropertyName != null))
       {
-        userNameValue = value;
+        final String value = projectProperties.getProperty(buildUserPropertyName);
+        if (!StringUtils.isBlank(value))
+        {
+          userNameValue = value;
+        }
       }
-    }
 
-    if (userNameValue != null)
-    {
-      buildMetaDataProperties.setProperty(Constant.PROP_NAME_BUILD_USER,
-          userNameValue);
+      if (userNameValue != null)
+      {
+        buildMetaDataProperties.setProperty(Constant.PROP_NAME_BUILD_USER, userNameValue);
+      }
     }
   }
 
