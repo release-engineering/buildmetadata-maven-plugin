@@ -3,6 +3,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <parent>
+    <groupId>com.redhat.rcm</groupId>
+    <artifactId>redhat-releng-tools</artifactId>
+    <version>2</version>
+  </parent>
+
   <groupId>com.redhat.rcm.maven.plugin</groupId>
   <artifactId>buildmetadata-maven-plugin</artifactId>
   <version>1.5.3-SNAPSHOT</version>
@@ -40,35 +46,30 @@
       <email>sal@redhat.com</email>
       <name>Salim Badakhchani</name>
     </developer>
+    <developer>
+      <id>rnc</id>
+      <email>ncross@redhat.com</email>
+      <name>Nick Cross</name>
+    </developer>
+    <developer>
+      <id>jdcasey</id>
+      <email>jcasey@redhat.com</email>
+      <name>John Casey</name>
+    </developer>
   </developers>
 
   <scm>
     <connection>scm:git:https://github.com/release-engineering/buildmetadata-maven-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:release-engineering/buildmetadata-maven-plugin.git</developerConnection>
-    <url>http://github.com/release-engineering/buildmetadata-maven-plugin</url>
-    <tag>HEAD</tag>
+    <url>https://github.com/release-engineering/buildmetadata-maven-plugin</url>
   </scm>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <jboss.releases.repo.url>https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/</jboss.releases.repo.url>
-    <jboss.snapshots.repo.url>https://repository.jboss.org/nexus/content/repositories/snapshots/</jboss.snapshots.repo.url>
-
     <maven-scm.version>1.9</maven-scm.version>
+    <javaVersion>1.6</javaVersion>
+    <enforceStandards>false</enforceStandards>
   </properties>
-
-    <distributionManagement>
-      <repository>
-        <id>jboss-releases-repository</id>
-        <name>JBoss Releases Repository</name>
-        <url>${jboss.releases.repo.url}</url>
-      </repository>
-      <snapshotRepository>
-        <id>jboss-snapshots-repository</id>
-        <name>JBoss Snapshots Repository</name>
-        <url>${jboss.snapshots.repo.url}</url>
-      </snapshotRepository>
-    </distributionManagement>
 
   <dependencies>
 
@@ -447,7 +448,7 @@
 
   <profiles>
     <profile>
-      <id>it</id>
+      <id>run-its</id>
       <!-- mvn -Pit integration-test
                -Dinvoker.test=bmd-it-xxx  (selected tests to run)-->
       <build>
