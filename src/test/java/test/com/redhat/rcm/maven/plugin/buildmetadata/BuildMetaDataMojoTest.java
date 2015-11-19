@@ -273,7 +273,7 @@ public class BuildMetaDataMojoTest extends AbstractMojoTestCase
   public void testBuild() throws Exception
   {
     final MavenSession session =
-        new MavenSession(null, null, null, null, null, null, null, null,
+        new MavenSession(null, null, null, null, null, null, null, new Properties(),
             new Date());
 
     setVariableValueToObject(uut, "createPropertiesReport", Boolean.TRUE);

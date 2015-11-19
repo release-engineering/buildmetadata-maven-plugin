@@ -216,8 +216,8 @@ public void provideBuildMetaData(final Properties buildMetaDataProperties)
     if (selection.isAddMavenExecutionInfo())
     {
       provideGoals(buildMetaDataProperties);
-      provideSpecialEnvVars(buildMetaDataProperties, executionProperties);
     }
+    provideSpecialEnvVars(buildMetaDataProperties, executionProperties);
   }
 
   private void provideProjectInfo(final Properties buildMetaDataProperties)
