@@ -453,7 +453,7 @@
   <profiles>
     <profile>
       <id>run-its</id>
-      <!-- mvn -Pit integration-test
+      <!-- mvn -Prun-its integration-test
                -Dinvoker.test=bmd-it-xxx  (selected tests to run)-->
       <build>
         <defaultGoal>install</defaultGoal>

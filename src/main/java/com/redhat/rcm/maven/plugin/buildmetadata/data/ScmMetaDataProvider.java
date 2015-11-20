@@ -100,6 +100,11 @@ public class ScmMetaDataProvider extends AbstractMetaDataProvider
       catch (final IllegalArgumentException e)
       {
         throw new ScmNoRevisionException(
+                "Unable to determine SCM revision information.", e );
+      }
+      catch (final IllegalStateException e)
+      {
+        throw new ScmNoRevisionException(
  "Unable to determine SCM revision information.", e );
       }
       catch (final ScmRepositoryException e)
