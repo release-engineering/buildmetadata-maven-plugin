@@ -11,7 +11,7 @@
 
   <groupId>com.redhat.rcm.maven.plugin</groupId>
   <artifactId>buildmetadata-maven-plugin</artifactId>
-  <version>1.6.2-SNAPSHOT</version>
+  <version>1.7.0</version>
   <packaging>maven-plugin</packaging>
 
   <name>buildmetadata-maven-plugin</name>
@@ -62,7 +62,7 @@
     <connection>scm:git:https://github.com/release-engineering/buildmetadata-maven-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:release-engineering/buildmetadata-maven-plugin.git</developerConnection>
     <url>https://github.com/release-engineering/buildmetadata-maven-plugin</url>
-    <tag>HEAD</tag>
+    <tag>buildmetadata-maven-plugin-1.7.0</tag>
   </scm>
 
   <properties>
