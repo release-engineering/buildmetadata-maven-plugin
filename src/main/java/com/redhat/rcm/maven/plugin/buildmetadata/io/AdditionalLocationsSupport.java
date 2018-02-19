@@ -174,6 +174,7 @@ public class AdditionalLocationsSupport
     final File testFile = new File(targetLocation);
     final File targetLocationDir;
     final File generatedSourcesMetaInfDir;
+
     if (testFile.isAbsolute())
     {
       targetLocationDir = null;
@@ -191,8 +192,10 @@ public class AdditionalLocationsSupport
     {
       final File propertiesFileInSources =
           new File(generatedSourcesMetaInfDir, propertiesFile.getName());
-      FileUtils.copyFile(propertiesFile, propertiesFileInSources);
-
+      if ( ! propertiesFile.getAbsolutePath().equals(propertiesFileInSources.getAbsolutePath()))
+      {
+        FileUtils.copyFile(propertiesFile, propertiesFileInSources);
+      }
       if (attach && targetLocationDir != null)
       {
         project.addCompileSourceRoot(targetLocationDir.getAbsolutePath());
